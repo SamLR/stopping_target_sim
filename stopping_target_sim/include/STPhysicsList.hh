@@ -46,18 +46,48 @@
 
 #include "globals.hh"
 #include "G4ParticleTypes.hh"
+#include "G4ProcessManager.hh"
+
+// particle specific
+#include "G4BosonConstructor.hh"
+#include "G4LeptonConstructor.hh"
+
+// photon processes
+#include "G4ComptonScattering.hh"
+#include "G4GammaConversion.hh"
+#include "G4PhotoElectricEffect.hh"
+
+// electron processes
+#include "G4eMultipleScattering.hh"
+#include "G4eIonisation.hh"
+#include "G4eBremsstrahlung.hh"
+#include "G4eplusAnnihilation.hh"
+
+// muon processes
+#include "G4MuMultipleScattering.hh"
+#include "G4MuIonisation.hh"
+#include "G4MuBremsstrahlung.hh"
+#include "G4MuPairProduction.hh"
+
+// decay processes
+#include "G4Decay.hh"
+
 
 class STPhysicsList: public G4VUserPhysicsList
 {
-  public:
+public:
     STPhysicsList();
     ~STPhysicsList();
 
-  protected:
+protected:
     // Construct particle and physics process
     void ConstructParticle();
     void ConstructProcess();
     void SetCuts();
+    
+private:
+    void ConstructDecay();
+    void ConstructEM();
 
 };
 

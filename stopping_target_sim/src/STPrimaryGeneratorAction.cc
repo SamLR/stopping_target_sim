@@ -32,38 +32,36 @@
 
 STPrimaryGeneratorAction::STPrimaryGeneratorAction()
 {
-  G4int n_particle = 1;
-  particleGun = new G4ParticleGun(n_particle);
-
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4String particleName;
-  particleGun->SetParticleDefinition(particleTable->FindParticle(particleName="geantino"));
-  particleGun->SetParticleEnergy(1.0*GeV);
-  particleGun->SetParticlePosition(G4ThreeVector(-2.0*m, 0.0, 0.0));
+    G4int n_particle = 1;
+    particleGun = new G4ParticleGun(n_particle);
+    
+    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+    G4String particleName;
+    particleGun->SetParticleDefinition(particleTable->FindParticle(particleName="e-"));
+    particleGun->SetParticleEnergy(50*MeV);
+    particleGun->SetParticlePosition(G4ThreeVector(0.0, 0.0, 0.0));
 }
 
 STPrimaryGeneratorAction::~STPrimaryGeneratorAction()
 {
-  delete particleGun;
+    delete particleGun;
 }
 
 void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  G4int i = anEvent->GetEventID() % 3;
-  G4ThreeVector v(1.0,0.0,0.0);
-  switch(i)
-  {
-    case 0:
-      break;
-    case 1:
-      v.setY(0.1);
-      break;
-    case 2:
-      v.setZ(0.1);
-      break;
-  }
-  particleGun->SetParticleMomentumDirection(v);
-  particleGun->GeneratePrimaryVertex(anEvent);
+    // generate a random location somewhere within the copper bar
+    // TODO: fewer magic numbers
+    G4double x_pos =   3*mm * (G4UniformRand() - 0.5);
+    G4double y_pos = 185*mm * (G4UniformRand() - 0.5);
+    G4double z_pos =  40*mm * (G4UniformRand() - 0.5);
+    
+    G4ThreeVector position = G4ThreeVector(x_pos, y_pos, z_pos);
+    particleGun->SetParticlePosition(position);
+    
+    
+    G4ThreeVector
+    particleGun->SetParticleMomentumDirection();
+    particleGun->GeneratePrimaryVertex(anEvent);
 }
 
 

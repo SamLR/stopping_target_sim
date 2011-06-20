@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD32139313AF9D5500CE3641 /* STcounterHit.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD32139213AF9D5500CE3641 /* STcounterHit.cc */; };
 		CD4DC6DC13AE41F50043BE61 /* STmain.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD4DC6DB13AE41F50043BE61 /* STmain.cc */; };
 		CD4DC6F313AE421F0043BE61 /* STDetectorConstruction.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD4DC6EF13AE421F0043BE61 /* STDetectorConstruction.cc */; };
 		CD4DC6F413AE421F0043BE61 /* STPhysicsList.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD4DC6F013AE421F0043BE61 /* STPhysicsList.cc */; };
@@ -57,6 +58,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CD32139213AF9D5500CE3641 /* STcounterHit.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STcounterHit.cc; sourceTree = "<group>"; };
+		CD3213A113AF9D8E00CE3641 /* STcounterHit.hh */ = {isa = PBXFileReference; fileEncoding = 4; path = STcounterHit.hh; sourceTree = "<group>"; };
 		CD4DC6D713AE41F50043BE61 /* stopping_target_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = stopping_target_sim; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4DC6DB13AE41F50043BE61 /* STmain.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = STmain.cc; sourceTree = "<group>"; };
 		CD4DC6DD13AE41F50043BE61 /* stopping_target_sim.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = stopping_target_sim.1; sourceTree = "<group>"; };
@@ -182,6 +185,7 @@
 		CD4DC6E913AE421F0043BE61 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				CD3213A113AF9D8E00CE3641 /* STcounterHit.hh */,
 				CD4DC6EA13AE421F0043BE61 /* STDetectorConstruction.hh */,
 				CD4DC6EB13AE421F0043BE61 /* STPhysicsList.hh */,
 				CD4DF4DB13AE8A530043BE61 /* STcounterSD.hh */,
@@ -193,6 +197,7 @@
 		CD4DC6EE13AE421F0043BE61 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				CD32139213AF9D5500CE3641 /* STcounterHit.cc */,
 				CD4DC6EF13AE421F0043BE61 /* STDetectorConstruction.cc */,
 				CD4DC6F013AE421F0043BE61 /* STPhysicsList.cc */,
 				CD4DC6F113AE421F0043BE61 /* STPrimaryGeneratorAction.cc */,
@@ -293,6 +298,7 @@
 				CD4DC6F413AE421F0043BE61 /* STPhysicsList.cc in Sources */,
 				CD4DC6F513AE421F0043BE61 /* STPrimaryGeneratorAction.cc in Sources */,
 				CD4DF4DA13AE8A110043BE61 /* STcounterSD.cc in Sources */,
+				CD32139313AF9D5500CE3641 /* STcounterHit.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

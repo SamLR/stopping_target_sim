@@ -37,6 +37,7 @@ class G4VPhysicalVolume;
 #include "G4VUserDetectorConstruction.hh"
 #include "STcounterSD.hh"
 
+#include "G4SDManager.hh"
 #include "G4Box.hh"
 #include "G4VPhysicalVolume.hh"
 #include "G4LogicalVolume.hh"
@@ -57,6 +58,8 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     void ConstructMaterials();
 
   private:
+    
+    // TODO: add hitcollection
     
     // Logical volumes
     //

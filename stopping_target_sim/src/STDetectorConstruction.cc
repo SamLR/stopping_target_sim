@@ -55,7 +55,9 @@ G4VPhysicalVolume* ConstructBox(G4Material *pMat,
 G4VPhysicalVolume* STDetectorConstruction::Construct()
 {
     
-    //------------------------------------------------------ materials
+    //------------------------------------------------------------------------------ 
+    // Define Materials
+    //------------------------------------------------------------------------------    
     
     G4double a;  // atomic mass
     G4double z;  // atomic number
@@ -63,19 +65,23 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     G4int    nel; // number of elements (for mixtures)
     
     G4Material* Cu =
-    new G4Material("Copper", z=29, a=63.54, density=8.94*g/cm3);
+    new G4Material("Copper", z=29, a=63.54*g/mole, density=8.94*g/cm3);
     
-    //Air (copied from ExN02DectectorConstruction
+    //Air (copied from ExN02DectectorConstruction)
     G4Element* N = new G4Element("Nitrogen", "N", z=7., a= 14.01*g/mole);
     G4Element* O = new G4Element("Oxygen"  , "O", z=8., a= 16.00*g/mole);
     
     G4Material* Air = new G4Material("Air", density= 1.29*mg/cm3, nel=2);
     Air->AddElement(N, 70*perCent);
     Air->AddElement(O, 30*perCent); 
-    //------------------------------------------------------ volumes
     
-    //------------------------------ experimental hall (world volume)
-    //------------------------------ beam line along x axis
+    
+    //------------------------------------------------------------------------------
+    // Define Volumes
+    //------------------------------------------------------------------------------
+    
+    // +++++++++
+    // Experimental hall, beam is assumed to be along the x axis
     
     G4double expHall_x = 1.0*m;
     G4double expHall_y = 1.0*m;
@@ -90,7 +96,8 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     experimentalHall_phys = new G4PVPlacement(0,G4ThreeVector(),
                                               experimentalHall_log,"expHall",0,false,0);
     
-    //------------------------------ a copper bar (stopping target)
+    // +++++++++
+    // Stopping target (copper)
     G4double st_x =  6*mm; // stopping target dimensions
     G4double st_y = 37*cm;
     G4double st_z =  8*cm;
@@ -102,20 +109,34 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
                                          experimentalHall_log, 
                                          st_x, st_y, st_z);
 
-    //------------------------------ The counters: A & B
+    // +++++++++
+    // Counters (A&B currently virtual detectors)
+    
+    G4SDManager* sdMan = G4SDManager::GetSDMpointer(); // create the detector manager
+    
     G4double c_x = 3.5*mm; // counter dimensions
     G4double c_y = 40*cm;
     G4double c_z = 50*cm;
     
-    G4ThreeVector counterA_pos = G4ThreeVector(0,0,0);
+    G4ThreeVector counterA_pos = G4ThreeVector(6*mm, 0, 0);
     
-    counterA_phys
-    = ConstructBox(Air, 0, counterA_pos, "counterA", counterA_log, experimentalHall_log, c_x, c_y, c_z, false, 0, counterA_sd);
+    counterA_phys = ConstructBox(Air, 0, counterA_pos, "counterA", 
+                                 counterA_log, experimentalHall_log,
+                                 c_x, c_y, c_z, false, 0, counterA_sd);
     
-    G4ThreeVector counterB_pos = 0;
+    sdMan->AddNewDetector(counterA_sd); // add the counterA
     
-    counterB_phys 
-    = ConstructBox(Air, 0, counterB_pos, "counterB", counterB_log, experimentalHall_log, c_x, c_y, c_z, false, 0, counterB_sd);
+    G4ThreeVector counterB_pos = G4ThreeVector(-6*mm, 0, 0);
+    counterB_phys = ConstructBox(Air, 0, counterB_pos, "counterB", 
+                                 counterB_log, experimentalHall_log,
+                                 c_x, c_y, c_z, false, 0, counterB_sd); 
+    
+    sdMan->AddNewDetector(counterB_sd);
+    
+    //------------------------------------------------------------------------------
+    // Create senstive detector manager
+    //------------------------------------------------------------------------------
+    
     
     
     return experimentalHall_phys;

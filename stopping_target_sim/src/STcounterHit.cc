@@ -24,46 +24,39 @@
 // ********************************************************************
 //
 //
-// $Id: ExN02TrackerHit.cc,v 1.10 2006/06/29 17:48:24 gunter Exp $
+// $Id: STcounterHit.cc,v 1.10 2006/06/29 17:48:24 gunter Exp $
 // GEANT4 tag $Name: geant4-09-03-patch-01 $
 //
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "ExN02TrackerHit.hh"
-#include "G4UnitsTable.hh"
-#include "G4VVisManager.hh"
-#include "G4Circle.hh"
-#include "G4Colour.hh"
-#include "G4VisAttributes.hh"
+#include "STcounterHit.hh"
 
-G4Allocator<ExN02TrackerHit> ExN02TrackerHitAllocator;
+G4Allocator<STcounterHit> STcounterHitAllocator;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-ExN02TrackerHit::ExN02TrackerHit() {}
+STcounterHit::STcounterHit() {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-ExN02TrackerHit::~ExN02TrackerHit() {}
+STcounterHit::~STcounterHit() {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-ExN02TrackerHit::ExN02TrackerHit(const ExN02TrackerHit& right)
+STcounterHit::STcounterHit(const STcounterHit& right)
   : G4VHit()
 {
   trackID   = right.trackID;
-  chamberNb = right.chamberNb;
   edep      = right.edep;
   pos       = right.pos;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-const ExN02TrackerHit& ExN02TrackerHit::operator=(const ExN02TrackerHit& right)
+const STcounterHit& STcounterHit::operator=(const STcounterHit& right)
 {
   trackID   = right.trackID;
-  chamberNb = right.chamberNb;
   edep      = right.edep;
   pos       = right.pos;
   return *this;
@@ -71,14 +64,14 @@ const ExN02TrackerHit& ExN02TrackerHit::operator=(const ExN02TrackerHit& right)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4int ExN02TrackerHit::operator==(const ExN02TrackerHit& right) const
+G4int STcounterHit::operator==(const STcounterHit& right) const
 {
   return (this==&right) ? 1 : 0;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void ExN02TrackerHit::Draw()
+void STcounterHit::Draw()
 {
   G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
   if(pVVisManager)
@@ -95,11 +88,10 @@ void ExN02TrackerHit::Draw()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void ExN02TrackerHit::Print()
+void STcounterHit::Print()
 {
-  G4cout << "  trackID: " << trackID << "  chamberNb: " << chamberNb
-         << "  energy deposit: " << G4BestUnit(edep,"Energy")
-	 << "  position: " << G4BestUnit(pos,"Length") << G4endl;
+  G4cout << "  trackID: " << trackID 
+        << "  position: " << G4BestUnit(pos,"Length") << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

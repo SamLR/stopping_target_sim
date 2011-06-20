@@ -30,7 +30,6 @@
 // 
 
 #include "STPhysicsList.hh"
-#include "G4ParticleTypes.hh"
 
 
 STPhysicsList::STPhysicsList()

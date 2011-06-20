@@ -33,6 +33,12 @@
 
 #include "G4VUserPrimaryGeneratorAction.hh"
 
+#include "G4Event.hh"
+#include "G4ParticleGun.hh"
+#include "G4ParticleTable.hh"
+#include "G4ParticleDefinition.hh"
+#include "globals.hh"
+
 class G4ParticleGun;
 class G4Event;
 

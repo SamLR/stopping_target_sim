@@ -30,31 +30,26 @@
 
 #include "STDetectorConstruction.hh"
 
-#include "G4Material.hh"
-#include "G4Box.hh"
-#include "G4Tubs.hh"
-#include "G4LogicalVolume.hh"
-#include "G4ThreeVector.hh"
-#include "G4PVPlacement.hh"
-#include "globals.hh"
-
 STDetectorConstruction::STDetectorConstruction()
-:  experimentalHall_log(0), tracker_log(0),
-calorimeterBlock_log(0), calorimeterLayer_log(0),
-experimentalHall_phys(0), calorimeterLayer_phys(0),
-calorimeterBlock_phys(0), tracker_phys(0)
+:   experimentalHall_log(0), experimentalHall_phys(0), 
+    cuStoppingTarget_log(0), cuStoppingTarget_phys(0),
+    counterA_log(0),         counterB_log(0),
+    counterA_phys(0),        counterB_phys(0),
+    counterA_sd(0),          counterB_sd(0)
 {;}
 
-STDetectorConstruction::~STDetectorConstruction()
-{
-}
+STDetectorConstruction::~STDetectorConstruction() {;}
 
 
-G4VPhysicalVolume* ConstructBox(G4Material *,G4RotationMatrix *, 
-                                const G4ThreeVector &, const G4String &,
-                                G4LogicalVolume*, G4LogicalVolume*, 
-                                G4double, G4double, G4double,
-                                G4bool, G4int, G4VSensitiveDetector*);
+G4VPhysicalVolume* ConstructBox(G4Material *pMat,
+                                G4RotationMatrix *pRot, 
+                                const G4ThreeVector &tlate,
+                                const G4String &pName,
+                                G4LogicalVolume *pCurrentLogical,
+                                G4LogicalVolume *pMotherLogical, 
+                                G4double pX, G4double pY, G4double pZ,
+                                G4bool pMany=false, G4int pCopyNo=0,
+                                G4VSensitiveDetector *pSDetector=0);
 
 
 G4VPhysicalVolume* STDetectorConstruction::Construct()
@@ -68,7 +63,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     G4int    nel; // number of elements (for mixtures)
     
     G4Material* Cu =
-    new G4Material("Copper", z=29, a=63.54, density=8.94*g/mole);
+    new G4Material("Copper", z=29, a=63.54, density=8.94*g/cm3);
     
     //Air (copied from ExN02DectectorConstruction
     G4Element* N = new G4Element("Nitrogen", "N", z=7., a= 14.01*g/mole);
@@ -82,63 +77,46 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     //------------------------------ experimental hall (world volume)
     //------------------------------ beam line along x axis
     
-    G4double expHall_x = 3.0*m;
+    G4double expHall_x = 1.0*m;
     G4double expHall_y = 1.0*m;
     G4double expHall_z = 1.0*m;
-    G4Box* experimentalHall_box
-    = new G4Box("expHall_box",expHall_x,expHall_y,expHall_z);
+    
+    G4Box* experimentalHall_box = new G4Box("expHall_box",
+                                            expHall_x,expHall_y,expHall_z);
+    
     experimentalHall_log = new G4LogicalVolume(experimentalHall_box,
                                                Air,"expHall_log",0,0,0);
+
     experimentalHall_phys = new G4PVPlacement(0,G4ThreeVector(),
                                               experimentalHall_log,"expHall",0,false,0);
     
     //------------------------------ a copper bar (stopping target)
-    G4double stX = 40*cm;
-    G4double stY = 5*cm;
-    G4double stZ = 5*mm;
+    G4double st_x =  6*mm; // stopping target dimensions
+    G4double st_y = 37*cm;
+    G4double st_z =  8*cm;
+    
     G4ThreeVector stPos = G4ThreeVector(0,0,0);
-    cuStoppingTarget_phys = ConstructBox(Cu, 0, &stPos, // mat, rotation, translation
-                                         "stopping_target", // name
-                                         cuStoppingTarget_log, // current logical
-                                         experimentalHall_log, // mother logical
-                                         stX, stY, stZ); // box dimensions
     
-    //------------------------------ a calorimeter block
+    cuStoppingTarget_phys = ConstructBox(Cu, 0, stPos, "stopping_target",
+                                         cuStoppingTarget_log,
+                                         experimentalHall_log, 
+                                         st_x, st_y, st_z);
+
+    //------------------------------ The counters: A & B
+    G4double c_x = 3.5*mm; // counter dimensions
+    G4double c_y = 40*cm;
+    G4double c_z = 50*cm;
     
-    G4double block_x = 1.0*m;
-    G4double block_y = 50.0*cm;
-    G4double block_z = 50.0*cm;
-    G4Box* calorimeterBlock_box = new G4Box("calBlock_box",block_x,
-                                            block_y,block_z);
-    calorimeterBlock_log = new G4LogicalVolume(calorimeterBlock_box,
-                                               Pb,"caloBlock_log",0,0,0);
-    G4double blockPos_x = 1.0*m;
-    G4double blockPos_y = 0.0*m;
-    G4double blockPos_z = 0.0*m;
-    calorimeterBlock_phys = new G4PVPlacement(0,
-                                              G4ThreeVector(blockPos_x,blockPos_y,blockPos_z),
-                                              calorimeterBlock_log,"caloBlock",experimentalHall_log,false,0);
+    G4ThreeVector counterA_pos = G4ThreeVector(0,0,0);
     
-    //------------------------------ calorimeter layers
+    counterA_phys
+    = ConstructBox(Air, 0, counterA_pos, "counterA", counterA_log, experimentalHall_log, c_x, c_y, c_z, false, 0, counterA_sd);
     
-    G4double calo_x = 1.*cm;
-    G4double calo_y = 40.*cm;
-    G4double calo_z = 40.*cm;
-    G4Box* calorimeterLayer_box = new G4Box("caloLayer_box",
-                                            calo_x,calo_y,calo_z);
-    calorimeterLayer_log = new G4LogicalVolume(calorimeterLayer_box,
-                                               Al,"caloLayer_log",0,0,0);
-    for(G4int i=0;i<19;i++) // loop for 19 layers
-    {
-        G4double caloPos_x = (i-9)*10.*cm;
-        G4double caloPos_y = 0.0*m;
-        G4double caloPos_z = 0.0*m;
-        calorimeterLayer_phys = new G4PVPlacement(0,
-                                                  G4ThreeVector(caloPos_x,caloPos_y,caloPos_z),
-                                                  calorimeterLayer_log,"caloLayer",calorimeterBlock_log,false,i);
-    }
+    G4ThreeVector counterB_pos = 0;
     
-    //------------------------------------------------------------------
+    counterB_phys 
+    = ConstructBox(Air, 0, counterB_pos, "counterB", counterB_log, experimentalHall_log, c_x, c_y, c_z, false, 0, counterB_sd);
+    
     
     return experimentalHall_phys;
 
@@ -152,8 +130,8 @@ G4VPhysicalVolume* ConstructBox(G4Material *pMat,
                                 G4LogicalVolume *pCurrentLogical,
                                 G4LogicalVolume *pMotherLogical, 
                                 G4double pX, G4double pY, G4double pZ,
-                                G4bool pMany=false, G4int pCopyNo=0,
-                                G4VSensitiveDetector *pSDetector=0)
+                                G4bool pMany, G4int pCopyNo,
+                                G4VSensitiveDetector *pSDetector)
 {
     
     // This will generate a G4Solid box, then generate an associated 
@@ -171,7 +149,7 @@ G4VPhysicalVolume* ConstructBox(G4Material *pMat,
     
     G4String pvName = "_PV";
     pvName.prepend(pName);
-    G4VPhysicalVolume *physicalVol = new G4PVPlacement(pRot, tlate, pCurrentLogical, pvName, pMotherLogical, pMany, pCopyNo);
+    G4VPhysicalVolume* physicalVol = new G4PVPlacement(pRot, tlate, pCurrentLogical, pvName, pMotherLogical, pMany, pCopyNo);
     
     return physicalVol;
     

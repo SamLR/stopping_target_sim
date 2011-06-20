@@ -43,7 +43,9 @@
 #define STPhysicsList_h 1
 
 #include "G4VUserPhysicsList.hh"
+
 #include "globals.hh"
+#include "G4ParticleTypes.hh"
 
 class STPhysicsList: public G4VUserPhysicsList
 {

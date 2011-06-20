@@ -35,6 +35,16 @@ class G4LogicalVolume;
 class G4VPhysicalVolume;
 
 #include "G4VUserDetectorConstruction.hh"
+#include "STcounterSD.hh"
+
+#include "G4Box.hh"
+#include "G4VPhysicalVolume.hh"
+#include "G4LogicalVolume.hh"
+#include "G4Material.hh"
+#include "G4ThreeVector.hh"
+#include "G4PVPlacement.hh"
+#include "globals.hh"
+
 
 class STDetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -52,29 +62,20 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     //
     G4LogicalVolume* cuStoppingTarget_log;
     G4LogicalVolume* experimentalHall_log;
-    G4LogicalVolume* tracker_log;
-    G4LogicalVolume* calorimeterBlock_log;
-    G4LogicalVolume* calorimeterLayer_log;
-
+    G4LogicalVolume* counterA_log;
+    G4LogicalVolume* counterB_log;
+    
     // Physical volumes
-    //
     G4VPhysicalVolume* cuStoppingTarget_phys;
     G4VPhysicalVolume* experimentalHall_phys;
-    G4VPhysicalVolume* calorimeterLayer_phys;
-    G4VPhysicalVolume* calorimeterBlock_phys;
-    G4VPhysicalVolume* tracker_phys;
+    G4VPhysicalVolume* counterA_phys;
+    G4VPhysicalVolume* counterB_phys;
+    
+    // Sensitive Detectors
+    G4VSensitiveDetector* counterA_sd;
+    G4VSensitiveDetector* counterB_sd;
+    
 };
-
-
-G4VPhysicalVolume* ConstructBox(G4Material *pMat,
-                                G4RotationMatrix *pRot, 
-                                const G4ThreeVector &tlate,
-                                const G4String &pName,
-                                G4LogicalVolume *pCurrentLogical,
-                                G4LogicalVolume *pMotherLogical, 
-                                G4double pX, G4double pY, G4double pZ,
-                                G4bool pMany=false, G4int pCopyNo=0,
-                                G4VSensitiveDetector *pSDetector=0);
 
 #endif
 

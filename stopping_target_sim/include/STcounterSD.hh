@@ -6,20 +6,30 @@
 //  Copyright 2011 UCL. All rights reserved.
 //
 
+#ifndef STcounterSD_HH
+#define STcounterSD_HH 1
 
-class STcounterSD : public G4VSensitiveDetector{
-    
-    
+#include "STcounterSD.hh"
+#include "globals.hh"
+#include "G4VSensitiveDetector.hh"
+#include "G4Step.hh"
+
+class STcounterSD : public G4VSensitiveDetector 
+{
 public:
-    STcounterSD();
+    STcounterSD(G4String name);
     ~STcounterSD();
     
-    // required method
-    G4bool  ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist);
-    
-    // needed for root and generally useful
+    // needed to set up Root
     void Initialize(G4HCofThisEvent*);
+    void EndOfEvent(G4HCofThisEvent*);
     
+private:
+    // required method
+    G4bool ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist);
     
-    
+    G4int hitCount;
+    static G4int totalCount;
 };
+
+# endif

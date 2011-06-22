@@ -30,8 +30,8 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       displayScaleIsEnabled = "NO"
       displayScale = "1.00"
       launchStyle = "0"
@@ -49,32 +49,32 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "DYLD_LIBRARY_PATH"
-            value = "/Applications/geant4.9.3.p01/lib/Darwin-g++:/Applications/CLHEP/2.0.4.6/lib:/usr/local/lib:/Applications/root/lib/:/Applications/geant4.9.3.p01/lib/Darwin-g++:/Applications/CLHEP/2.0.4.6/lib:/usr/local/lib:/Applications/root/lib/:/Applications/geant4.9.3.p01/lib/Darwin-g++:/Applications/CLHEP/2.0.4.6/lib:/usr/local/lib:/Applications/root/lib/:/Applications/geant4.9.3.p01/lib/Darwin-g++:/Applications/CLHEP/2.0.4.6/lib:/usr/local/lib:/Applications/root/lib/   "
+            value = "/Applications/geant/geant_debug/lib/Darwin-g++:/Applications/CLHEP/2.0.4.6/lib:/Applications/root/lib/:/usr/local/lib"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "G4LEVELGAMMADATA"
-            value = "/Applications/geant4.9.3.p01/data/PhotonEvaporation2.0"
+            value = "/Applications/geant/geant_debug/data/PhotonEvaporation2.0"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "G4RADIOACTIVEDATA"
-            value = "/Applications/geant4.9.3.p01/data/RadioactiveDecay3.2"
+            value = "/Applications/geant/geant_debug/data/RadioactiveDecay3.2"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "G4LEDATA"
-            value = "/Applications/geant4.9.3.p01/data/G4EMLOW6.9"
+            value = "/Applications/geant/geant_debug/data/G4EMLOW6.9"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "G4NEUTRONHPDATA"
-            value = "/Applications/geant4.9.3.p01/data/G4NDL3.13"
+            value = "/Applications/geant/geant_debug/data/G4NDL3.13"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "G4REALSURFACEDATA"
-            value = "/Applications/geant4.9.3.p01/data/RealSurface1.0"
+            value = "/Applications/geant/geant_debug/data/RealSurface1.0"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

@@ -7,41 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD21D5C813B00DC7006CE930 /* libCLHEP.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD21D5C713B00DC7006CE930 /* libCLHEP.dylib */; };
 		CD32139313AF9D5500CE3641 /* STcounterHit.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD32139213AF9D5500CE3641 /* STcounterHit.cc */; };
+		CD48C6FE13B1B8E500CC8708 /* libG4digits_hits.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6E113B1B8E400CC8708 /* libG4digits_hits.dylib */; };
+		CD48C6FF13B1B8E500CC8708 /* libG4error_propagation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6E213B1B8E400CC8708 /* libG4error_propagation.dylib */; };
+		CD48C70013B1B8E500CC8708 /* libG4event.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6E313B1B8E500CC8708 /* libG4event.dylib */; };
+		CD48C70113B1B8E500CC8708 /* libG4FR.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6E413B1B8E500CC8708 /* libG4FR.dylib */; };
+		CD48C70213B1B8E500CC8708 /* libG4geometry.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6E513B1B8E500CC8708 /* libG4geometry.dylib */; };
+		CD48C70313B1B8E500CC8708 /* libG4gl2ps.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6E613B1B8E500CC8708 /* libG4gl2ps.dylib */; };
+		CD48C70413B1B8E500CC8708 /* libG4global.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6E713B1B8E500CC8708 /* libG4global.dylib */; };
+		CD48C70513B1B8E500CC8708 /* libG4GMocren.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6E813B1B8E500CC8708 /* libG4GMocren.dylib */; };
+		CD48C70613B1B8E500CC8708 /* libG4graphics_reps.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6E913B1B8E500CC8708 /* libG4graphics_reps.dylib */; };
+		CD48C70713B1B8E500CC8708 /* libG4intercoms.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6EA13B1B8E500CC8708 /* libG4intercoms.dylib */; };
+		CD48C70813B1B8E500CC8708 /* libG4interfaces.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6EB13B1B8E500CC8708 /* libG4interfaces.dylib */; };
+		CD48C70913B1B8E500CC8708 /* libG4materials.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6EC13B1B8E500CC8708 /* libG4materials.dylib */; };
+		CD48C70A13B1B8E500CC8708 /* libG4modeling.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6ED13B1B8E500CC8708 /* libG4modeling.dylib */; };
+		CD48C70B13B1B8E500CC8708 /* libG4OpenGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6EE13B1B8E500CC8708 /* libG4OpenGL.dylib */; };
+		CD48C70C13B1B8E500CC8708 /* libG4parmodels.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6EF13B1B8E500CC8708 /* libG4parmodels.dylib */; };
+		CD48C70D13B1B8E500CC8708 /* libG4particles.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F013B1B8E500CC8708 /* libG4particles.dylib */; };
+		CD48C70E13B1B8E500CC8708 /* libG4persistency.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F113B1B8E500CC8708 /* libG4persistency.dylib */; };
+		CD48C70F13B1B8E500CC8708 /* libG4physicslists.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F213B1B8E500CC8708 /* libG4physicslists.dylib */; };
+		CD48C71013B1B8E500CC8708 /* libG4processes.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F313B1B8E500CC8708 /* libG4processes.dylib */; };
+		CD48C71113B1B8E500CC8708 /* libG4RayTracer.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F413B1B8E500CC8708 /* libG4RayTracer.dylib */; };
+		CD48C71213B1B8E500CC8708 /* libG4readout.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F513B1B8E500CC8708 /* libG4readout.dylib */; };
+		CD48C71313B1B8E500CC8708 /* libG4run.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F613B1B8E500CC8708 /* libG4run.dylib */; };
+		CD48C71413B1B8E500CC8708 /* libG4track.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F713B1B8E500CC8708 /* libG4track.dylib */; };
+		CD48C71513B1B8E500CC8708 /* libG4tracking.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F813B1B8E500CC8708 /* libG4tracking.dylib */; };
+		CD48C71613B1B8E500CC8708 /* libG4Tree.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6F913B1B8E500CC8708 /* libG4Tree.dylib */; };
+		CD48C71713B1B8E500CC8708 /* libG4vis_management.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6FA13B1B8E500CC8708 /* libG4vis_management.dylib */; };
+		CD48C71813B1B8E500CC8708 /* libG4visHepRep.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6FB13B1B8E500CC8708 /* libG4visHepRep.dylib */; };
+		CD48C71913B1B8E500CC8708 /* libG4visXXX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6FC13B1B8E500CC8708 /* libG4visXXX.dylib */; };
+		CD48C71A13B1B8E500CC8708 /* libG4VRML.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD48C6FD13B1B8E500CC8708 /* libG4VRML.dylib */; };
 		CD4DC6DC13AE41F50043BE61 /* STmain.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD4DC6DB13AE41F50043BE61 /* STmain.cc */; };
 		CD4DC6F313AE421F0043BE61 /* STDetectorConstruction.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD4DC6EF13AE421F0043BE61 /* STDetectorConstruction.cc */; };
 		CD4DC6F413AE421F0043BE61 /* STPhysicsList.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD4DC6F013AE421F0043BE61 /* STPhysicsList.cc */; };
 		CD4DC6F513AE421F0043BE61 /* STPrimaryGeneratorAction.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD4DC6F113AE421F0043BE61 /* STPrimaryGeneratorAction.cc */; };
-		CD4DC71313AE44EF0043BE61 /* libG4digits_hits.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6F613AE44EE0043BE61 /* libG4digits_hits.dylib */; };
-		CD4DC71413AE44EF0043BE61 /* libG4error_propagation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6F713AE44EE0043BE61 /* libG4error_propagation.dylib */; };
-		CD4DC71513AE44EF0043BE61 /* libG4event.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6F813AE44EE0043BE61 /* libG4event.dylib */; };
-		CD4DC71613AE44EF0043BE61 /* libG4FR.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6F913AE44EE0043BE61 /* libG4FR.dylib */; };
-		CD4DC71713AE44EF0043BE61 /* libG4geometry.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6FA13AE44EE0043BE61 /* libG4geometry.dylib */; };
-		CD4DC71813AE44EF0043BE61 /* libG4gl2ps.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6FB13AE44EE0043BE61 /* libG4gl2ps.dylib */; };
-		CD4DC71913AE44EF0043BE61 /* libG4global.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6FC13AE44EE0043BE61 /* libG4global.dylib */; };
-		CD4DC71A13AE44EF0043BE61 /* libG4GMocren.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6FD13AE44EE0043BE61 /* libG4GMocren.dylib */; };
-		CD4DC71B13AE44EF0043BE61 /* libG4graphics_reps.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6FE13AE44EE0043BE61 /* libG4graphics_reps.dylib */; };
-		CD4DC71C13AE44EF0043BE61 /* libG4intercoms.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC6FF13AE44EE0043BE61 /* libG4intercoms.dylib */; };
-		CD4DC71D13AE44EF0043BE61 /* libG4interfaces.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70013AE44EE0043BE61 /* libG4interfaces.dylib */; };
-		CD4DC71E13AE44EF0043BE61 /* libG4materials.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70113AE44EE0043BE61 /* libG4materials.dylib */; };
-		CD4DC71F13AE44EF0043BE61 /* libG4modeling.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70213AE44EE0043BE61 /* libG4modeling.dylib */; };
-		CD4DC72013AE44EF0043BE61 /* libG4OpenGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70313AE44EE0043BE61 /* libG4OpenGL.dylib */; };
-		CD4DC72113AE44EF0043BE61 /* libG4parmodels.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70413AE44EE0043BE61 /* libG4parmodels.dylib */; };
-		CD4DC72213AE44EF0043BE61 /* libG4particles.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70513AE44EE0043BE61 /* libG4particles.dylib */; };
-		CD4DC72313AE44EF0043BE61 /* libG4persistency.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70613AE44EE0043BE61 /* libG4persistency.dylib */; };
-		CD4DC72413AE44EF0043BE61 /* libG4physicslists.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70713AE44EE0043BE61 /* libG4physicslists.dylib */; };
-		CD4DC72513AE44EF0043BE61 /* libG4processes.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70813AE44EE0043BE61 /* libG4processes.dylib */; };
-		CD4DC72613AE44EF0043BE61 /* libG4RayTracer.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70913AE44EE0043BE61 /* libG4RayTracer.dylib */; };
-		CD4DC72713AE44EF0043BE61 /* libG4readout.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70A13AE44EF0043BE61 /* libG4readout.dylib */; };
-		CD4DC72813AE44EF0043BE61 /* libG4run.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70B13AE44EF0043BE61 /* libG4run.dylib */; };
-		CD4DC72913AE44EF0043BE61 /* libG4track.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70C13AE44EF0043BE61 /* libG4track.dylib */; };
-		CD4DC72A13AE44EF0043BE61 /* libG4tracking.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70D13AE44EF0043BE61 /* libG4tracking.dylib */; };
-		CD4DC72B13AE44EF0043BE61 /* libG4Tree.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70E13AE44EF0043BE61 /* libG4Tree.dylib */; };
-		CD4DC72C13AE44EF0043BE61 /* libG4vis_management.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC70F13AE44EF0043BE61 /* libG4vis_management.dylib */; };
-		CD4DC72D13AE44EF0043BE61 /* libG4visHepRep.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC71013AE44EF0043BE61 /* libG4visHepRep.dylib */; };
-		CD4DC72E13AE44EF0043BE61 /* libG4visXXX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC71113AE44EF0043BE61 /* libG4visXXX.dylib */; };
-		CD4DC72F13AE44EF0043BE61 /* libG4VRML.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC71213AE44EF0043BE61 /* libG4VRML.dylib */; };
-		CD4DC73113AE45100043BE61 /* libCLHEP-2.0.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4DC73013AE45100043BE61 /* libCLHEP-2.0.4.6.dylib */; };
 		CD4DF4DA13AE8A110043BE61 /* STcounterSD.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD4DF4D913AE8A110043BE61 /* STcounterSD.cc */; };
 /* End PBXBuildFile section */
 
@@ -58,8 +58,38 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CD21D5C713B00DC7006CE930 /* libCLHEP.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCLHEP.dylib; path = /Applications/CLHEP/2.0.4.6/lib/libCLHEP.dylib; sourceTree = "<absolute>"; };
 		CD32139213AF9D5500CE3641 /* STcounterHit.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STcounterHit.cc; sourceTree = "<group>"; };
-		CD3213A113AF9D8E00CE3641 /* STcounterHit.hh */ = {isa = PBXFileReference; fileEncoding = 4; path = STcounterHit.hh; sourceTree = "<group>"; };
+		CD3213A113AF9D8E00CE3641 /* STcounterHit.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STcounterHit.hh; sourceTree = "<group>"; };
+		CD48C6E113B1B8E400CC8708 /* libG4digits_hits.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4digits_hits.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4digits_hits.dylib"; sourceTree = "<absolute>"; };
+		CD48C6E213B1B8E400CC8708 /* libG4error_propagation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4error_propagation.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4error_propagation.dylib"; sourceTree = "<absolute>"; };
+		CD48C6E313B1B8E500CC8708 /* libG4event.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4event.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4event.dylib"; sourceTree = "<absolute>"; };
+		CD48C6E413B1B8E500CC8708 /* libG4FR.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4FR.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4FR.dylib"; sourceTree = "<absolute>"; };
+		CD48C6E513B1B8E500CC8708 /* libG4geometry.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4geometry.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4geometry.dylib"; sourceTree = "<absolute>"; };
+		CD48C6E613B1B8E500CC8708 /* libG4gl2ps.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4gl2ps.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4gl2ps.dylib"; sourceTree = "<absolute>"; };
+		CD48C6E713B1B8E500CC8708 /* libG4global.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4global.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4global.dylib"; sourceTree = "<absolute>"; };
+		CD48C6E813B1B8E500CC8708 /* libG4GMocren.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4GMocren.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4GMocren.dylib"; sourceTree = "<absolute>"; };
+		CD48C6E913B1B8E500CC8708 /* libG4graphics_reps.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4graphics_reps.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4graphics_reps.dylib"; sourceTree = "<absolute>"; };
+		CD48C6EA13B1B8E500CC8708 /* libG4intercoms.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4intercoms.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4intercoms.dylib"; sourceTree = "<absolute>"; };
+		CD48C6EB13B1B8E500CC8708 /* libG4interfaces.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4interfaces.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4interfaces.dylib"; sourceTree = "<absolute>"; };
+		CD48C6EC13B1B8E500CC8708 /* libG4materials.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4materials.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4materials.dylib"; sourceTree = "<absolute>"; };
+		CD48C6ED13B1B8E500CC8708 /* libG4modeling.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4modeling.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4modeling.dylib"; sourceTree = "<absolute>"; };
+		CD48C6EE13B1B8E500CC8708 /* libG4OpenGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4OpenGL.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4OpenGL.dylib"; sourceTree = "<absolute>"; };
+		CD48C6EF13B1B8E500CC8708 /* libG4parmodels.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4parmodels.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4parmodels.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F013B1B8E500CC8708 /* libG4particles.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4particles.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4particles.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F113B1B8E500CC8708 /* libG4persistency.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4persistency.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4persistency.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F213B1B8E500CC8708 /* libG4physicslists.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4physicslists.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4physicslists.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F313B1B8E500CC8708 /* libG4processes.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4processes.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4processes.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F413B1B8E500CC8708 /* libG4RayTracer.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4RayTracer.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4RayTracer.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F513B1B8E500CC8708 /* libG4readout.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4readout.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4readout.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F613B1B8E500CC8708 /* libG4run.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4run.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4run.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F713B1B8E500CC8708 /* libG4track.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4track.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4track.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F813B1B8E500CC8708 /* libG4tracking.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4tracking.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4tracking.dylib"; sourceTree = "<absolute>"; };
+		CD48C6F913B1B8E500CC8708 /* libG4Tree.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4Tree.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4Tree.dylib"; sourceTree = "<absolute>"; };
+		CD48C6FA13B1B8E500CC8708 /* libG4vis_management.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4vis_management.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4vis_management.dylib"; sourceTree = "<absolute>"; };
+		CD48C6FB13B1B8E500CC8708 /* libG4visHepRep.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4visHepRep.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4visHepRep.dylib"; sourceTree = "<absolute>"; };
+		CD48C6FC13B1B8E500CC8708 /* libG4visXXX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4visXXX.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4visXXX.dylib"; sourceTree = "<absolute>"; };
+		CD48C6FD13B1B8E500CC8708 /* libG4VRML.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4VRML.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4VRML.dylib"; sourceTree = "<absolute>"; };
 		CD4DC6D713AE41F50043BE61 /* stopping_target_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = stopping_target_sim; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4DC6DB13AE41F50043BE61 /* STmain.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = STmain.cc; sourceTree = "<group>"; };
 		CD4DC6DD13AE41F50043BE61 /* stopping_target_sim.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = stopping_target_sim.1; sourceTree = "<group>"; };
@@ -74,36 +104,6 @@
 		CD4DC6EF13AE421F0043BE61 /* STDetectorConstruction.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STDetectorConstruction.cc; sourceTree = "<group>"; };
 		CD4DC6F013AE421F0043BE61 /* STPhysicsList.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STPhysicsList.cc; sourceTree = "<group>"; };
 		CD4DC6F113AE421F0043BE61 /* STPrimaryGeneratorAction.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STPrimaryGeneratorAction.cc; sourceTree = "<group>"; };
-		CD4DC6F613AE44EE0043BE61 /* libG4digits_hits.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4digits_hits.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4digits_hits.dylib"; sourceTree = "<absolute>"; };
-		CD4DC6F713AE44EE0043BE61 /* libG4error_propagation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4error_propagation.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4error_propagation.dylib"; sourceTree = "<absolute>"; };
-		CD4DC6F813AE44EE0043BE61 /* libG4event.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4event.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4event.dylib"; sourceTree = "<absolute>"; };
-		CD4DC6F913AE44EE0043BE61 /* libG4FR.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4FR.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4FR.dylib"; sourceTree = "<absolute>"; };
-		CD4DC6FA13AE44EE0043BE61 /* libG4geometry.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4geometry.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4geometry.dylib"; sourceTree = "<absolute>"; };
-		CD4DC6FB13AE44EE0043BE61 /* libG4gl2ps.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4gl2ps.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4gl2ps.dylib"; sourceTree = "<absolute>"; };
-		CD4DC6FC13AE44EE0043BE61 /* libG4global.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4global.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4global.dylib"; sourceTree = "<absolute>"; };
-		CD4DC6FD13AE44EE0043BE61 /* libG4GMocren.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4GMocren.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4GMocren.dylib"; sourceTree = "<absolute>"; };
-		CD4DC6FE13AE44EE0043BE61 /* libG4graphics_reps.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4graphics_reps.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4graphics_reps.dylib"; sourceTree = "<absolute>"; };
-		CD4DC6FF13AE44EE0043BE61 /* libG4intercoms.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4intercoms.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4intercoms.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70013AE44EE0043BE61 /* libG4interfaces.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4interfaces.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4interfaces.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70113AE44EE0043BE61 /* libG4materials.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4materials.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4materials.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70213AE44EE0043BE61 /* libG4modeling.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4modeling.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4modeling.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70313AE44EE0043BE61 /* libG4OpenGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4OpenGL.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4OpenGL.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70413AE44EE0043BE61 /* libG4parmodels.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4parmodels.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4parmodels.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70513AE44EE0043BE61 /* libG4particles.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4particles.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4particles.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70613AE44EE0043BE61 /* libG4persistency.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4persistency.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4persistency.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70713AE44EE0043BE61 /* libG4physicslists.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4physicslists.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4physicslists.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70813AE44EE0043BE61 /* libG4processes.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4processes.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4processes.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70913AE44EE0043BE61 /* libG4RayTracer.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4RayTracer.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4RayTracer.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70A13AE44EF0043BE61 /* libG4readout.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4readout.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4readout.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70B13AE44EF0043BE61 /* libG4run.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4run.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4run.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70C13AE44EF0043BE61 /* libG4track.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4track.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4track.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70D13AE44EF0043BE61 /* libG4tracking.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4tracking.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4tracking.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70E13AE44EF0043BE61 /* libG4Tree.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4Tree.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4Tree.dylib"; sourceTree = "<absolute>"; };
-		CD4DC70F13AE44EF0043BE61 /* libG4vis_management.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4vis_management.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4vis_management.dylib"; sourceTree = "<absolute>"; };
-		CD4DC71013AE44EF0043BE61 /* libG4visHepRep.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4visHepRep.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4visHepRep.dylib"; sourceTree = "<absolute>"; };
-		CD4DC71113AE44EF0043BE61 /* libG4visXXX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4visXXX.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4visXXX.dylib"; sourceTree = "<absolute>"; };
-		CD4DC71213AE44EF0043BE61 /* libG4VRML.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4VRML.dylib; path = "/Applications/geant4.9.3.p01/lib/Darwin-g++/libG4VRML.dylib"; sourceTree = "<absolute>"; };
-		CD4DC73013AE45100043BE61 /* libCLHEP-2.0.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libCLHEP-2.0.4.6.dylib"; path = "/Applications/CLHEP/2.0.4.6/lib/libCLHEP-2.0.4.6.dylib"; sourceTree = "<absolute>"; };
 		CD4DF4D913AE8A110043BE61 /* STcounterSD.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STcounterSD.cc; sourceTree = "<group>"; };
 		CD4DF4DB13AE8A530043BE61 /* STcounterSD.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STcounterSD.hh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,46 +113,83 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD4DC73113AE45100043BE61 /* libCLHEP-2.0.4.6.dylib in Frameworks */,
-				CD4DC71313AE44EF0043BE61 /* libG4digits_hits.dylib in Frameworks */,
-				CD4DC71413AE44EF0043BE61 /* libG4error_propagation.dylib in Frameworks */,
-				CD4DC71513AE44EF0043BE61 /* libG4event.dylib in Frameworks */,
-				CD4DC71613AE44EF0043BE61 /* libG4FR.dylib in Frameworks */,
-				CD4DC71713AE44EF0043BE61 /* libG4geometry.dylib in Frameworks */,
-				CD4DC71813AE44EF0043BE61 /* libG4gl2ps.dylib in Frameworks */,
-				CD4DC71913AE44EF0043BE61 /* libG4global.dylib in Frameworks */,
-				CD4DC71A13AE44EF0043BE61 /* libG4GMocren.dylib in Frameworks */,
-				CD4DC71B13AE44EF0043BE61 /* libG4graphics_reps.dylib in Frameworks */,
-				CD4DC71C13AE44EF0043BE61 /* libG4intercoms.dylib in Frameworks */,
-				CD4DC71D13AE44EF0043BE61 /* libG4interfaces.dylib in Frameworks */,
-				CD4DC71E13AE44EF0043BE61 /* libG4materials.dylib in Frameworks */,
-				CD4DC71F13AE44EF0043BE61 /* libG4modeling.dylib in Frameworks */,
-				CD4DC72013AE44EF0043BE61 /* libG4OpenGL.dylib in Frameworks */,
-				CD4DC72113AE44EF0043BE61 /* libG4parmodels.dylib in Frameworks */,
-				CD4DC72213AE44EF0043BE61 /* libG4particles.dylib in Frameworks */,
-				CD4DC72313AE44EF0043BE61 /* libG4persistency.dylib in Frameworks */,
-				CD4DC72413AE44EF0043BE61 /* libG4physicslists.dylib in Frameworks */,
-				CD4DC72513AE44EF0043BE61 /* libG4processes.dylib in Frameworks */,
-				CD4DC72613AE44EF0043BE61 /* libG4RayTracer.dylib in Frameworks */,
-				CD4DC72713AE44EF0043BE61 /* libG4readout.dylib in Frameworks */,
-				CD4DC72813AE44EF0043BE61 /* libG4run.dylib in Frameworks */,
-				CD4DC72913AE44EF0043BE61 /* libG4track.dylib in Frameworks */,
-				CD4DC72A13AE44EF0043BE61 /* libG4tracking.dylib in Frameworks */,
-				CD4DC72B13AE44EF0043BE61 /* libG4Tree.dylib in Frameworks */,
-				CD4DC72C13AE44EF0043BE61 /* libG4vis_management.dylib in Frameworks */,
-				CD4DC72D13AE44EF0043BE61 /* libG4visHepRep.dylib in Frameworks */,
-				CD4DC72E13AE44EF0043BE61 /* libG4visXXX.dylib in Frameworks */,
-				CD4DC72F13AE44EF0043BE61 /* libG4VRML.dylib in Frameworks */,
+				CD48C6FE13B1B8E500CC8708 /* libG4digits_hits.dylib in Frameworks */,
+				CD48C6FF13B1B8E500CC8708 /* libG4error_propagation.dylib in Frameworks */,
+				CD48C70013B1B8E500CC8708 /* libG4event.dylib in Frameworks */,
+				CD48C70113B1B8E500CC8708 /* libG4FR.dylib in Frameworks */,
+				CD48C70213B1B8E500CC8708 /* libG4geometry.dylib in Frameworks */,
+				CD48C70313B1B8E500CC8708 /* libG4gl2ps.dylib in Frameworks */,
+				CD48C70413B1B8E500CC8708 /* libG4global.dylib in Frameworks */,
+				CD48C70513B1B8E500CC8708 /* libG4GMocren.dylib in Frameworks */,
+				CD48C70613B1B8E500CC8708 /* libG4graphics_reps.dylib in Frameworks */,
+				CD48C70713B1B8E500CC8708 /* libG4intercoms.dylib in Frameworks */,
+				CD48C70813B1B8E500CC8708 /* libG4interfaces.dylib in Frameworks */,
+				CD48C70913B1B8E500CC8708 /* libG4materials.dylib in Frameworks */,
+				CD48C70A13B1B8E500CC8708 /* libG4modeling.dylib in Frameworks */,
+				CD48C70B13B1B8E500CC8708 /* libG4OpenGL.dylib in Frameworks */,
+				CD48C70C13B1B8E500CC8708 /* libG4parmodels.dylib in Frameworks */,
+				CD48C70D13B1B8E500CC8708 /* libG4particles.dylib in Frameworks */,
+				CD48C70E13B1B8E500CC8708 /* libG4persistency.dylib in Frameworks */,
+				CD48C70F13B1B8E500CC8708 /* libG4physicslists.dylib in Frameworks */,
+				CD48C71013B1B8E500CC8708 /* libG4processes.dylib in Frameworks */,
+				CD48C71113B1B8E500CC8708 /* libG4RayTracer.dylib in Frameworks */,
+				CD48C71213B1B8E500CC8708 /* libG4readout.dylib in Frameworks */,
+				CD48C71313B1B8E500CC8708 /* libG4run.dylib in Frameworks */,
+				CD48C71413B1B8E500CC8708 /* libG4track.dylib in Frameworks */,
+				CD48C71513B1B8E500CC8708 /* libG4tracking.dylib in Frameworks */,
+				CD48C71613B1B8E500CC8708 /* libG4Tree.dylib in Frameworks */,
+				CD48C71713B1B8E500CC8708 /* libG4vis_management.dylib in Frameworks */,
+				CD48C71813B1B8E500CC8708 /* libG4visHepRep.dylib in Frameworks */,
+				CD48C71913B1B8E500CC8708 /* libG4visXXX.dylib in Frameworks */,
+				CD48C71A13B1B8E500CC8708 /* libG4VRML.dylib in Frameworks */,
+				CD21D5C813B00DC7006CE930 /* libCLHEP.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD21D60513B00E4E006CE930 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				CD48C6E113B1B8E400CC8708 /* libG4digits_hits.dylib */,
+				CD48C6E213B1B8E400CC8708 /* libG4error_propagation.dylib */,
+				CD48C6E313B1B8E500CC8708 /* libG4event.dylib */,
+				CD48C6E413B1B8E500CC8708 /* libG4FR.dylib */,
+				CD48C6E513B1B8E500CC8708 /* libG4geometry.dylib */,
+				CD48C6E613B1B8E500CC8708 /* libG4gl2ps.dylib */,
+				CD48C6E713B1B8E500CC8708 /* libG4global.dylib */,
+				CD48C6E813B1B8E500CC8708 /* libG4GMocren.dylib */,
+				CD48C6E913B1B8E500CC8708 /* libG4graphics_reps.dylib */,
+				CD48C6EA13B1B8E500CC8708 /* libG4intercoms.dylib */,
+				CD48C6EB13B1B8E500CC8708 /* libG4interfaces.dylib */,
+				CD48C6EC13B1B8E500CC8708 /* libG4materials.dylib */,
+				CD48C6ED13B1B8E500CC8708 /* libG4modeling.dylib */,
+				CD48C6EE13B1B8E500CC8708 /* libG4OpenGL.dylib */,
+				CD48C6EF13B1B8E500CC8708 /* libG4parmodels.dylib */,
+				CD48C6F013B1B8E500CC8708 /* libG4particles.dylib */,
+				CD48C6F113B1B8E500CC8708 /* libG4persistency.dylib */,
+				CD48C6F213B1B8E500CC8708 /* libG4physicslists.dylib */,
+				CD48C6F313B1B8E500CC8708 /* libG4processes.dylib */,
+				CD48C6F413B1B8E500CC8708 /* libG4RayTracer.dylib */,
+				CD48C6F513B1B8E500CC8708 /* libG4readout.dylib */,
+				CD48C6F613B1B8E500CC8708 /* libG4run.dylib */,
+				CD48C6F713B1B8E500CC8708 /* libG4track.dylib */,
+				CD48C6F813B1B8E500CC8708 /* libG4tracking.dylib */,
+				CD48C6F913B1B8E500CC8708 /* libG4Tree.dylib */,
+				CD48C6FA13B1B8E500CC8708 /* libG4vis_management.dylib */,
+				CD48C6FB13B1B8E500CC8708 /* libG4visHepRep.dylib */,
+				CD48C6FC13B1B8E500CC8708 /* libG4visXXX.dylib */,
+				CD48C6FD13B1B8E500CC8708 /* libG4VRML.dylib */,
+				CD21D5C713B00DC7006CE930 /* libCLHEP.dylib */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
 		CD4DC6CC13AE41F50043BE61 = {
 			isa = PBXGroup;
 			children = (
-				CD4DC73213AE45190043BE61 /* Library */,
+				CD21D60513B00E4E006CE930 /* Library */,
 				CD4DC6DA13AE41F50043BE61 /* stopping_target_sim */,
 				CD4DC6D813AE41F50043BE61 /* Products */,
 			);
@@ -204,43 +241,6 @@
 				CD4DF4D913AE8A110043BE61 /* STcounterSD.cc */,
 			);
 			path = src;
-			sourceTree = "<group>";
-		};
-		CD4DC73213AE45190043BE61 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				CD4DC73013AE45100043BE61 /* libCLHEP-2.0.4.6.dylib */,
-				CD4DC6F613AE44EE0043BE61 /* libG4digits_hits.dylib */,
-				CD4DC6F713AE44EE0043BE61 /* libG4error_propagation.dylib */,
-				CD4DC6F813AE44EE0043BE61 /* libG4event.dylib */,
-				CD4DC6F913AE44EE0043BE61 /* libG4FR.dylib */,
-				CD4DC6FA13AE44EE0043BE61 /* libG4geometry.dylib */,
-				CD4DC6FB13AE44EE0043BE61 /* libG4gl2ps.dylib */,
-				CD4DC6FC13AE44EE0043BE61 /* libG4global.dylib */,
-				CD4DC6FD13AE44EE0043BE61 /* libG4GMocren.dylib */,
-				CD4DC6FE13AE44EE0043BE61 /* libG4graphics_reps.dylib */,
-				CD4DC6FF13AE44EE0043BE61 /* libG4intercoms.dylib */,
-				CD4DC70013AE44EE0043BE61 /* libG4interfaces.dylib */,
-				CD4DC70113AE44EE0043BE61 /* libG4materials.dylib */,
-				CD4DC70213AE44EE0043BE61 /* libG4modeling.dylib */,
-				CD4DC70313AE44EE0043BE61 /* libG4OpenGL.dylib */,
-				CD4DC70413AE44EE0043BE61 /* libG4parmodels.dylib */,
-				CD4DC70513AE44EE0043BE61 /* libG4particles.dylib */,
-				CD4DC70613AE44EE0043BE61 /* libG4persistency.dylib */,
-				CD4DC70713AE44EE0043BE61 /* libG4physicslists.dylib */,
-				CD4DC70813AE44EE0043BE61 /* libG4processes.dylib */,
-				CD4DC70913AE44EE0043BE61 /* libG4RayTracer.dylib */,
-				CD4DC70A13AE44EF0043BE61 /* libG4readout.dylib */,
-				CD4DC70B13AE44EF0043BE61 /* libG4run.dylib */,
-				CD4DC70C13AE44EF0043BE61 /* libG4track.dylib */,
-				CD4DC70D13AE44EF0043BE61 /* libG4tracking.dylib */,
-				CD4DC70E13AE44EF0043BE61 /* libG4Tree.dylib */,
-				CD4DC70F13AE44EF0043BE61 /* libG4vis_management.dylib */,
-				CD4DC71013AE44EF0043BE61 /* libG4visHepRep.dylib */,
-				CD4DC71113AE44EF0043BE61 /* libG4visXXX.dylib */,
-				CD4DC71213AE44EF0043BE61 /* libG4VRML.dylib */,
-			);
-			name = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,18 +317,15 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/Applications/geant4.9.3.p01/source/**",
-					"/Applications/CLHEP/2.0.4.6/include/**",
-				);
+				HEADER_SEARCH_PATHS = "/Applications/CLHEP/2.0.4.6/include/**";
 				LIBRARY_SEARCH_PATHS = (
-					"/Applications/geant4.9.3.p01/lib/**",
-					"/Applications/CLHEP/2.0.4.6/lib/**",
+					/Applications/CLHEP/2.0.4.6/lib,
+					/Applications/geant/geant_debug/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "/Applications/geant4.9.3.p01/source/**  /Applications/CLHEP/2.0.4.6/include/CLHEP/**";
+				USER_HEADER_SEARCH_PATHS = /Applications/geant/geant_release/include;
 			};
 			name = Debug;
 		};
@@ -341,17 +338,14 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/Applications/geant4.9.3.p01/source/**",
-					"/Applications/CLHEP/2.0.4.6/include/**",
-				);
+				HEADER_SEARCH_PATHS = "/Applications/CLHEP/2.0.4.6/include/**";
 				LIBRARY_SEARCH_PATHS = (
-					"/Applications/geant4.9.3.p01/lib/**",
-					"/Applications/CLHEP/2.0.4.6/lib/**",
+					/Applications/CLHEP/2.0.4.6/lib,
+					/Applications/geant/geant_release/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "/Applications/geant4.9.3.p01/source/**  /Applications/CLHEP/2.0.4.6/include/CLHEP/**";
+				USER_HEADER_SEARCH_PATHS = /Applications/geant/geant_release/include;
 			};
 			name = Release;
 		};
@@ -362,10 +356,13 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_LINK_WITH_DYNAMIC_LIBRARIES = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/geant4.9.3.p01/lib/Darwin-g++\"",
 					"\"$(SYSTEM_APPS_DIR)/CLHEP/2.0.4.6/lib\"",
+					"\"$(SYSTEM_APPS_DIR)/geant/geant_debug/lib/Darwin-g++\"",
+					"\"$(SYSTEM_APPS_DIR)/geant/geant_release/lib/Darwin-g++\"",
+					"\"$(SYSTEM_APPS_DIR)/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
@@ -379,12 +376,14 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_LINK_WITH_DYNAMIC_LIBRARIES = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/geant4.9.3.p01/lib/Darwin-g++\"",
 					"\"$(SYSTEM_APPS_DIR)/CLHEP/2.0.4.6/lib\"",
+					"\"$(SYSTEM_APPS_DIR)/geant/geant_debug/lib/Darwin-g++\"",
+					"\"$(SYSTEM_APPS_DIR)/geant/geant_release/lib/Darwin-g++\"",
+					"\"$(SYSTEM_APPS_DIR)/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++\"",
 				);
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 			};

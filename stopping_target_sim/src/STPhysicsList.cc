@@ -40,99 +40,30 @@ STPhysicsList::~STPhysicsList()
 
 void STPhysicsList::ConstructParticle()
 {
-    // In this method, static member functions should be called
-    // for all particles which you want to use.
-    // This ensures that objects of these particle types will be
-    // created in the program. 
-    G4BosonConstructor pBosonConstructor;
-    pBosonConstructor.ConstructParticle();
-    
-    G4LeptonConstructor pLeptonConstructor;
-    pLeptonConstructor.ConstructParticle();
+  // In this method, static member functions should be called
+  // for all particles which you want to use.
+  // This ensures that objects of these particle types will be
+  // created in the program. 
+
+  G4Geantino::GeantinoDefinition();
 }
 
 void STPhysicsList::ConstructProcess()
 {
-    // Define transportation process
-    
-    AddTransportation();
-    ConstructEM();
-    ConstructDecay();
+  // Define transportation process
+
+  AddTransportation();
 }
-
-void STPhysicsList::ConstructEM()
-{
-    theParticleIterator->reset();
-    
-    while ( (*theParticleIterator)() ) 
-    {
-        G4ParticleDefinition* particle = theParticleIterator->value();
-        G4ProcessManager* pmanager = particle->GetProcessManager();
-        G4String particleName = particle->GetParticleName();
-        
-        if (particleName == "gamma")
-        {
-            // photon
-            pmanager->AddDiscreteProcess(new G4PhotoElectricEffect);
-            pmanager->AddDiscreteProcess(new G4ComptonScattering);
-            pmanager->AddDiscreteProcess(new G4GammaConversion);
-            
-        } else if (particleName == "e-") {
-            //electron
-            pmanager->AddProcess(new G4eMultipleScattering,-1, 1, 1);
-            pmanager->AddProcess(new G4eIonisation,        -1, 2, 2);
-            pmanager->AddProcess(new G4eBremsstrahlung,    -1, 3, 3);      
-            
-        } else if (particleName == "e+") {
-            //positron
-            pmanager->AddProcess(new G4eMultipleScattering,-1, 1, 1);
-            pmanager->AddProcess(new G4eIonisation,        -1, 2, 2);
-            pmanager->AddProcess(new G4eBremsstrahlung,    -1, 3, 3);
-            pmanager->AddProcess(new G4eplusAnnihilation,   0,-1, 4);
-            
-        } else if( particleName == "mu+" || 
-                  particleName == "mu-"    ) {
-            //muon  
-            pmanager->AddProcess(new G4MuMultipleScattering,-1, 1, 1);
-            pmanager->AddProcess(new G4MuIonisation,       -1, 2, 2);
-            pmanager->AddProcess(new G4MuBremsstrahlung,   -1, 3, 3);
-            pmanager->AddProcess(new G4MuPairProduction,   -1, 4, 4);
-            
-        }
-    }
-}
-
-void STPhysicsList::ConstructDecay()
-{
-    // Add Decay Process
-    G4Decay* theDecayProcess = new G4Decay();
-    theParticleIterator->reset();
-    while( (*theParticleIterator)() )
-    {
-        G4ParticleDefinition* particle = theParticleIterator->value();
-        G4ProcessManager* pmanager = particle->GetProcessManager();
-        
-        if (theDecayProcess->IsApplicable(*particle)) 
-        { 
-            pmanager ->AddProcess(theDecayProcess);
-            // set ordering for PostStepDoIt and AtRestDoIt
-            pmanager ->SetProcessOrdering(theDecayProcess, idxPostStep);
-            pmanager ->SetProcessOrdering(theDecayProcess, idxAtRest);
-        }
-    }
-}
-
-
 
 void STPhysicsList::SetCuts()
 {
-    // uppress error messages even in case e/gamma/proton do not exist            
-    G4int temp = GetVerboseLevel();                                                SetVerboseLevel(0);                                                           
-    //  " G4VUserPhysicsList::SetCutsWithDefault" method sets 
-    //   the default cut value for all particle types 
-    SetCutsWithDefault();   
-    
-    // Retrieve verbose level
-    SetVerboseLevel(temp);  
+  // uppress error messages even in case e/gamma/proton do not exist            
+  G4int temp = GetVerboseLevel();                                                SetVerboseLevel(0);                                                           
+  //  " G4VUserPhysicsList::SetCutsWithDefault" method sets 
+  //   the default cut value for all particle types 
+  SetCutsWithDefault();   
+
+  // Retrieve verbose level
+  SetVerboseLevel(temp);  
 }
 

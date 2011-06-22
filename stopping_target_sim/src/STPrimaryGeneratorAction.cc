@@ -59,8 +59,8 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     particleGun->SetParticlePosition(position);
     
     
-    G4ThreeVector momentum_dir = G4ThreeVector();// make this random in 4pi
-    particleGun->SetParticleMomentumDirection(G4ThreeVector(1, 0, 0));
+    G4ThreeVector
+    particleGun->SetParticleMomentumDirection();
     particleGun->GeneratePrimaryVertex(anEvent);
 }
 

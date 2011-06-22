@@ -39,8 +39,6 @@
 #include "G4ParticleDefinition.hh"
 #include "globals.hh"
 
-#include "Randomize.hh"
-
 class G4ParticleGun;
 class G4Event;
 

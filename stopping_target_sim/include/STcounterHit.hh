@@ -24,82 +24,78 @@
 // ********************************************************************
 //
 //
-// $Id: STcounterHit.hh,v 1.8 2006/06/29 17:47:53 gunter Exp $
+// $Id: ExN02TrackerHit.hh,v 1.8 2006/06/29 17:47:53 gunter Exp $
 // GEANT4 tag $Name: geant4-09-03-patch-01 $
 //
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#ifndef STcounterHit_hh
-#define STcounterHit_hh 1
+#ifndef ExN02TrackerHit_h
+#define ExN02TrackerHit_h 1
 
 #include "G4VHit.hh"
 #include "G4THitsCollection.hh"
 #include "G4Allocator.hh"
 #include "G4ThreeVector.hh"
 
-
-#include "G4UnitsTable.hh"
-#include "G4VVisManager.hh"
-#include "G4Circle.hh"
-#include "G4Colour.hh"
-#include "G4VisAttributes.hh"
-
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class STcounterHit : public G4VHit
+class ExN02TrackerHit : public G4VHit
 {
   public:
 
-      STcounterHit();
-     ~STcounterHit();
-      STcounterHit(const STcounterHit&);
-    
-      const STcounterHit& operator=(const STcounterHit&);
-      G4int operator==(const STcounterHit&) const;
+      ExN02TrackerHit();
+     ~ExN02TrackerHit();
+      ExN02TrackerHit(const ExN02TrackerHit&);
+      const ExN02TrackerHit& operator=(const ExN02TrackerHit&);
+      G4int operator==(const ExN02TrackerHit&) const;
 
       inline void* operator new(size_t);
       inline void  operator delete(void*);
 
       void Draw();
       void Print();
+
+  public:
   
-      inline void SetTrackID  (G4int track)      { trackID = track; }; 
-      inline void SetEdep     (G4double de)      { edep = de; };
-      inline void SetPos      (G4ThreeVector xyz){ pos = xyz; };
+      void SetTrackID  (G4int track)      { trackID = track; };
+      void SetChamberNb(G4int chamb)      { chamberNb = chamb; };  
+      void SetEdep     (G4double de)      { edep = de; };
+      void SetPos      (G4ThreeVector xyz){ pos = xyz; };
       
       G4int GetTrackID()    { return trackID; };
+      G4int GetChamberNb()  { return chamberNb; };
       G4double GetEdep()    { return edep; };      
       G4ThreeVector GetPos(){ return pos; };
       
   private:
   
       G4int         trackID;
+      G4int         chamberNb;
       G4double      edep;
       G4ThreeVector pos;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-// make a hits collection (templated)
-typedef G4THitsCollection<STcounterHit> STcounterHitsCollection;
-// allocator defined in .cc
-extern G4Allocator<STcounterHit> STcounterHitAllocator;
+typedef G4THitsCollection<ExN02TrackerHit> ExN02TrackerHitsCollection;
+
+extern G4Allocator<ExN02TrackerHit> ExN02TrackerHitAllocator;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-inline void* STcounterHit::operator new(size_t)
+inline void* ExN02TrackerHit::operator new(size_t)
 {
   void *aHit;
-  aHit = (void *) STcounterHitAllocator.MallocSingle();
+  aHit = (void *) ExN02TrackerHitAllocator.MallocSingle();
   return aHit;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-inline void STcounterHit::operator delete(void *aHit)
+inline void ExN02TrackerHit::operator delete(void *aHit)
 {
-  STcounterHitAllocator.FreeSingle((STcounterHit*) aHit);
+  ExN02TrackerHitAllocator.FreeSingle((ExN02TrackerHit*) aHit);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

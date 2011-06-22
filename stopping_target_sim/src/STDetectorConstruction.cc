@@ -104,63 +104,76 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     
     G4ThreeVector stPos = G4ThreeVector(0,0,0);
     
-//    cuStoppingTarget_phys = ConstructBox(Cu, 0, stPos, "stopping_target",
-//                                         cuStoppingTarget_log,
-//                                         experimentalHall_log, 
-//                                         st_x, st_y, st_z);
-    
-    G4Box* target_phys = new G4Box("target", st_x, st_y, st_z);
-    cuStoppingTarget_log = new G4LogicalVolume(target_phys, Cu, "target_log");
-    cuStoppingTarget_phys = new G4PVPlacement(0, stPos, cuStoppingTarget_log, "target_phys",
-                                              experimentalHall_log, false, 0);
+    cuStoppingTarget_phys = ConstructBox(Cu, 0, stPos, "stopping_target",
+                                         cuStoppingTarget_log,
+                                         experimentalHall_log, 
+                                         st_x, st_y, st_z);
 
     // +++++++++
     // Counters (A&B currently virtual detectors)
+    
+    G4SDManager* sdMan = G4SDManager::GetSDMpointer(); // create the detector manager
     
     G4double c_x = 3.5*mm; // counter dimensions
     G4double c_y = 40*cm;
     G4double c_z = 50*cm;
     
-    G4double x_offset = 3*mm + (st_x + c_x)/2; // width of Al frame + half widths of Cu & scint
+    G4ThreeVector counterA_pos = G4ThreeVector(6*mm, 0, 0);
     
-    G4ThreeVector counterA_pos = G4ThreeVector(x_offset, 0, 0);
+    counterA_phys = ConstructBox(Air, 0, counterA_pos, "counterA", 
+                                 counterA_log, experimentalHall_log,
+                                 c_x, c_y, c_z, false, 0, counterA_sd);
     
-    G4Box* counter = new G4Box("counter", c_x, c_y, c_z);
+    sdMan->AddNewDetector(counterA_sd); // add the counterA
     
-    counterA_log = new G4LogicalVolume(counter, Air, "counterA_log");
-    counterA_phys = new G4PVPlacement(0, counterA_pos, counterA_log, "counterA_phys", experimentalHall_log, false, 0);
+    G4ThreeVector counterB_pos = G4ThreeVector(-6*mm, 0, 0);
+    counterB_phys = ConstructBox(Air, 0, counterB_pos, "counterB", 
+                                 counterB_log, experimentalHall_log,
+                                 c_x, c_y, c_z, false, 0, counterB_sd); 
     
-//    counterA_phys = ConstructBox(Air, 0, counterA_pos, "counterA", 
-//                                 counterA_log, experimentalHall_log,
-//                                 c_x, c_y, c_z, false, 0, 0);
-    
-    G4ThreeVector counterB_pos = G4ThreeVector(-x_offset, 0, 0);
-    
-    counterB_log = new G4LogicalVolume(counter, Air, "counterB_log");
-    counterB_phys = new G4PVPlacement(0, counterB_pos, counterB_log, "counterB_phys", experimentalHall_log, false, 0);
-    
-    
-//    counterB_phys = ConstructBox(Air, 0, counterB_pos, "counterB", 
-//                                 counterB_log, experimentalHall_log,
-//                                 c_x, c_y, c_z, false, 0, 0); 
+    sdMan->AddNewDetector(counterB_sd);
     
     //------------------------------------------------------------------------------
     // Create senstive detector manager
     //------------------------------------------------------------------------------
     
-    G4SDManager* sdMan = G4SDManager::GetSDMpointer(); // create the detector manager
     
-    
-    counterA_sd = new STcounterSD("counterA");
-    sdMan->AddNewDetector(counterA_sd); // add the counterA
-    counterA_log->SetSensitiveDetector(counterA_sd);
-    
-    counterB_sd = new STcounterSD("counterB");
-    sdMan->AddNewDetector(counterB_sd);
-    counterB_log->SetSensitiveDetector(counterB_sd);
     
     return experimentalHall_phys;
 
+}
+
+
+G4VPhysicalVolume* ConstructBox(G4Material *pMat,
+                                G4RotationMatrix *pRot, 
+                                const G4ThreeVector &tlate,
+                                const G4String &pName,
+                                G4LogicalVolume *pCurrentLogical,
+                                G4LogicalVolume *pMotherLogical, 
+                                G4double pX, G4double pY, G4double pZ,
+                                G4bool pMany, G4int pCopyNo,
+                                G4VSensitiveDetector *pSDetector)
+{
+    
+    // This will generate a G4Solid box, then generate an associated 
+    // logical volume then attach all that to a physical volume and return it.
+    G4String boxName = "_name";
+    boxName.prepend(pName);
+    G4Box *box = new G4Box(boxName, pX, pY, pZ);
+    
+    if (pCurrentLogical == 0)
+    { // If the logical volume doesn't exist: make it.
+        G4String lvName = "_LV";
+        lvName.prepend(pName);
+        pCurrentLogical = new G4LogicalVolume(box, pMat, lvName, 0,pSDetector, 0, true);
+    } 
+    
+    G4String pvName = "_PV";
+    pvName.prepend(pName);
+    G4VPhysicalVolume* physicalVol = new G4PVPlacement(pRot, tlate, pCurrentLogical, pvName, pMotherLogical, pMany, pCopyNo);
+    
+    return physicalVol;
+    
 }
 
 

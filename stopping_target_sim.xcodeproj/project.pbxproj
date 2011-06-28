@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CDB2F6FB13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB2F6FA13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib */; };
+		CDB2F6FD13BA4CA3004A8085 /* libxerces-c-3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB2F6FC13BA4CA3004A8085 /* libxerces-c-3.1.dylib */; };
 		CDC6E7F113B1CD0200C59D48 /* STcounterHit.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7EB13B1CD0200C59D48 /* STcounterHit.cc */; };
 		CDC6E7F213B1CD0200C59D48 /* STcounterSD.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7EC13B1CD0200C59D48 /* STcounterSD.cc */; };
 		CDC6E7F313B1CD0200C59D48 /* STDetectorConstruction.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7ED13B1CD0200C59D48 /* STDetectorConstruction.cc */; };
 		CDC6E7F413B1CD0200C59D48 /* STPhysicsList.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7EE13B1CD0200C59D48 /* STPhysicsList.cc */; };
 		CDC6E7F513B1CD0200C59D48 /* STPrimaryGeneratorAction.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7EF13B1CD0200C59D48 /* STPrimaryGeneratorAction.cc */; };
 		CDC6E7F613B1CD0200C59D48 /* STmain.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7F013B1CD0200C59D48 /* STmain.cc */; };
-		CDC6E7F813B1CDE300C59D48 /* libCLHEP.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E7F713B1CDE300C59D48 /* libCLHEP.dylib */; };
 		CDC6E81813B1CDFD00C59D48 /* libG4digits_hits.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E7FB13B1CDFC00C59D48 /* libG4digits_hits.dylib */; };
 		CDC6E81913B1CDFD00C59D48 /* libG4error_propagation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E7FC13B1CDFC00C59D48 /* libG4error_propagation.dylib */; };
 		CDC6E81A13B1CDFD00C59D48 /* libG4event.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E7FD13B1CDFC00C59D48 /* libG4event.dylib */; };
@@ -58,6 +59,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CDB2F66613B8EB34004A8085 /* stopping_target_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = stopping_target_sim; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDB2F6FA13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libCLHEP-2.1.0.1.dylib"; path = "/Applications/CLHEP/lib/libCLHEP-2.1.0.1.dylib"; sourceTree = "<absolute>"; };
+		CDB2F6FC13BA4CA3004A8085 /* libxerces-c-3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libxerces-c-3.1.dylib"; path = "../../../../usr/local/lib/libxerces-c-3.1.dylib"; sourceTree = "<group>"; };
 		CDC6E7D013B1CBB800C59D48 /* stopping_target_sim.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = stopping_target_sim.1; sourceTree = "<group>"; };
 		CDC6E7E213B1CD0200C59D48 /* History */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = History; sourceTree = "<group>"; };
 		CDC6E7E413B1CD0200C59D48 /* STcounterHit.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STcounterHit.hh; sourceTree = "<group>"; };
@@ -72,8 +76,6 @@
 		CDC6E7EE13B1CD0200C59D48 /* STPhysicsList.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STPhysicsList.cc; sourceTree = "<group>"; };
 		CDC6E7EF13B1CD0200C59D48 /* STPrimaryGeneratorAction.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STPrimaryGeneratorAction.cc; sourceTree = "<group>"; };
 		CDC6E7F013B1CD0200C59D48 /* STmain.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STmain.cc; sourceTree = "<group>"; };
-		CDC6E7F713B1CDE300C59D48 /* libCLHEP.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCLHEP.dylib; path = /Applications/CLHEP/2.0.4.6/lib/libCLHEP.dylib; sourceTree = "<absolute>"; };
-		CDC6E7F913B1CDE300C59D48 /* stopping_target_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = stopping_target_sim; path = /Users/scook/code/stopping_target_sim/build/Release/stopping_target_sim; sourceTree = "<absolute>"; };
 		CDC6E7FB13B1CDFC00C59D48 /* libG4digits_hits.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4digits_hits.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4digits_hits.dylib"; sourceTree = "<absolute>"; };
 		CDC6E7FC13B1CDFC00C59D48 /* libG4error_propagation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4error_propagation.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4error_propagation.dylib"; sourceTree = "<absolute>"; };
 		CDC6E7FD13B1CDFC00C59D48 /* libG4event.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4event.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4event.dylib"; sourceTree = "<absolute>"; };
@@ -110,6 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDB2F6FD13BA4CA3004A8085 /* libxerces-c-3.1.dylib in Frameworks */,
+				CDB2F6FB13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib in Frameworks */,
 				CDC6E81813B1CDFD00C59D48 /* libG4digits_hits.dylib in Frameworks */,
 				CDC6E81913B1CDFD00C59D48 /* libG4error_propagation.dylib in Frameworks */,
 				CDC6E81A13B1CDFD00C59D48 /* libG4event.dylib in Frameworks */,
@@ -139,7 +143,6 @@
 				CDC6E83213B1CDFD00C59D48 /* libG4visHepRep.dylib in Frameworks */,
 				CDC6E83313B1CDFD00C59D48 /* libG4visXXX.dylib in Frameworks */,
 				CDC6E83413B1CDFD00C59D48 /* libG4VRML.dylib in Frameworks */,
-				CDC6E7F813B1CDE300C59D48 /* libCLHEP.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +152,7 @@
 		CDC6E7BF13B1CBB800C59D48 = {
 			isa = PBXGroup;
 			children = (
+				CDB2F6FC13BA4CA3004A8085 /* libxerces-c-3.1.dylib */,
 				CDC6E83513B1CE0300C59D48 /* Library */,
 				CDC6E7CD13B1CBB800C59D48 /* stopping_target_sim */,
 				CDC6E7CB13B1CBB800C59D48 /* Products */,
@@ -158,6 +162,7 @@
 		CDC6E7CB13B1CBB800C59D48 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				CDB2F66613B8EB34004A8085 /* stopping_target_sim */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 		CDC6E83513B1CE0300C59D48 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				CDB2F6FA13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib */,
 				CDC6E7FB13B1CDFC00C59D48 /* libG4digits_hits.dylib */,
 				CDC6E7FC13B1CDFC00C59D48 /* libG4error_propagation.dylib */,
 				CDC6E7FD13B1CDFC00C59D48 /* libG4event.dylib */,
@@ -231,7 +237,6 @@
 				CDC6E81513B1CDFD00C59D48 /* libG4visHepRep.dylib */,
 				CDC6E81613B1CDFD00C59D48 /* libG4visXXX.dylib */,
 				CDC6E81713B1CDFD00C59D48 /* libG4VRML.dylib */,
-				CDC6E7F713B1CDE300C59D48 /* libCLHEP.dylib */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -253,7 +258,7 @@
 			);
 			name = stopping_target_sim;
 			productName = stopping_target_sim;
-			productReference = CDC6E7F913B1CDE300C59D48 /* stopping_target_sim */;
+			productReference = CDB2F66613B8EB34004A8085 /* stopping_target_sim */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -304,15 +309,18 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					G4VIS_USE,
+					G4UI_USE,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "/Applications/CLHEP/2.0.4.6/include/**";
+				HEADER_SEARCH_PATHS = "/Applications/CLHEP/include/**";
 				LIBRARY_SEARCH_PATHS = (
-					/Applications/CLHEP/2.0.4.6/lib,
+					/Applications/CLHEP/lib,
 					"/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -327,11 +335,15 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					G4VIS_USE,
+					G4UI_USE,
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "/Applications/CLHEP/2.0.4.6/include/**";
+				HEADER_SEARCH_PATHS = "/Applications/CLHEP/include/**";
 				LIBRARY_SEARCH_PATHS = (
 					/Applications/CLHEP/2.0.4.6/lib,
 					"/Applications/geant/geant_release/geant4.9.4.p01/lib/Darwin-g++/",
@@ -353,6 +365,7 @@
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/CLHEP/2.0.4.6/lib\"",
 					"\"$(SYSTEM_APPS_DIR)/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++\"",
+					"\"$(SYSTEM_APPS_DIR)/CLHEP/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -369,6 +382,7 @@
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/CLHEP/2.0.4.6/lib\"",
 					"\"$(SYSTEM_APPS_DIR)/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++\"",
+					"\"$(SYSTEM_APPS_DIR)/CLHEP/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

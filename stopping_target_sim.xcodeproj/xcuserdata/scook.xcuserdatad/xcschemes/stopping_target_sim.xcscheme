@@ -46,6 +46,13 @@
             ReferencedContainer = "container:stopping_target_sim.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "DYLD_LIBRARY_PATH"
+            value = "/usr/local/lib:/Applications/root/lib/:/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++:/Applications/CLHEP/lib:/lib&#10;"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

@@ -3,53 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CDB2F6FB13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB2F6FA13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib */; };
-		CDB2F6FD13BA4CA3004A8085 /* libxerces-c-3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB2F6FC13BA4CA3004A8085 /* libxerces-c-3.1.dylib */; };
-		CDC6E7F113B1CD0200C59D48 /* STcounterHit.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7EB13B1CD0200C59D48 /* STcounterHit.cc */; };
-		CDC6E7F213B1CD0200C59D48 /* STcounterSD.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7EC13B1CD0200C59D48 /* STcounterSD.cc */; };
-		CDC6E7F313B1CD0200C59D48 /* STDetectorConstruction.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7ED13B1CD0200C59D48 /* STDetectorConstruction.cc */; };
-		CDC6E7F413B1CD0200C59D48 /* STPhysicsList.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7EE13B1CD0200C59D48 /* STPhysicsList.cc */; };
-		CDC6E7F513B1CD0200C59D48 /* STPrimaryGeneratorAction.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7EF13B1CD0200C59D48 /* STPrimaryGeneratorAction.cc */; };
-		CDC6E7F613B1CD0200C59D48 /* STmain.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDC6E7F013B1CD0200C59D48 /* STmain.cc */; };
-		CDC6E81813B1CDFD00C59D48 /* libG4digits_hits.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E7FB13B1CDFC00C59D48 /* libG4digits_hits.dylib */; };
-		CDC6E81913B1CDFD00C59D48 /* libG4error_propagation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E7FC13B1CDFC00C59D48 /* libG4error_propagation.dylib */; };
-		CDC6E81A13B1CDFD00C59D48 /* libG4event.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E7FD13B1CDFC00C59D48 /* libG4event.dylib */; };
-		CDC6E81B13B1CDFD00C59D48 /* libG4FR.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E7FE13B1CDFC00C59D48 /* libG4FR.dylib */; };
-		CDC6E81C13B1CDFD00C59D48 /* libG4geometry.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E7FF13B1CDFD00C59D48 /* libG4geometry.dylib */; };
-		CDC6E81D13B1CDFD00C59D48 /* libG4gl2ps.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80013B1CDFD00C59D48 /* libG4gl2ps.dylib */; };
-		CDC6E81E13B1CDFD00C59D48 /* libG4global.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80113B1CDFD00C59D48 /* libG4global.dylib */; };
-		CDC6E81F13B1CDFD00C59D48 /* libG4GMocren.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80213B1CDFD00C59D48 /* libG4GMocren.dylib */; };
-		CDC6E82013B1CDFD00C59D48 /* libG4graphics_reps.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80313B1CDFD00C59D48 /* libG4graphics_reps.dylib */; };
-		CDC6E82113B1CDFD00C59D48 /* libG4intercoms.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80413B1CDFD00C59D48 /* libG4intercoms.dylib */; };
-		CDC6E82213B1CDFD00C59D48 /* libG4interfaces.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80513B1CDFD00C59D48 /* libG4interfaces.dylib */; };
-		CDC6E82313B1CDFD00C59D48 /* libG4materials.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80613B1CDFD00C59D48 /* libG4materials.dylib */; };
-		CDC6E82413B1CDFD00C59D48 /* libG4modeling.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80713B1CDFD00C59D48 /* libG4modeling.dylib */; };
-		CDC6E82513B1CDFD00C59D48 /* libG4OpenGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80813B1CDFD00C59D48 /* libG4OpenGL.dylib */; };
-		CDC6E82613B1CDFD00C59D48 /* libG4parmodels.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80913B1CDFD00C59D48 /* libG4parmodels.dylib */; };
-		CDC6E82713B1CDFD00C59D48 /* libG4particles.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80A13B1CDFD00C59D48 /* libG4particles.dylib */; };
-		CDC6E82813B1CDFD00C59D48 /* libG4persistency.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80B13B1CDFD00C59D48 /* libG4persistency.dylib */; };
-		CDC6E82913B1CDFD00C59D48 /* libG4physicslists.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80C13B1CDFD00C59D48 /* libG4physicslists.dylib */; };
-		CDC6E82A13B1CDFD00C59D48 /* libG4processes.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80D13B1CDFD00C59D48 /* libG4processes.dylib */; };
-		CDC6E82B13B1CDFD00C59D48 /* libG4RayTracer.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80E13B1CDFD00C59D48 /* libG4RayTracer.dylib */; };
-		CDC6E82C13B1CDFD00C59D48 /* libG4readout.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E80F13B1CDFD00C59D48 /* libG4readout.dylib */; };
-		CDC6E82D13B1CDFD00C59D48 /* libG4run.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E81013B1CDFD00C59D48 /* libG4run.dylib */; };
-		CDC6E82E13B1CDFD00C59D48 /* libG4track.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E81113B1CDFD00C59D48 /* libG4track.dylib */; };
-		CDC6E82F13B1CDFD00C59D48 /* libG4tracking.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E81213B1CDFD00C59D48 /* libG4tracking.dylib */; };
-		CDC6E83013B1CDFD00C59D48 /* libG4Tree.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E81313B1CDFD00C59D48 /* libG4Tree.dylib */; };
-		CDC6E83113B1CDFD00C59D48 /* libG4vis_management.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E81413B1CDFD00C59D48 /* libG4vis_management.dylib */; };
-		CDC6E83213B1CDFD00C59D48 /* libG4visHepRep.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E81513B1CDFD00C59D48 /* libG4visHepRep.dylib */; };
-		CDC6E83313B1CDFD00C59D48 /* libG4visXXX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E81613B1CDFD00C59D48 /* libG4visXXX.dylib */; };
-		CDC6E83413B1CDFD00C59D48 /* libG4VRML.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC6E81713B1CDFD00C59D48 /* libG4VRML.dylib */; };
+		CD5C461F13BA5C7B000AB21E /* STcounterHit.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD5C461913BA5C7B000AB21E /* STcounterHit.cc */; };
+		CD5C462013BA5C7B000AB21E /* STcounterSD.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD5C461A13BA5C7B000AB21E /* STcounterSD.cc */; };
+		CD5C462113BA5C7B000AB21E /* STDetectorConstruction.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD5C461B13BA5C7B000AB21E /* STDetectorConstruction.cc */; };
+		CD5C462213BA5C7B000AB21E /* STPhysicsList.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD5C461C13BA5C7B000AB21E /* STPhysicsList.cc */; };
+		CD5C462313BA5C7B000AB21E /* STPrimaryGeneratorAction.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD5C461D13BA5C7B000AB21E /* STPrimaryGeneratorAction.cc */; };
+		CD5C462413BA5C7B000AB21E /* STmain.cc in Sources */ = {isa = PBXBuildFile; fileRef = CD5C461E13BA5C7B000AB21E /* STmain.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CDC6E7C813B1CBB800C59D48 /* CopyFiles */ = {
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
@@ -59,357 +28,220 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CDB2F66613B8EB34004A8085 /* stopping_target_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = stopping_target_sim; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDB2F6FA13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libCLHEP-2.1.0.1.dylib"; path = "/Applications/CLHEP/lib/libCLHEP-2.1.0.1.dylib"; sourceTree = "<absolute>"; };
-		CDB2F6FC13BA4CA3004A8085 /* libxerces-c-3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libxerces-c-3.1.dylib"; path = "../../../../usr/local/lib/libxerces-c-3.1.dylib"; sourceTree = "<group>"; };
-		CDC6E7D013B1CBB800C59D48 /* stopping_target_sim.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = stopping_target_sim.1; sourceTree = "<group>"; };
-		CDC6E7E213B1CD0200C59D48 /* History */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = History; sourceTree = "<group>"; };
-		CDC6E7E413B1CD0200C59D48 /* STcounterHit.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STcounterHit.hh; sourceTree = "<group>"; };
-		CDC6E7E513B1CD0200C59D48 /* STcounterSD.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STcounterSD.hh; sourceTree = "<group>"; };
-		CDC6E7E613B1CD0200C59D48 /* STDetectorConstruction.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STDetectorConstruction.hh; sourceTree = "<group>"; };
-		CDC6E7E713B1CD0200C59D48 /* STPhysicsList.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STPhysicsList.hh; sourceTree = "<group>"; };
-		CDC6E7E813B1CD0200C59D48 /* STPrimaryGeneratorAction.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STPrimaryGeneratorAction.hh; sourceTree = "<group>"; };
-		CDC6E7E913B1CD0200C59D48 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		CDC6E7EB13B1CD0200C59D48 /* STcounterHit.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STcounterHit.cc; sourceTree = "<group>"; };
-		CDC6E7EC13B1CD0200C59D48 /* STcounterSD.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STcounterSD.cc; sourceTree = "<group>"; };
-		CDC6E7ED13B1CD0200C59D48 /* STDetectorConstruction.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STDetectorConstruction.cc; sourceTree = "<group>"; };
-		CDC6E7EE13B1CD0200C59D48 /* STPhysicsList.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STPhysicsList.cc; sourceTree = "<group>"; };
-		CDC6E7EF13B1CD0200C59D48 /* STPrimaryGeneratorAction.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STPrimaryGeneratorAction.cc; sourceTree = "<group>"; };
-		CDC6E7F013B1CD0200C59D48 /* STmain.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STmain.cc; sourceTree = "<group>"; };
-		CDC6E7FB13B1CDFC00C59D48 /* libG4digits_hits.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4digits_hits.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4digits_hits.dylib"; sourceTree = "<absolute>"; };
-		CDC6E7FC13B1CDFC00C59D48 /* libG4error_propagation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4error_propagation.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4error_propagation.dylib"; sourceTree = "<absolute>"; };
-		CDC6E7FD13B1CDFC00C59D48 /* libG4event.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4event.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4event.dylib"; sourceTree = "<absolute>"; };
-		CDC6E7FE13B1CDFC00C59D48 /* libG4FR.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4FR.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4FR.dylib"; sourceTree = "<absolute>"; };
-		CDC6E7FF13B1CDFD00C59D48 /* libG4geometry.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4geometry.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4geometry.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80013B1CDFD00C59D48 /* libG4gl2ps.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4gl2ps.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4gl2ps.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80113B1CDFD00C59D48 /* libG4global.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4global.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4global.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80213B1CDFD00C59D48 /* libG4GMocren.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4GMocren.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4GMocren.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80313B1CDFD00C59D48 /* libG4graphics_reps.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4graphics_reps.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4graphics_reps.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80413B1CDFD00C59D48 /* libG4intercoms.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4intercoms.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4intercoms.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80513B1CDFD00C59D48 /* libG4interfaces.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4interfaces.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4interfaces.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80613B1CDFD00C59D48 /* libG4materials.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4materials.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4materials.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80713B1CDFD00C59D48 /* libG4modeling.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4modeling.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4modeling.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80813B1CDFD00C59D48 /* libG4OpenGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4OpenGL.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4OpenGL.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80913B1CDFD00C59D48 /* libG4parmodels.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4parmodels.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4parmodels.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80A13B1CDFD00C59D48 /* libG4particles.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4particles.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4particles.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80B13B1CDFD00C59D48 /* libG4persistency.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4persistency.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4persistency.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80C13B1CDFD00C59D48 /* libG4physicslists.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4physicslists.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4physicslists.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80D13B1CDFD00C59D48 /* libG4processes.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4processes.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4processes.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80E13B1CDFD00C59D48 /* libG4RayTracer.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4RayTracer.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4RayTracer.dylib"; sourceTree = "<absolute>"; };
-		CDC6E80F13B1CDFD00C59D48 /* libG4readout.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4readout.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4readout.dylib"; sourceTree = "<absolute>"; };
-		CDC6E81013B1CDFD00C59D48 /* libG4run.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4run.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4run.dylib"; sourceTree = "<absolute>"; };
-		CDC6E81113B1CDFD00C59D48 /* libG4track.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4track.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4track.dylib"; sourceTree = "<absolute>"; };
-		CDC6E81213B1CDFD00C59D48 /* libG4tracking.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4tracking.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4tracking.dylib"; sourceTree = "<absolute>"; };
-		CDC6E81313B1CDFD00C59D48 /* libG4Tree.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4Tree.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4Tree.dylib"; sourceTree = "<absolute>"; };
-		CDC6E81413B1CDFD00C59D48 /* libG4vis_management.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4vis_management.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4vis_management.dylib"; sourceTree = "<absolute>"; };
-		CDC6E81513B1CDFD00C59D48 /* libG4visHepRep.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4visHepRep.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4visHepRep.dylib"; sourceTree = "<absolute>"; };
-		CDC6E81613B1CDFD00C59D48 /* libG4visXXX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4visXXX.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4visXXX.dylib"; sourceTree = "<absolute>"; };
-		CDC6E81713B1CDFD00C59D48 /* libG4VRML.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libG4VRML.dylib; path = "/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++/libG4VRML.dylib"; sourceTree = "<absolute>"; };
+		8DD76F6C0486A84900D96B5E /* stopping_target_sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = stopping_target_sim; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD5C461313BA5C7B000AB21E /* STcounterHit.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STcounterHit.hh; sourceTree = "<group>"; };
+		CD5C461413BA5C7B000AB21E /* STcounterSD.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STcounterSD.hh; sourceTree = "<group>"; };
+		CD5C461513BA5C7B000AB21E /* STDetectorConstruction.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STDetectorConstruction.hh; sourceTree = "<group>"; };
+		CD5C461613BA5C7B000AB21E /* STPhysicsList.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STPhysicsList.hh; sourceTree = "<group>"; };
+		CD5C461713BA5C7B000AB21E /* STPrimaryGeneratorAction.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STPrimaryGeneratorAction.hh; sourceTree = "<group>"; };
+		CD5C461913BA5C7B000AB21E /* STcounterHit.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STcounterHit.cc; sourceTree = "<group>"; };
+		CD5C461A13BA5C7B000AB21E /* STcounterSD.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STcounterSD.cc; sourceTree = "<group>"; };
+		CD5C461B13BA5C7B000AB21E /* STDetectorConstruction.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STDetectorConstruction.cc; sourceTree = "<group>"; };
+		CD5C461C13BA5C7B000AB21E /* STPhysicsList.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STPhysicsList.cc; sourceTree = "<group>"; };
+		CD5C461D13BA5C7B000AB21E /* STPrimaryGeneratorAction.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STPrimaryGeneratorAction.cc; sourceTree = "<group>"; };
+		CD5C461E13BA5C7B000AB21E /* STmain.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = STmain.cc; path = stopping_target_sim/STmain.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CDC6E7C713B1CBB800C59D48 /* Frameworks */ = {
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDB2F6FD13BA4CA3004A8085 /* libxerces-c-3.1.dylib in Frameworks */,
-				CDB2F6FB13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib in Frameworks */,
-				CDC6E81813B1CDFD00C59D48 /* libG4digits_hits.dylib in Frameworks */,
-				CDC6E81913B1CDFD00C59D48 /* libG4error_propagation.dylib in Frameworks */,
-				CDC6E81A13B1CDFD00C59D48 /* libG4event.dylib in Frameworks */,
-				CDC6E81B13B1CDFD00C59D48 /* libG4FR.dylib in Frameworks */,
-				CDC6E81C13B1CDFD00C59D48 /* libG4geometry.dylib in Frameworks */,
-				CDC6E81D13B1CDFD00C59D48 /* libG4gl2ps.dylib in Frameworks */,
-				CDC6E81E13B1CDFD00C59D48 /* libG4global.dylib in Frameworks */,
-				CDC6E81F13B1CDFD00C59D48 /* libG4GMocren.dylib in Frameworks */,
-				CDC6E82013B1CDFD00C59D48 /* libG4graphics_reps.dylib in Frameworks */,
-				CDC6E82113B1CDFD00C59D48 /* libG4intercoms.dylib in Frameworks */,
-				CDC6E82213B1CDFD00C59D48 /* libG4interfaces.dylib in Frameworks */,
-				CDC6E82313B1CDFD00C59D48 /* libG4materials.dylib in Frameworks */,
-				CDC6E82413B1CDFD00C59D48 /* libG4modeling.dylib in Frameworks */,
-				CDC6E82513B1CDFD00C59D48 /* libG4OpenGL.dylib in Frameworks */,
-				CDC6E82613B1CDFD00C59D48 /* libG4parmodels.dylib in Frameworks */,
-				CDC6E82713B1CDFD00C59D48 /* libG4particles.dylib in Frameworks */,
-				CDC6E82813B1CDFD00C59D48 /* libG4persistency.dylib in Frameworks */,
-				CDC6E82913B1CDFD00C59D48 /* libG4physicslists.dylib in Frameworks */,
-				CDC6E82A13B1CDFD00C59D48 /* libG4processes.dylib in Frameworks */,
-				CDC6E82B13B1CDFD00C59D48 /* libG4RayTracer.dylib in Frameworks */,
-				CDC6E82C13B1CDFD00C59D48 /* libG4readout.dylib in Frameworks */,
-				CDC6E82D13B1CDFD00C59D48 /* libG4run.dylib in Frameworks */,
-				CDC6E82E13B1CDFD00C59D48 /* libG4track.dylib in Frameworks */,
-				CDC6E82F13B1CDFD00C59D48 /* libG4tracking.dylib in Frameworks */,
-				CDC6E83013B1CDFD00C59D48 /* libG4Tree.dylib in Frameworks */,
-				CDC6E83113B1CDFD00C59D48 /* libG4vis_management.dylib in Frameworks */,
-				CDC6E83213B1CDFD00C59D48 /* libG4visHepRep.dylib in Frameworks */,
-				CDC6E83313B1CDFD00C59D48 /* libG4visXXX.dylib in Frameworks */,
-				CDC6E83413B1CDFD00C59D48 /* libG4VRML.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CDC6E7BF13B1CBB800C59D48 = {
+		08FB7794FE84155DC02AAC07 /* stopping_target_sim */ = {
 			isa = PBXGroup;
 			children = (
-				CDB2F6FC13BA4CA3004A8085 /* libxerces-c-3.1.dylib */,
-				CDC6E83513B1CE0300C59D48 /* Library */,
-				CDC6E7CD13B1CBB800C59D48 /* stopping_target_sim */,
-				CDC6E7CB13B1CBB800C59D48 /* Products */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
+			name = stopping_target_sim;
 			sourceTree = "<group>";
 		};
-		CDC6E7CB13B1CBB800C59D48 /* Products */ = {
+		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				CDB2F66613B8EB34004A8085 /* stopping_target_sim */,
+				CD5C461213BA5C7B000AB21E /* include */,
+				CD5C461813BA5C7B000AB21E /* src */,
+				CD5C461E13BA5C7B000AB21E /* STmain.cc */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* stopping_target_sim */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CDC6E7CD13B1CBB800C59D48 /* stopping_target_sim */ = {
+		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				CDC6E7E213B1CD0200C59D48 /* History */,
-				CDC6E7E313B1CD0200C59D48 /* include */,
-				CDC6E7E913B1CD0200C59D48 /* README */,
-				CDC6E7EA13B1CD0200C59D48 /* src */,
-				CDC6E7F013B1CD0200C59D48 /* STmain.cc */,
-				CDC6E7D013B1CBB800C59D48 /* stopping_target_sim.1 */,
 			);
-			path = stopping_target_sim;
+			name = Documentation;
 			sourceTree = "<group>";
 		};
-		CDC6E7E313B1CD0200C59D48 /* include */ = {
+		CD5C461213BA5C7B000AB21E /* include */ = {
 			isa = PBXGroup;
 			children = (
-				CDC6E7E413B1CD0200C59D48 /* STcounterHit.hh */,
-				CDC6E7E513B1CD0200C59D48 /* STcounterSD.hh */,
-				CDC6E7E613B1CD0200C59D48 /* STDetectorConstruction.hh */,
-				CDC6E7E713B1CD0200C59D48 /* STPhysicsList.hh */,
-				CDC6E7E813B1CD0200C59D48 /* STPrimaryGeneratorAction.hh */,
+				CD5C461313BA5C7B000AB21E /* STcounterHit.hh */,
+				CD5C461413BA5C7B000AB21E /* STcounterSD.hh */,
+				CD5C461513BA5C7B000AB21E /* STDetectorConstruction.hh */,
+				CD5C461613BA5C7B000AB21E /* STPhysicsList.hh */,
+				CD5C461713BA5C7B000AB21E /* STPrimaryGeneratorAction.hh */,
 			);
-			path = include;
+			name = include;
+			path = stopping_target_sim/include;
 			sourceTree = "<group>";
 		};
-		CDC6E7EA13B1CD0200C59D48 /* src */ = {
+		CD5C461813BA5C7B000AB21E /* src */ = {
 			isa = PBXGroup;
 			children = (
-				CDC6E7EB13B1CD0200C59D48 /* STcounterHit.cc */,
-				CDC6E7EC13B1CD0200C59D48 /* STcounterSD.cc */,
-				CDC6E7ED13B1CD0200C59D48 /* STDetectorConstruction.cc */,
-				CDC6E7EE13B1CD0200C59D48 /* STPhysicsList.cc */,
-				CDC6E7EF13B1CD0200C59D48 /* STPrimaryGeneratorAction.cc */,
+				CD5C461913BA5C7B000AB21E /* STcounterHit.cc */,
+				CD5C461A13BA5C7B000AB21E /* STcounterSD.cc */,
+				CD5C461B13BA5C7B000AB21E /* STDetectorConstruction.cc */,
+				CD5C461C13BA5C7B000AB21E /* STPhysicsList.cc */,
+				CD5C461D13BA5C7B000AB21E /* STPrimaryGeneratorAction.cc */,
 			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		CDC6E83513B1CE0300C59D48 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				CDB2F6FA13BA4A65004A8085 /* libCLHEP-2.1.0.1.dylib */,
-				CDC6E7FB13B1CDFC00C59D48 /* libG4digits_hits.dylib */,
-				CDC6E7FC13B1CDFC00C59D48 /* libG4error_propagation.dylib */,
-				CDC6E7FD13B1CDFC00C59D48 /* libG4event.dylib */,
-				CDC6E7FE13B1CDFC00C59D48 /* libG4FR.dylib */,
-				CDC6E7FF13B1CDFD00C59D48 /* libG4geometry.dylib */,
-				CDC6E80013B1CDFD00C59D48 /* libG4gl2ps.dylib */,
-				CDC6E80113B1CDFD00C59D48 /* libG4global.dylib */,
-				CDC6E80213B1CDFD00C59D48 /* libG4GMocren.dylib */,
-				CDC6E80313B1CDFD00C59D48 /* libG4graphics_reps.dylib */,
-				CDC6E80413B1CDFD00C59D48 /* libG4intercoms.dylib */,
-				CDC6E80513B1CDFD00C59D48 /* libG4interfaces.dylib */,
-				CDC6E80613B1CDFD00C59D48 /* libG4materials.dylib */,
-				CDC6E80713B1CDFD00C59D48 /* libG4modeling.dylib */,
-				CDC6E80813B1CDFD00C59D48 /* libG4OpenGL.dylib */,
-				CDC6E80913B1CDFD00C59D48 /* libG4parmodels.dylib */,
-				CDC6E80A13B1CDFD00C59D48 /* libG4particles.dylib */,
-				CDC6E80B13B1CDFD00C59D48 /* libG4persistency.dylib */,
-				CDC6E80C13B1CDFD00C59D48 /* libG4physicslists.dylib */,
-				CDC6E80D13B1CDFD00C59D48 /* libG4processes.dylib */,
-				CDC6E80E13B1CDFD00C59D48 /* libG4RayTracer.dylib */,
-				CDC6E80F13B1CDFD00C59D48 /* libG4readout.dylib */,
-				CDC6E81013B1CDFD00C59D48 /* libG4run.dylib */,
-				CDC6E81113B1CDFD00C59D48 /* libG4track.dylib */,
-				CDC6E81213B1CDFD00C59D48 /* libG4tracking.dylib */,
-				CDC6E81313B1CDFD00C59D48 /* libG4Tree.dylib */,
-				CDC6E81413B1CDFD00C59D48 /* libG4vis_management.dylib */,
-				CDC6E81513B1CDFD00C59D48 /* libG4visHepRep.dylib */,
-				CDC6E81613B1CDFD00C59D48 /* libG4visXXX.dylib */,
-				CDC6E81713B1CDFD00C59D48 /* libG4VRML.dylib */,
-			);
-			name = Library;
+			name = src;
+			path = stopping_target_sim/src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CDC6E7C913B1CBB800C59D48 /* stopping_target_sim */ = {
+		8DD76F620486A84900D96B5E /* stopping_target_sim */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CDC6E7D313B1CBB800C59D48 /* Build configuration list for PBXNativeTarget "stopping_target_sim" */;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "stopping_target_sim" */;
 			buildPhases = (
-				CDC6E7C613B1CBB800C59D48 /* Sources */,
-				CDC6E7C713B1CBB800C59D48 /* Frameworks */,
-				CDC6E7C813B1CBB800C59D48 /* CopyFiles */,
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = stopping_target_sim;
+			productInstallPath = "$(HOME)/bin";
 			productName = stopping_target_sim;
-			productReference = CDB2F66613B8EB34004A8085 /* stopping_target_sim */;
+			productReference = 8DD76F6C0486A84900D96B5E /* stopping_target_sim */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CDC6E7C113B1CBB800C59D48 /* Project object */ = {
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			attributes = {
-				ORGANIZATIONNAME = UCL;
-			};
-			buildConfigurationList = CDC6E7C413B1CBB800C59D48 /* Build configuration list for PBXProject "stopping_target_sim" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = CDC6E7BF13B1CBB800C59D48;
-			productRefGroup = CDC6E7CB13B1CBB800C59D48 /* Products */;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "stopping_target_sim" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* stopping_target_sim */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CDC6E7C913B1CBB800C59D48 /* stopping_target_sim */,
+				8DD76F620486A84900D96B5E /* stopping_target_sim */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CDC6E7C613B1CBB800C59D48 /* Sources */ = {
+		8DD76F640486A84900D96B5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDC6E7F113B1CD0200C59D48 /* STcounterHit.cc in Sources */,
-				CDC6E7F213B1CD0200C59D48 /* STcounterSD.cc in Sources */,
-				CDC6E7F313B1CD0200C59D48 /* STDetectorConstruction.cc in Sources */,
-				CDC6E7F413B1CD0200C59D48 /* STPhysicsList.cc in Sources */,
-				CDC6E7F513B1CD0200C59D48 /* STPrimaryGeneratorAction.cc in Sources */,
-				CDC6E7F613B1CD0200C59D48 /* STmain.cc in Sources */,
+				CD5C461F13BA5C7B000AB21E /* STcounterHit.cc in Sources */,
+				CD5C462013BA5C7B000AB21E /* STcounterSD.cc in Sources */,
+				CD5C462113BA5C7B000AB21E /* STDetectorConstruction.cc in Sources */,
+				CD5C462213BA5C7B000AB21E /* STPhysicsList.cc in Sources */,
+				CD5C462313BA5C7B000AB21E /* STPrimaryGeneratorAction.cc in Sources */,
+				CD5C462413BA5C7B000AB21E /* STmain.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		CDC6E7D113B1CBB800C59D48 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					G4VIS_USE,
-					G4UI_USE,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "/Applications/CLHEP/include/**";
-				LIBRARY_SEARCH_PATHS = (
-					/Applications/CLHEP/lib,
-					"/Applications/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "/Applications/geant/geant_debug/geant4.9.4.p01/source/**";
-			};
-			name = Debug;
-		};
-		CDC6E7D213B1CBB800C59D48 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					G4VIS_USE,
-					G4UI_USE,
-				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "/Applications/CLHEP/include/**";
-				LIBRARY_SEARCH_PATHS = (
-					/Applications/CLHEP/2.0.4.6/lib,
-					"/Applications/geant/geant_release/geant4.9.4.p01/lib/Darwin-g++/",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "/Applications/geant/geant_debug/geant4.9.4.p01/source/**";
-			};
-			name = Release;
-		};
-		CDC6E7D413B1CBB800C59D48 /* Debug */ = {
+		1DEB923208733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/CLHEP/2.0.4.6/lib\"",
-					"\"$(SYSTEM_APPS_DIR)/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++\"",
-					"\"$(SYSTEM_APPS_DIR)/CLHEP/lib\"",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = stopping_target_sim;
 			};
 			name = Debug;
 		};
-		CDC6E7D513B1CBB800C59D48 /* Release */ = {
+		1DEB923308733DC60010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/CLHEP/2.0.4.6/lib\"",
-					"\"$(SYSTEM_APPS_DIR)/geant/geant_debug/geant4.9.4.p01/lib/Darwin-g++\"",
-					"\"$(SYSTEM_APPS_DIR)/CLHEP/lib\"",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = stopping_target_sim;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CDC6E7C413B1CBB800C59D48 /* Build configuration list for PBXProject "stopping_target_sim" */ = {
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "stopping_target_sim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CDC6E7D113B1CBB800C59D48 /* Debug */,
-				CDC6E7D213B1CBB800C59D48 /* Release */,
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CDC6E7D313B1CBB800C59D48 /* Build configuration list for PBXNativeTarget "stopping_target_sim" */ = {
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "stopping_target_sim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CDC6E7D413B1CBB800C59D48 /* Debug */,
-				CDC6E7D513B1CBB800C59D48 /* Release */,
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = CDC6E7C113B1CBB800C59D48 /* Project object */;
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }

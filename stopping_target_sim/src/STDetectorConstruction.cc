@@ -41,17 +41,6 @@ STDetectorConstruction::STDetectorConstruction()
 STDetectorConstruction::~STDetectorConstruction() {;}
 
 
-G4VPhysicalVolume* ConstructBox(G4Material *pMat,
-                                G4RotationMatrix *pRot, 
-                                const G4ThreeVector &tlate,
-                                const G4String &pName,
-                                G4LogicalVolume *pCurrentLogical,
-                                G4LogicalVolume *pMotherLogical, 
-                                G4double pX, G4double pY, G4double pZ,
-                                G4bool pMany=false, G4int pCopyNo=0,
-                                G4VSensitiveDetector *pSDetector=0);
-
-
 G4VPhysicalVolume* STDetectorConstruction::Construct()
 {
     
@@ -104,11 +93,6 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     
     G4ThreeVector stPos = G4ThreeVector(0,0,0);
     
-//    cuStoppingTarget_phys = ConstructBox(Cu, 0, stPos, "stopping_target",
-//                                         cuStoppingTarget_log,
-//                                         experimentalHall_log, 
-//                                         st_x, st_y, st_z);
-    
     G4Box* target_phys = new G4Box("target", st_x, st_y, st_z);
     cuStoppingTarget_log = new G4LogicalVolume(target_phys, Cu, "target_log");
     cuStoppingTarget_phys = new G4PVPlacement(0, stPos, cuStoppingTarget_log, "target_phys",
@@ -130,19 +114,11 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     counterA_log = new G4LogicalVolume(counter, Air, "counterA_log");
     counterA_phys = new G4PVPlacement(0, counterA_pos, counterA_log, "counterA_phys", experimentalHall_log, false, 0);
     
-//    counterA_phys = ConstructBox(Air, 0, counterA_pos, "counterA", 
-//                                 counterA_log, experimentalHall_log,
-//                                 c_x, c_y, c_z, false, 0, 0);
-    
     G4ThreeVector counterB_pos = G4ThreeVector(-x_offset, 0, 0);
     
     counterB_log = new G4LogicalVolume(counter, Air, "counterB_log");
     counterB_phys = new G4PVPlacement(0, counterB_pos, counterB_log, "counterB_phys", experimentalHall_log, false, 0);
     
-    
-//    counterB_phys = ConstructBox(Air, 0, counterB_pos, "counterB", 
-//                                 counterB_log, experimentalHall_log,
-//                                 c_x, c_y, c_z, false, 0, 0); 
     
     //------------------------------------------------------------------------------
     // Create senstive detector manager

@@ -32,32 +32,41 @@
 //      GEANT 4 - exampleN01
 // --------------------------------------------------------------
 
-
+// Mandatory includes for geant
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
 
+// include for visualisation 
+#ifdef G4VIS_USE
+#include "G4VisExecutive.hh"
+#endif
+
+// include for interactive mode
+#ifdef G4UI_USE
+#include "G4UIExecutive.hh"
+#endif
+
+// includes for physics etc
 #include "STDetectorConstruction.hh"
 #include "STPhysicsList.hh"
 #include "STPrimaryGeneratorAction.hh"
 
-int main()
+int main(int argc, char** argv)
 {
     // Construct the default run manager
-    //
     G4RunManager* runManager = new G4RunManager;
     
-    // set mandatory initialization classes
-    //
-    G4VUserDetectorConstruction* detector = new STDetectorConstruction;
-    runManager->SetUserInitialization(detector);
-    //
-    G4VUserPhysicsList* physics = new STPhysicsList;
-    runManager->SetUserInitialization(physics);
+    // initialise detector & physics
+    runManager->SetUserInitialization(new STDetectorConstruction);
+    runManager->SetUserInitialization(new STPhysicsList);
     
-    // set mandatory user action class
-    //
-    G4VUserPrimaryGeneratorAction* gen_action = new STPrimaryGeneratorAction;
-    runManager->SetUserAction(gen_action);
+#ifdef G4VIS_USE // set up visualisation manager
+    G4VisManager* visManager = new G4VisExecutive;
+    visManager->Initialize();
+#endif 
+    
+    // initialise primary action
+    runManager->SetUserAction(new STPrimaryGeneratorAction);
     
     // Initialize G4 kernel
     //
@@ -65,10 +74,26 @@ int main()
     
     // Get the pointer to the UI manager and set verbosities
     //
-    G4UImanager* UI = G4UImanager::GetUIpointer();
-    UI->ApplyCommand("/run/verbose 1");
-    UI->ApplyCommand("/event/verbose 1");
-    UI->ApplyCommand("/tracking/verbose 1");
+    G4UImanager* UImanager = G4UImanager::GetUIpointer();
+    UImanager->ApplyCommand("/run/verbose 1");
+    UImanager->ApplyCommand("/event/verbose 1");
+    UImanager->ApplyCommand("/tracking/verbose 1");
+    
+    if(argc==1){
+#ifdef G4UI_USE
+        G4UIExecutive* ui = new G4UIExecutive(argc, argv);
+#ifdef G4VIS_USE
+        UImanager->ApplyCommand("/control/execute vis.mac");     
+#endif
+        ui->SessionStart();
+        delete ui;
+#endif
+    }
+    else{
+        G4String command = "/control/execute ";
+        G4String filename = argv[1];
+        UImanager->ApplyCommand(command+filename);
+    }
     
     // Start a run
     //

@@ -103,7 +103,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     
     G4double c_x = 3.5*mm; // counter dimensions
     G4double c_y = 40*cm;
-    G4double c_z = 50*cm;
+    G4double c_z =  5*cm;
     
     G4double x_offset = 3*mm + (st_x + c_x)/2; // width of Al frame + half widths of Cu & scint
     

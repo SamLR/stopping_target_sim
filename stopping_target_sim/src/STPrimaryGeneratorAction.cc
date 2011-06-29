@@ -30,40 +30,48 @@
 
 #include "STPrimaryGeneratorAction.hh"
 
-STPrimaryGeneratorAction::STPrimaryGeneratorAction()
-{
-  G4int n_particle = 1;
-  particleGun = new G4ParticleGun(n_particle);
+#include "Randomize.hh"
 
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4String particleName;
-  particleGun->SetParticleDefinition(particleTable->FindParticle(particleName="geantino"));
-  particleGun->SetParticleEnergy(1.0*GeV);
-  particleGun->SetParticlePosition(G4ThreeVector(-2.0*m, 0.0, 0.0));
+#include "G4Event.hh"
+#include "G4ParticleGun.hh"
+#include "G4ParticleTable.hh"
+#include "G4ParticleDefinition.hh"
+
+#include "G4RandomDirection.hh"
+
+STPrimaryGeneratorAction::STPrimaryGeneratorAction()
+// TODO look at getting data for detector from that class
+{
+    // this is vaguely close to the energy of an electron produced in mu decay
+    G4double electron_energy = 80.0*MeV;
+    G4int n_particle = 1;
+    particleGun = new G4ParticleGun(n_particle);
+    
+    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+    G4ParticleDefinition* particle = particleTable->FindParticle("e-");
+    
+    particleGun->SetParticleDefinition(particle);
+    
+    particleGun->SetParticleEnergy(electron_energy);
 }
 
 STPrimaryGeneratorAction::~STPrimaryGeneratorAction()
 {
-  delete particleGun;
+    delete particleGun;
 }
 
 void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
-{
-  G4int i = anEvent->GetEventID() % 3;
-  G4ThreeVector v(1.0,0.0,0.0);
-  switch(i)
-  {
-    case 0:
-      break;
-    case 1:
-      v.setY(0.1);
-      break;
-    case 2:
-      v.setZ(0.1);
-      break;
-  }
-  particleGun->SetParticleMomentumDirection(v);
-  particleGun->GeneratePrimaryVertex(anEvent);
+{ 
+    // Cu target is 6 x 370 x 80 mm; randomly position the e- with this volume
+    G4double pos_x =   6 * (G4UniformRand() - 0.5) * mm;
+    G4double pos_y = 370 * (G4UniformRand() - 0.5) * mm;
+    G4double pos_z =  80 * (G4UniformRand() - 0.5) * mm;
+    
+    particleGun->SetParticlePosition(G4ThreeVector(pos_x, pos_y, pos_z));
+    // use G4RandomDirection to ensure uniform dist across 4pi solid angle
+    particleGun->SetParticleMomentumDirection(G4RandomDirection());
+    
+    particleGun->GeneratePrimaryVertex(anEvent);
 }
 
 

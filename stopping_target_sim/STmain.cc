@@ -95,11 +95,6 @@ int main(int argc, char** argv)
         UImanager->ApplyCommand(command+filename);
     }
     
-    // Start a run
-    //
-    G4int numberOfEvent = 3;
-    runManager->BeamOn(numberOfEvent);
-    
     // Job termination
     //
     // Free the store: user actions, physics_list and detector_description are

@@ -32,17 +32,17 @@
 
 #include "STcounterHit.hh"
 
-G4Allocator<STcounterHit> STcounterHitAllocator;
+#include "G4UnitsTable.hh"
+#include "G4VVisManager.hh"
+#include "G4Circle.hh"
+#include "G4Colour.hh"
+#include "G4VisAttributes.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+G4Allocator<STcounterHit> STcounterHitAllocator;
 
 STcounterHit::STcounterHit() {}
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 STcounterHit::~STcounterHit() {}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 STcounterHit::STcounterHit(const STcounterHit& right)
   : G4VHit()
@@ -52,8 +52,6 @@ STcounterHit::STcounterHit(const STcounterHit& right)
   pos       = right.pos;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 const STcounterHit& STcounterHit::operator=(const STcounterHit& right)
 {
   trackID   = right.trackID;
@@ -62,14 +60,10 @@ const STcounterHit& STcounterHit::operator=(const STcounterHit& right)
   return *this;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 G4int STcounterHit::operator==(const STcounterHit& right) const
 {
   return (this==&right) ? 1 : 0;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void STcounterHit::Draw()
 {
@@ -86,13 +80,8 @@ void STcounterHit::Draw()
   }
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 void STcounterHit::Print()
 {
   G4cout << "  trackID: " << trackID 
         << "  position: " << G4BestUnit(pos,"Length") << G4endl;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-

@@ -45,7 +45,6 @@
 #include "G4VUserPhysicsList.hh"
 
 #include "globals.hh"
-#include "G4ParticleTypes.hh"
 
 class STPhysicsList: public G4VUserPhysicsList
 {
@@ -58,6 +57,9 @@ class STPhysicsList: public G4VUserPhysicsList
     void ConstructParticle();
     void ConstructProcess();
     void SetCuts();
+    void ConstructLeptons();
+    void ConstructEM();
+    void ConstructDecay();
 
 };
 

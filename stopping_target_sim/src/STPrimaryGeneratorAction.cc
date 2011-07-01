@@ -43,16 +43,18 @@ STPrimaryGeneratorAction::STPrimaryGeneratorAction()
 // TODO look at getting data for detector from that class
 {
     // this is vaguely close to the energy of an electron produced in mu decay
-    G4double electron_energy = 80.0*MeV;
+    G4double energy = 2.0*MeV; // was 80 MeV
     G4int n_particle = 1;
     particleGun = new G4ParticleGun(n_particle);
     
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-    G4ParticleDefinition* particle = particleTable->FindParticle("e-");
+//    G4ParticleDefinition* particle = particleTable->FindParticle("e-");
+    G4ParticleDefinition* particle = particleTable->FindParticle("mu-");
     
     particleGun->SetParticleDefinition(particle);
+    //particleGun->SetParticleMomentum(energy);
     
-    particleGun->SetParticleEnergy(electron_energy);
+    particleGun->SetParticleEnergy(energy);
 }
 
 STPrimaryGeneratorAction::~STPrimaryGeneratorAction()

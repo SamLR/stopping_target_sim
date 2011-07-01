@@ -18,17 +18,19 @@ STcounterSD::~STcounterSD(){;}
 void STcounterSD::Initialize(G4HCofThisEvent *pThisHC)
 {
     // set up root here (when used)
-    hitCount = 0;
 }
 
 void STcounterSD::EndOfEvent(G4HCofThisEvent *pThisHC)
 {
-    // save/write root files etc
-    printf("++++++++++++++++++++");
-    printf("name: %s", this->SensitiveDetectorName.data());
-    printf("this count: %i", hitCount);
-    printf("total count: %i", totalCount);
-    printf("++++++++++++++++++++");
+    if (hitCount > 0) 
+    {
+        // save/write root files etc
+        printf("\n++++++++++++++++++++\n");
+        printf("name: %s\n", this->SensitiveDetectorName.data());
+        printf("this count: %i\n", hitCount);
+        printf("total count: %i\n", totalCount);
+        printf("++++++++++++++++++++\n");        
+    }
 }
 
 G4bool STcounterSD::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
@@ -37,12 +39,21 @@ G4bool STcounterSD::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     // first check that the partice is entering the detector
     // then count it
     G4StepPoint* point = aStep->GetPreStepPoint();
+    const G4ParticleDefinition* particle = 
+                            aStep->GetTrack()->GetParticleDefinition();
+    G4String particle_name = particle->GetParticleName();
     
-     if (point->GetStepStatus() == fGeomBoundary) 
-     {
-         ++hitCount;
-         ++totalCount;
-         return true;
-     } 
-     return false;
+    G4bool ionising = (particle_name == "mu-" || 
+                       particle_name == "mu+" ||
+                       particle_name == "e-"  ||
+                       particle_name == "e+"    ); 
+    
+    
+    if (ionising && (point->GetStepStatus() == fGeomBoundary))
+    {
+        ++hitCount;
+        ++totalCount;
+        return true;
+    } 
+    return false;
 }

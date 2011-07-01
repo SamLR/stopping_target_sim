@@ -44,9 +44,9 @@ STDetectorConstruction::~STDetectorConstruction() {;}
 G4VPhysicalVolume* STDetectorConstruction::Construct()
 {
     
-    //------------------------------------------------------------------------------ 
+    //-------------------------------------------------------------------------- 
     // Define Materials
-    //------------------------------------------------------------------------------    
+    //--------------------------------------------------------------------------    
     
     G4double a;  // atomic mass
     G4double z;  // atomic number
@@ -65,9 +65,9 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     Air->AddElement(O, 30*perCent); 
     
     
-    //------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     // Define Volumes
-    //------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     
     // +++++++++
     // Experimental hall, beam is assumed to be along the x axis
@@ -76,55 +76,61 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     G4double expHall_y = 1.0*m;
     G4double expHall_z = 1.0*m;
     
-    G4Box* experimentalHall_box = new G4Box("expHall_box",
+    G4Box* expHall_box = new G4Box("expHall_box",
                                             expHall_x,expHall_y,expHall_z);
     
-    experimentalHall_log = new G4LogicalVolume(experimentalHall_box,
+    expHall_log = new G4LogicalVolume(expHall_box,
                                                Air,"expHall_log",0,0,0);
 
-    experimentalHall_phys = new G4PVPlacement(0,G4ThreeVector(),
-                                              experimentalHall_log,"expHall",0,false,0);
+    expHall_phys = new G4PVPlacement(0,G4ThreeVector(),
+                                              expHall_log,"expHall",
+                                              0,false,0);
     
     // +++++++++
     // Stopping target (copper)
-    G4double st_x =  6*mm; // stopping target dimensions
-    G4double st_y = 37*cm;
-    G4double st_z =  8*cm;
+    G4double st_x =  6*mm /2; // stopping target dimensions (from centre)
+    G4double st_y = 37*cm /2;
+    G4double st_z =  8*cm /2;
     
     G4ThreeVector stPos = G4ThreeVector(0,0,0);
     
     G4Box* target_phys = new G4Box("target", st_x, st_y, st_z);
     cuStoppingTarget_log = new G4LogicalVolume(target_phys, Cu, "target_log");
-    cuStoppingTarget_phys = new G4PVPlacement(0, stPos, cuStoppingTarget_log, "target_phys",
-                                              experimentalHall_log, false, 0);
+    cuStoppingTarget_phys = new G4PVPlacement(0, stPos, cuStoppingTarget_log, 
+                                              "target_phys", expHall_log, 
+                                              false, 0);
 
     // +++++++++
     // Counters (A&B currently virtual detectors)
     
-    G4double c_x = 3.5*mm; // counter dimensions
-    G4double c_y = 40*cm;
-    G4double c_z =  5*cm;
+    G4double c_x =  3.5*mm /2; // counter dimensions (from centre of solid)
+    G4double c_y = 40.0*cm /2;
+    G4double c_z =  5.0*cm /2;
     
-    G4double x_offset = 3*mm + (st_x + c_x)/2; // width of Al frame + half widths of Cu & scint
-    
-    G4ThreeVector counterA_pos = G4ThreeVector(x_offset, 0, 0);
+    // positional offset: width of Al frame + half widths of Cu & scint
+    G4double x_offset = st_x + c_x + 3*mm; 
     
     G4Box* counter = new G4Box("counter", c_x, c_y, c_z);
     
+    // Counter A
+    G4ThreeVector counterA_pos = G4ThreeVector(x_offset, 0, 0);
     counterA_log = new G4LogicalVolume(counter, Air, "counterA_log");
-    counterA_phys = new G4PVPlacement(0, counterA_pos, counterA_log, "counterA_phys", experimentalHall_log, false, 0);
-    
+    counterA_phys = new G4PVPlacement(0, counterA_pos, counterA_log, 
+                                      "counterA_phys", expHall_log, 
+                                      false, 0);
+    // Counter B
     G4ThreeVector counterB_pos = G4ThreeVector(-x_offset, 0, 0);
-    
     counterB_log = new G4LogicalVolume(counter, Air, "counterB_log");
-    counterB_phys = new G4PVPlacement(0, counterB_pos, counterB_log, "counterB_phys", experimentalHall_log, false, 0);
+    counterB_phys = new G4PVPlacement(0, counterB_pos, counterB_log, 
+                                      "counterB_phys", expHall_log, 
+                                      false, 0);
     
     
-    //------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     // Create senstive detector manager
-    //------------------------------------------------------------------------------
-    
-    G4SDManager* sdMan = G4SDManager::GetSDMpointer(); // create the detector manager
+    //--------------------------------------------------------------------------
+    // create the detector manager
+    G4SDManager* sdMan = G4SDManager::GetSDMpointer(); 
     
     
     counterA_sd = new STcounterSD("counterA");
@@ -135,7 +141,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     sdMan->AddNewDetector(counterB_sd);
     counterB_log->SetSensitiveDetector(counterB_sd);
     
-    return experimentalHall_phys;
+    return expHall_phys;
 
 }
 

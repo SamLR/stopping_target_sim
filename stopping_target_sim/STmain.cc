@@ -75,9 +75,6 @@ int main(int argc, char** argv)
     // Get the pointer to the UI manager and set verbosities
     //
     G4UImanager* UImanager = G4UImanager::GetUIpointer();
-    UImanager->ApplyCommand("/run/verbose 0");
-    UImanager->ApplyCommand("/event/verbose 0");
-    UImanager->ApplyCommand("/tracking/verbose 0");
     
     if(argc==1){
 #ifdef G4UI_USE

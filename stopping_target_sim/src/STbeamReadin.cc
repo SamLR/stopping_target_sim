@@ -13,11 +13,11 @@
 #include <iostream>
 //#include <string> // check to see if G4String supports this
 
-#include "string_conv.hh" // tools for converting strings to numbers
+//#include "string_conv.hh" // tools for converting strings to numbers
 
 using namespace std; // for files etc
 
-STbeamReading* STbeamReadin::mInstancePtr = 0;
+STbeamReadin* STbeamReadin::mInstancePtr = NULL;
 
 STbeamReadin::STbeamReadin(){;}
 
@@ -25,19 +25,20 @@ STbeamReadin::~STbeamReadin(){;}
 
 inputParticle STbeamReadin::next()
 {
-    if (currentParticle == mParticleVec.size())
+    if (mCurrentParticle == mParticleVec.size())
     {
         G4cout << "End of Primaries" << G4endl;
         inputParticle error;
         error.status = -1;
         return error;
     }
-    return mParticleVec[currentParticle++];
+    return mParticleVec[mCurrentParticle++];
 }
 
 STbeamReadin* STbeamReadin::getPointer(G4String file)
 {
-    if (mInstancePtr==0) {
+    if (mInstancePtr==NULL) 
+    {
         mInstancePtr = new STbeamReadin();
         mInstancePtr->initialise(file);
     }
@@ -48,7 +49,7 @@ void STbeamReadin::initialise(G4String file)
 {
     ifstream fileIn (file);
     G4String line; 
-    currentParticle = 0;
+    mCurrentParticle = 0;
     
     if (fileIn.is_open())
     {
@@ -60,8 +61,6 @@ void STbeamReadin::initialise(G4String file)
             G4float posx, posy, posz;
             G4float momx, momy, momz;
             inputParticle currentParticle;
-            
-            G4int column_no = 0; // used to keep track of format
             
             fileIn >> eventNo >> pid 
                    >> posx >> posy >> posz

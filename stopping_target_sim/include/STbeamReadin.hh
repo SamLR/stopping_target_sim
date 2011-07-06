@@ -15,17 +15,19 @@
 
 #include "G4ThreeVector.hh"
 
+using namespace std;
+
 struct inputParticle {
     G4int status;
     G4int PDG_id;
     G4ThreeVector position;
     G4ThreeVector momentum;
-}
+};
 
-class STbeamReadin : public  
+class STbeamReadin  
 {
 public:
-    inputParticle* next();
+    inputParticle next();
     static STbeamReadin* getPointer(G4String file);
     ~STbeamReadin();
     G4int inline getMaxParticles() {return mParticleVec.size();}
@@ -33,8 +35,8 @@ public:
 private:
     STbeamReadin();
     void initialise(G4String file);
-    static STbeamReadin mInstancePtr;
-    vector <inputParticle> mParticleVec;
+    static STbeamReadin* mInstancePtr;
+    vector<inputParticle> mParticleVec;
     G4int mCurrentParticle;
     
 };

@@ -31,7 +31,7 @@
 #include "STDetectorConstruction.hh"
 
 STDetectorConstruction::STDetectorConstruction()
-:   experimentalHall_log(0), experimentalHall_phys(0), 
+:   expHall_log(0), expHall_phys(0), 
     cuStoppingTarget_log(0), cuStoppingTarget_phys(0),
     counterA_log(0),         counterB_log(0),
     counterA_phys(0),        counterB_phys(0),

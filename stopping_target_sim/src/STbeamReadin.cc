@@ -12,8 +12,9 @@
 #include <fstream>
 #include <iostream>
 //#include <string> // check to see if G4String supports this
+#include <string.h>
 
-//#include "string_conv.hh" // tools for converting strings to numbers
+#include "string_conv.hh" // tools for converting strings to numbers
 
 using namespace std; // for files etc
 
@@ -56,20 +57,73 @@ void STbeamReadin::initialise(G4String file)
         while (fileIn.good())
         {
             // read in
-            G4int eventNo; // to be discarded
-            G4int pid; 
-            G4float posx, posy, posz;
-            G4float momx, momy, momz;
+//            G4String eventNo; // to be discarded
+//            G4String pid; 
+//            G4String posStr[3];
+//            G4String momStr[3];
+//            inputParticle currentParticle;
+            
+//            fileIn >> eventNo >> pid 
+//                   >> posStr[0] >> posStr[1] >> posStr[2]
+//                   >> momStr[0] >> momStr[1] >> momStr[3];
+//            
+//            G4float pos[3];
+//            G4float mom[3];
+//            for (int i = 0; i < 3; ++i) {
+//                pos[i] = string_to_float(posStr[i]);
+//                mom[i] = string_to_float(momStr[i]);
+//            }
+//            
+            G4int column = 0;
+            G4int eventNo, pid;
+            G4float pos[3];
+            G4float mom[3];
             inputParticle currentParticle;
             
-            fileIn >> eventNo >> pid 
-                   >> posx >> posy >> posz
-                   >> momx >> momy >> momz;
+            getline(fileIn, line);
             
+            char cstr[150];
+            strcpy(cstr, line.c_str());
+            char* pcr = strtok(cstr, " ");
+            
+            while (pcr != NULL) 
+            {
+                switch (column) 
+                {
+                    case 0: // event Number
+                        eventNo = atoi(pcr);
+                        break;
+                    case 1: // PDG id
+                        pid = atoi(pcr);
+                        break;
+                    case 2: // pos x
+                        pos[0] = atof(pcr);
+                        break;
+                    case 3: // pos y
+                        pos[1] = atof(pcr);
+                        break;
+                    case 4: // pos z
+                        pos[2] = atof(pcr);
+                        break;
+                    case 5: // mom x
+                        mom[0] = atof(pcr);
+                        break;
+                    case 6: // mom y
+                        mom[1] = atof(pcr);
+                        break;
+                    case 7: // mom z
+                        mom[2] = atof(pcr);
+                        break;
+                    default:
+                        break;
+                }
+                pcr = strtok (NULL, " ");
+                ++column;
+            }
             currentParticle.status = 1; 
-            currentParticle.PDG_id = pid;
-            currentParticle.position = G4ThreeVector(posx, posy, posz);
-            currentParticle.momentum = G4ThreeVector(momx, momy, momz);
+            currentParticle.PDG_id = pid;//string_to_int(pid);
+            currentParticle.position = G4ThreeVector(pos[0], pos[1], pos[2]);
+            currentParticle.momentum = G4ThreeVector(mom[0], mom[1], mom[2]);
             mParticleVec.push_back(currentParticle);
         }
     }

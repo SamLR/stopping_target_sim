@@ -11,18 +11,31 @@
 #define STBEAMREADIN_HH
 
 #include "globals.hh"
+#include <vector>
+
+#include "G4ThreeVector.hh"
+
+struct inputParticle {
+    G4int status;
+    G4int PDG_id;
+    G4ThreeVector position;
+    G4ThreeVector momentum;
+}
 
 class STbeamReadin : public  
 {
 public:
-    void next();
+    inputParticle* next();
     static STbeamReadin* getPointer(G4String file);
     ~STbeamReadin();
+    G4int inline getMaxParticles() {return mParticleVec.size();}
     
 private:
     STbeamReadin();
     void initialise(G4String file);
-    static STbeamReadin* mInstancePtr;
+    static STbeamReadin mInstancePtr;
+    vector <inputParticle> mParticleVec;
+    G4int mCurrentParticle;
     
 };
 

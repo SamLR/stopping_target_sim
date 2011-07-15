@@ -39,15 +39,23 @@
 #include "G4GammaConversion.hh"
 #include "G4PhotoElectricEffect.hh"
 
+// EM for electrons
 #include "G4eMultipleScattering.hh"
 #include "G4eIonisation.hh"
 #include "G4eBremsstrahlung.hh"
 #include "G4eplusAnnihilation.hh"
 
+// EM for muons
 #include "G4MuMultipleScattering.hh"
 #include "G4MuIonisation.hh"
 #include "G4MuBremsstrahlung.hh"
 #include "G4MuPairProduction.hh"
+
+// EM for hadrons
+#include "G4hMultipleScattering.hh"
+#include "G4hIonisation.hh"
+#include "G4hBremsstrahlung.hh"
+#include "G4hPairProduction.hh"
 
 #include "G4Decay.hh"
 
@@ -61,6 +69,8 @@ STPhysicsList::~STPhysicsList()
 void STPhysicsList::ConstructParticle()
 {    
     ConstructLeptons();
+    ConstructBaryons();
+    ConstructMesons();
     G4Gamma::GammaDefinition();
 }
 
@@ -99,6 +109,18 @@ void STPhysicsList::ConstructLeptons()
     // nu_mu
     G4NeutrinoMu::NeutrinoMuDefinition();
     G4AntiNeutrinoMu::AntiNeutrinoMuDefinition();
+}
+
+void STPhysicsList::ConstructMesons()
+{
+    G4PionPlus::PionPlusDefinition();
+    G4PionMinus::PionMinusDefinition();
+}
+
+void STPhysicsList::ConstructBaryons()
+{
+    G4Proton::ProtonDefinition();
+    G4Neutron::NeutronDefinition();
 }
 
 void STPhysicsList::ConstructEM()
@@ -142,7 +164,16 @@ void STPhysicsList::ConstructEM()
             pmanager->AddProcess(new G4MuBremsstrahlung,     -1, 3, 3);
             pmanager->AddProcess(new G4MuPairProduction,     -1, 4, 4);       
             
-        } 
+        } else if( particleName == "proton" ||
+                  particleName == "pi-" ||
+                  particleName == "pi+"    ) {
+            //proton  
+            pmanager->AddProcess(new G4hMultipleScattering, -1, 1, 1);
+            pmanager->AddProcess(new G4hIonisation,         -1, 2, 2);
+            pmanager->AddProcess(new G4hBremsstrahlung,     -1, 3, 3);
+            pmanager->AddProcess(new G4hPairProduction,     -1, 4, 4);       
+            
+        }
     }
 }
 

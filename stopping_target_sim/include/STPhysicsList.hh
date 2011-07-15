@@ -58,6 +58,8 @@ class STPhysicsList: public G4VUserPhysicsList
     void ConstructProcess();
     void SetCuts();
     void ConstructLeptons();
+    void ConstructBaryons();
+    void ConstructMesons();
     void ConstructEM();
     void ConstructDecay();
 

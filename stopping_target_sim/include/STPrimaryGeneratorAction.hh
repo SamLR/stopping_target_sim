@@ -33,6 +33,10 @@
 
 #include "G4VUserPrimaryGeneratorAction.hh"
 
+#include "STbeamReadin.hh"
+
+#include "G4ParticleGun.hh"
+#include "G4ParticleTable.hh"
 #include "globals.hh"
 
 class G4ParticleGun;
@@ -48,7 +52,9 @@ class STPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     void GeneratePrimaries(G4Event* anEvent);
 
   private:
-    G4ParticleGun* particleGun;
+    G4ParticleGun* mParticleGun;
+    G4ParticleTable* mParticleTable;
+    STbeamReadin* mBeam_data;
 };
 
 #endif

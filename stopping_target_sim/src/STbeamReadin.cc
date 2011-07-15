@@ -56,24 +56,6 @@ void STbeamReadin::initialise(G4String file)
     {
         while (fileIn.good())
         {
-            // read in
-//            G4String eventNo; // to be discarded
-//            G4String pid; 
-//            G4String posStr[3];
-//            G4String momStr[3];
-//            inputParticle currentParticle;
-            
-//            fileIn >> eventNo >> pid 
-//                   >> posStr[0] >> posStr[1] >> posStr[2]
-//                   >> momStr[0] >> momStr[1] >> momStr[3];
-//            
-//            G4float pos[3];
-//            G4float mom[3];
-//            for (int i = 0; i < 3; ++i) {
-//                pos[i] = string_to_float(posStr[i]);
-//                mom[i] = string_to_float(momStr[i]);
-//            }
-//            
             G4int column = 0;
             G4int eventNo, pid;
             G4float pos[3];
@@ -97,22 +79,22 @@ void STbeamReadin::initialise(G4String file)
                         pid = atoi(pcr);
                         break;
                     case 2: // pos x
-                        pos[0] = atof(pcr);
+                        pos[0] = atof(pcr)*mm;
                         break;
                     case 3: // pos y
-                        pos[1] = atof(pcr);
+                        pos[1] = atof(pcr)*mm;
                         break;
                     case 4: // pos z
-                        pos[2] = atof(pcr);
+                        pos[2] = atof(pcr)*mm;
                         break;
                     case 5: // mom x
-                        mom[0] = atof(pcr);
+                        mom[0] = atof(pcr)*mm;
                         break;
                     case 6: // mom y
-                        mom[1] = atof(pcr);
+                        mom[1] = atof(pcr)*mm;
                         break;
                     case 7: // mom z
-                        mom[2] = atof(pcr);
+                        mom[2] = atof(pcr)*mm;
                         break;
                     default:
                         break;
@@ -120,6 +102,8 @@ void STbeamReadin::initialise(G4String file)
                 pcr = strtok (NULL, " ");
                 ++column;
             }
+            // some of the PIDs given are in valid; remove them
+            if (pid>1000000000) {continue;}
             currentParticle.status = 1; 
             currentParticle.PDG_id = pid;//string_to_int(pid);
             currentParticle.position = G4ThreeVector(pos[0], pos[1], pos[2]);

@@ -13,6 +13,7 @@
 #include <iostream>
 //#include <string> // check to see if G4String supports this
 #include <string.h>
+#include <ctype.h>
 
 #include "string_conv.hh" // tools for converting strings to numbers
 
@@ -28,7 +29,6 @@ inputParticle STbeamReadin::next()
 {
     if (mCurrentParticle == mParticleVec.size())
     {
-        G4cout << "End of Primaries" << G4endl;
         inputParticle error;
         error.status = -1;
         return error;
@@ -56,16 +56,20 @@ void STbeamReadin::initialise(G4String file)
     {
         while (fileIn.good())
         {
-            G4int column = 0;
-            G4int eventNo, pid;
-            G4float pos[3];
-            G4float mom[3];
-            inputParticle currentParticle;
-            
             getline(fileIn, line);
+            
+            // check for empty lines
+            if (line.length() < 1) break;
             
             char cstr[150];
             strcpy(cstr, line.c_str());
+            
+            G4int column = 0;
+            G4int eventNo, pid;
+            G4float pos_tmp[3];
+            G4float mom[3];
+            inputParticle currentParticle;
+            
             char* pcr = strtok(cstr, " ");
             
             while (pcr != NULL) 
@@ -79,13 +83,13 @@ void STbeamReadin::initialise(G4String file)
                         pid = atoi(pcr);
                         break;
                     case 2: // pos x
-                        pos[0] = atof(pcr)*mm;
+                        pos_tmp[0] = atof(pcr)*mm;
                         break;
                     case 3: // pos y
-                        pos[1] = atof(pcr)*mm;
+                        pos_tmp[1] = atof(pcr)*mm;
                         break;
                     case 4: // pos z
-                        pos[2] = atof(pcr)*mm;
+                        pos_tmp[2] = atof(pcr)*mm;
                         break;
                     case 5: // mom x
                         mom[0] = atof(pcr)*mm;
@@ -103,14 +107,45 @@ void STbeamReadin::initialise(G4String file)
                 ++column;
             }
             // some of the PIDs given are in valid; remove them
-            if (pid>1000000000) {continue;}
+            if (pid>1000000000) continue;
+            
+            G4float* pos = transformToLocal(pos_tmp);
+            // if the position is out of the world volume.....
+            if (!pos) continue; 
             currentParticle.status = 1; 
             currentParticle.PDG_id = pid;//string_to_int(pid);
             currentParticle.position = G4ThreeVector(pos[0], pos[1], pos[2]);
             currentParticle.momentum = G4ThreeVector(mom[0], mom[1], mom[2]);
             mParticleVec.push_back(currentParticle);
+            if (pos) delete[] pos; // clean up
         }
     }
+}
+
+// utility function to convert from g4beamline to local co-ordinates
+G4float* STbeamReadin::transformToLocal (G4float* in)
+{
+    // this should probably be 'get'ed
+    G4float max_extent = 1.0*m; // maximum co-ordinate value w/ in the world
+    G4float* out = new G4float[3];
+    
+    // swap around co-ordinates
+    out[0] = in [2]; // x(local) = z (beamline) direction of beam 
+    out[1] = in [0]; // y(local) = x (beamline) normal to beam
+    out[2] = in [1]; // z(local) = y (beamline) up
+    
+    out[0] -= 2757.60; // magic transformation number
+    
+    for (int i = 0; i < 3; ++i) 
+    { // check that all positions are still within the world
+        if (out[i] > max_extent || out[i] < -max_extent) 
+        {
+            delete[] out;
+            out = NULL;
+            break;
+        }
+    }
+    return out;
 }
 
 

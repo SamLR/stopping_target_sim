@@ -45,9 +45,9 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
 {
     G4double al_thickness = 3*mm;
     
-    G4double expHall_x = 1.0*m;
-    G4double expHall_y = 1.0*m;
-    G4double expHall_z = 1.0*m;
+    G4double expHall_x = 2.0*m;
+    G4double expHall_y = 2.0*m;
+    G4double expHall_z = 2.0*m;
     
     G4double st_x =  6*mm; // stopping target dimensions 
     G4double st_y = 37*cm;

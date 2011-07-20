@@ -38,6 +38,7 @@ private:
     static STbeamReadin* mInstancePtr;
     vector<inputParticle> mParticleVec;
     G4int mCurrentParticle;
+    G4float* transformToLocal (G4float* in);
     
 };
 

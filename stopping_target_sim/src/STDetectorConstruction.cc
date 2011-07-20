@@ -43,7 +43,19 @@ STDetectorConstruction::~STDetectorConstruction() {;}
 
 G4VPhysicalVolume* STDetectorConstruction::Construct()
 {
+    G4double al_thickness = 3*mm;
     
+    G4double expHall_x = 1.0*m;
+    G4double expHall_y = 1.0*m;
+    G4double expHall_z = 1.0*m;
+    
+    G4double st_x =  6*mm; // stopping target dimensions 
+    G4double st_y = 37*cm;
+    G4double st_z =  8*cm;
+    
+    G4double c_x =  3.5*mm; // counter dimensions 
+    G4double c_y = 40.0*cm;
+    G4double c_z =  5.0*cm;
     //-------------------------------------------------------------------------- 
     // Define Materials
     //--------------------------------------------------------------------------    
@@ -72,10 +84,6 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // +++++++++
     // Experimental hall, beam is assumed to be along the x axis
     
-    G4double expHall_x = 1.0*m;
-    G4double expHall_y = 1.0*m;
-    G4double expHall_z = 1.0*m;
-    
     G4Box* expHall_box = new G4Box("expHall_box",
                                             expHall_x,expHall_y,expHall_z);
     
@@ -85,13 +93,8 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     expHall_phys = new G4PVPlacement(0,G4ThreeVector(),
                                               expHall_log,"expHall",
                                               0,false,0);
-    
     // +++++++++
     // Stopping target (copper)
-    G4double st_x =  6*mm /2; // stopping target dimensions (from centre)
-    G4double st_y = 37*cm /2;
-    G4double st_z =  8*cm /2;
-    
     G4ThreeVector stPos = G4ThreeVector(0,0,0);
     
     G4Box* target_phys = new G4Box("target", st_x, st_y, st_z);
@@ -99,16 +102,10 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     cuStoppingTarget_phys = new G4PVPlacement(0, stPos, cuStoppingTarget_log, 
                                               "target_phys", expHall_log, 
                                               false, 0);
-
     // +++++++++
     // Counters (A&B currently virtual detectors)
-    
-    G4double c_x =  3.5*mm /2; // counter dimensions (from centre of solid)
-    G4double c_y = 40.0*cm /2;
-    G4double c_z =  5.0*cm /2;
-    
     // positional offset: width of Al frame + half widths of Cu & scint
-    G4double x_offset = st_x + c_x + 3*mm; 
+    G4double x_offset = st_x + c_x + al_thickness; 
     
     G4Box* counter = new G4Box("counter", c_x, c_y, c_z);
     

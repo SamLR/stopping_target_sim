@@ -166,9 +166,34 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     counterB_sd = new STcounterSD("counterB");
     sdMan->AddNewDetector(counterB_sd);
     counterB_log->SetSensitiveDetector(counterB_sd);
+        
+    //--------------------------------------------------------------------------   
+    //  Magnetic Field 
+    //--------------------------------------------------------------------------
     
+    static G4bool fieldIsInitialized = false;
+    if(!fieldIsInitialized)
+    {
+        G4FieldManager* pFieldMgr;
+        
+        G4MagneticField* PurgMagField = 
+                    new STTabulatedField3D("../../magfield.TABLE", z_offset_mag);
+        
+        G4TransportationManager* tMan = 
+                            G4TransportationManager::GetTransportationManager();
+        
+        pFieldMgr = tMan->GetFieldManager();
+                
+        G4ChordFinder *pChordFinder = new G4ChordFinder(PurgMagField);
+        pFieldMgr->SetChordFinder( pChordFinder );
+        
+        pFieldMgr->SetDetectorField(PurgMagField);
+        
+        fieldIsInitialized = true;
+    }  
+    
+    // return the lot
     return expHall_phys;
-
 }
 
 

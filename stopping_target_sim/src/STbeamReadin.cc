@@ -1,9 +1,8 @@
 /*
- *  STg4readin.cc
+ *  STbeamReadin.cc
  *  stopping_target_sim
  *
- *  Created by Sam Cook on 04/07/2011.
- *  Copyright 2011 UCL. All rights reserved.
+ *  Created by Sam Cook on 04/07/2011.
  *
  */
 
@@ -129,12 +128,7 @@ G4float* STbeamReadin::transformToLocal (G4float* in)
     G4float max_extent = 1.0*m; // maximum co-ordinate value w/ in the world
     G4float* out = new G4float[3];
     
-    // swap around co-ordinates
-    out[0] = in [2]; // x(local) = z (beamline) direction of beam 
-    out[1] = in [0]; // y(local) = x (beamline) normal to beam
-    out[2] = in [1]; // z(local) = y (beamline) up
-    
-    out[0] -= 2757.60; // magic transformation number
+    out[0] -= 2757.60*mm; // magic transformation number
     
     for (int i = 0; i < 3; ++i) 
     { // check that all positions are still within the world

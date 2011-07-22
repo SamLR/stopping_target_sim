@@ -29,6 +29,24 @@
 //
 
 #include "STDetectorConstruction.hh"
+#include "STcounterSD.hh"
+#include "STTabulatedField3D.hh"
+
+// managers
+#include "G4SDManager.hh"
+#include "G4FieldManager.hh"
+#include "G4TransportationManager.hh"
+
+#include "G4ChordFinder.hh"
+
+// geometry stuff
+#include "G4Box.hh"
+#include "G4VPhysicalVolume.hh"
+#include "G4LogicalVolume.hh"
+#include "G4Material.hh"
+#include "G4ThreeVector.hh"
+#include "G4PVPlacement.hh"
+
 
 STDetectorConstruction::STDetectorConstruction()
 :   expHall_log(0), expHall_phys(0), 
@@ -43,19 +61,30 @@ STDetectorConstruction::~STDetectorConstruction() {;}
 
 G4VPhysicalVolume* STDetectorConstruction::Construct()
 {
+    //--------------------------------------------------------------------------
+    // Definition of directions
+    //--------------------------------------------------------------------------
+    // x = perpendicular to y & z
+    // y = vertically (positive = up)
+    // z = beam direction (positive = direction of particles)
+    //--------------------------------------------------------------------------
     G4double al_thickness = 3*mm;
+    
+    G4double z_offset_mag = -2757.60*mm;
     
     G4double expHall_x = 2.0*m;
     G4double expHall_y = 2.0*m;
     G4double expHall_z = 2.0*m;
     
-    G4double st_x =  6*mm; // stopping target dimensions 
-    G4double st_y = 37*cm;
-    G4double st_z =  8*cm;
+    G4double st_x = 37*cm; // stopping target dimensions
+    G4double st_y =  8*cm; 
+    G4double st_z =  6*mm;  
     
-    G4double c_x =  3.5*mm; // counter dimensions 
-    G4double c_y = 40.0*cm;
-    G4double c_z =  5.0*cm;
+    G4double c_x = 40.0*cm; // counter dimensions
+    G4double c_y =  5.0*cm;
+    G4double c_z =  3.5*mm; 
+
+    
     //-------------------------------------------------------------------------- 
     // Define Materials
     //--------------------------------------------------------------------------    
@@ -105,18 +134,18 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // +++++++++
     // Counters (A&B currently virtual detectors)
     // positional offset: width of Al frame + half widths of Cu & scint
-    G4double x_offset = st_x + c_x + al_thickness; 
+    G4double z_offset = st_z + c_z + al_thickness; 
     
     G4Box* counter = new G4Box("counter", c_x, c_y, c_z);
     
     // Counter A
-    G4ThreeVector counterA_pos = G4ThreeVector(x_offset, 0, 0);
+    G4ThreeVector counterA_pos = G4ThreeVector(0, 0, z_offset);
     counterA_log = new G4LogicalVolume(counter, Air, "counterA_log");
     counterA_phys = new G4PVPlacement(0, counterA_pos, counterA_log, 
                                       "counterA_phys", expHall_log, 
                                       false, 0);
     // Counter B
-    G4ThreeVector counterB_pos = G4ThreeVector(-x_offset, 0, 0);
+    G4ThreeVector counterB_pos = G4ThreeVector(0, 0, -z_offset);
     counterB_log = new G4LogicalVolume(counter, Air, "counterB_log");
     counterB_phys = new G4PVPlacement(0, counterB_pos, counterB_log, 
                                       "counterB_phys", expHall_log, 

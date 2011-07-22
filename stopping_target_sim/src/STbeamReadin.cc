@@ -10,11 +10,6 @@
 
 #include <fstream>
 #include <iostream>
-//#include <string> // check to see if G4String supports this
-#include <string.h>
-#include <ctype.h>
-
-#include "string_conv.hh" // tools for converting strings to numbers
 
 using namespace std; // for files etc
 
@@ -48,63 +43,21 @@ STbeamReadin* STbeamReadin::getPointer(G4String file)
 void STbeamReadin::initialise(G4String file)
 {
     ifstream fileIn (file);
-    G4String line; 
     mCurrentParticle = 0;
     
     if (fileIn.is_open())
     {
         while (fileIn.good())
         {
-            getline(fileIn, line);
-            
-            // check for empty lines
-            if (line.length() < 1) break;
-            
-            char cstr[150];
-            strcpy(cstr, line.c_str());
-            
-            G4int column = 0;
-            G4int eventNo, pid;
+            G4float eventNo, pid;
             G4float pos_tmp[3];
             G4float mom[3];
             inputParticle currentParticle;
             
-            char* pcr = strtok(cstr, " ");
+            fileIn >> eventNo >> pid 
+                   >> pos_tmp[0] >> pos_tmp[1] >> pos_tmp[2] 
+                   >> mom[0] >> mom[1] >> mom[2];
             
-            while (pcr != NULL) 
-            {
-                switch (column) 
-                {
-                    case 0: // event Number
-                        eventNo = atoi(pcr);
-                        break;
-                    case 1: // PDG id
-                        pid = atoi(pcr);
-                        break;
-                    case 2: // pos x
-                        pos_tmp[0] = atof(pcr)*mm;
-                        break;
-                    case 3: // pos y
-                        pos_tmp[1] = atof(pcr)*mm;
-                        break;
-                    case 4: // pos z
-                        pos_tmp[2] = atof(pcr)*mm;
-                        break;
-                    case 5: // mom x
-                        mom[0] = atof(pcr)*mm;
-                        break;
-                    case 6: // mom y
-                        mom[1] = atof(pcr)*mm;
-                        break;
-                    case 7: // mom z
-                        mom[2] = atof(pcr)*mm;
-                        break;
-                    default:
-                        break;
-                }
-                pcr = strtok (NULL, " ");
-                ++column;
-            }
             // some of the PIDs given are in valid; remove them
             if (pid>1000000000) continue;
             
@@ -112,13 +65,14 @@ void STbeamReadin::initialise(G4String file)
             // if the position is out of the world volume.....
             if (!pos) continue; 
             currentParticle.status = 1; 
-            currentParticle.PDG_id = pid;//string_to_int(pid);
+            currentParticle.PDG_id = (int) pid;
             currentParticle.position = G4ThreeVector(pos[0], pos[1], pos[2]);
             currentParticle.momentum = G4ThreeVector(mom[0], mom[1], mom[2]);
             mParticleVec.push_back(currentParticle);
             if (pos) delete[] pos; // clean up
         }
     }
+    fileIn.close();
 }
 
 // utility function to convert from g4beamline to local co-ordinates

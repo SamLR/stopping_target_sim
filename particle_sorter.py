@@ -15,6 +15,12 @@ parser.add_argument('-n', dest='n_lines', type=int, default=None,
                     
 parser.add_argument('-c', dest='col', default=2, type=int,
                     help='column number (from 0) in which to find x')
+                    
+parser.add_argument('-l', dest='ignore_lines', default=0, type=int,
+                    help='number of lines to ignore from the start of the file')
+
+parser.add_argument('-lp', dest='print_ignore_lines', default=True, type=bool,
+                    help='whether to print ignored lines')
 
 parser.add_argument('--file', dest='file_name', type=file, 
                     default='../music_particle_dist.txt',
@@ -35,8 +41,11 @@ for min, max in zip(args.min, args.max):
         print "error: min (%.1f) greater than or equal to max (%.1f)"%(min, max)
         sys.exit(1)    
 
-count = 1
 for line in args.file_name:
+    if (args.ignore_lines > 0): # skip header lines
+        if (args.print_ignore_lines): print line, 
+        args.ignore_lines -=1
+        continue
     split = line.split()
     x, y, z = map(float, split[args.col: args.col+3])
     # check that the point is within the bounds
@@ -45,7 +54,7 @@ for line in args.file_name:
        not (args.min[2] < z < args.max[2]): continue
     
     print line,
-    if (args.n_lines and count >= args.n_lines): break
-    count += 1
-        
+    if (args.n_lines):
+        args.n_lines -= 1
+        if (args.n_lines <= 0): break
         

@@ -38,40 +38,58 @@
 
 #include "G4UImanager.hh"
 
-STPrimaryGeneratorAction::STPrimaryGeneratorAction()
+STPrimaryGeneratorAction::STPrimaryGeneratorAction(): mFileMode(true)
 // TODO look at getting data for detector from that class
+// add messenger to toggle file input & mono-energetic muon 
 {
-    G4String file_path = "../../test_particles.txt";
-    mParticleTable = G4ParticleTable::GetParticleTable();
-    mBeam_data =  STbeamReadin::getPointer(file_path);
-    mParticleGun = new G4ParticleGun(1);
+    if (mFileMode)
+    {    
+        G4String file_path = "../../test_particles.txt";
+        mParticleTable = G4ParticleTable::GetParticleTable();
+        mBeam_data =  STbeamReadin::getPointer(file_path);
+        mParticleGun = new G4ParticleGun(1);
+    } else {
+        mParticleTable = G4ParticleTable::GetParticleTable();
+        mParticleGun = new G4ParticleGun(1);
+        G4ParticleDefinition* particle = mParticleTable->FindParticle("e-"); 
+        mParticleGun->SetParticleDefinition(particle);
+        mParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
+        mParticleGun->SetParticleEnergy(5*MeV);
+    }
 }
 
 STPrimaryGeneratorAction::~STPrimaryGeneratorAction()
 {
+    delete mParticleTable;
     delete mParticleGun;
     delete mBeam_data;
 }
 
 void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 { 
-    inputParticle current;
-    current = mBeam_data->next();
-    if (current.status < 0) 
+    if (mFileMode) 
     {
-        // error, stop the current run
-        G4cout <<"Error: out of primaries, aborting run" << G4endl;
-        G4UImanager* ui = G4UImanager::GetUIpointer();
-        ui->ApplyCommand("/rub/abort");
+        inputParticle current;
+        current = mBeam_data->next();
+        if (current.status < 0) 
+        {
+            // error, stop the current run
+            G4cout <<"Error: out of primaries, aborting run" << G4endl;
+            G4UImanager* ui = G4UImanager::GetUIpointer();
+            ui->ApplyCommand("/run/abort");
+        }
+        G4ParticleDefinition* particle =
+        mParticleTable->FindParticle(current.PDG_id);
+        
+        mParticleGun->SetParticleDefinition(particle);
+        mParticleGun->SetParticlePosition(current.position);
+        // position will need to be adjusted WRT to new geometry
+        mParticleGun->SetParticleMomentum(current.momentum);
+    } else {
+        mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 0.));
     }
-    G4ParticleDefinition* particle =
-                                mParticleTable->FindParticle(current.PDG_id);
-    
-    mParticleGun->SetParticleDefinition(particle);
-    mParticleGun->SetParticlePosition(current.position);
-    // position will need to be adjusted WRT to new geometry
-    mParticleGun->SetParticleMomentum(current.momentum);
     mParticleGun->GeneratePrimaryVertex(anEvent);
+
 }
 
 

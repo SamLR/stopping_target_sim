@@ -30,12 +30,15 @@ STTabulatedField3D::STTabulatedField3D( const char* filename, double zOffset )
     << "\n      Magnetic field"
     << "\n-----------------------------------------------------------";
     
-    G4cout << "\n ---> " "Reading the field grid from " << filename << " ... " << endl; 
+    G4cout << "\n ---> " "Reading the field grid from " 
+           << filename << " ... " << endl; 
     ifstream file( filename ); // Open the file for reading.
     
-    // Ignore first blank line
-    char buffer[256];
-    file.getline(buffer,256);
+    if (!file.good())
+    {
+        G4cout << "File not properly opened quiting" << endl;
+        exit(0);
+    }
     
     // Read table dimensions 
     file >> nx >> ny >> nz; 
@@ -46,7 +49,7 @@ STTabulatedField3D::STTabulatedField3D( const char* filename, double zOffset )
     
     // Set up storage space for table
     xField.resize( nx );
-    yField.resize( nx );
+    yField.resize( 2*nx ); // assume field vertically symmetric so double 
     zField.resize( nx );
     int ix, iy, iz;
     for (ix=0; ix<nx; ix++) {
@@ -59,14 +62,15 @@ STTabulatedField3D::STTabulatedField3D( const char* filename, double zOffset )
             zField[ix][iy].resize(nz);
         }
     }
-    
+
     // Ignore other header information    
     // The first line whose second character is '0' is considered to
     // be the last line of the header.
+    char buffer[256];
     do {
         file.getline(buffer,256);
     } while ( buffer[1]!='0');
-    
+
     // Read in the data
     double xval,yval,zval,bx,by,bz;
     double permeability; // Not used in this example.
@@ -74,6 +78,7 @@ STTabulatedField3D::STTabulatedField3D( const char* filename, double zOffset )
         for (iy=0; iy<ny; iy++) {
             for (iz=0; iz<nz; iz++) {
                 file >> xval >> yval >> zval >> bx >> by >> bz >> permeability;
+                zval += zOffset;
                 if ( ix==0 && iy==0 && iz==0 ) {
                     minx = xval * lenUnit;
                     miny = yval * lenUnit;
@@ -125,7 +130,9 @@ void STTabulatedField3D::GetFieldValue(const double point[4],
     
     double x = point[0];
     double y = point[1];
-    double z = point[2] + fZoffset;
+    double z = point[2];
+    
+    if (y < 0) y = -y; // y is only defined for y > 0
     
     // Check that the point is within the defined region 
     if ( x>=minx && x<=maxx &&

@@ -70,7 +70,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     //--------------------------------------------------------------------------
     G4double al_thickness = 3*mm;
     
-    G4double z_offset_mag = -2757.60*mm;
+    G4double z_offset_mag = -4000*mm;
     
     G4double expHall_x = 2.0*m;
     G4double expHall_y = 2.0*m;
@@ -177,7 +177,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
         G4FieldManager* pFieldMgr;
         
         G4MagneticField* PurgMagField = 
-                    new STTabulatedField3D("../../magfield.TABLE", z_offset_mag);
+                    new STTabulatedField3D("../../magfield.table", z_offset_mag);
         
         G4TransportationManager* tMan = 
                             G4TransportationManager::GetTransportationManager();

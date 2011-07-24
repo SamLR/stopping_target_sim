@@ -20,7 +20,7 @@ parser.add_argument('-l', dest='ignore_lines', type=int,
     
 args = parser.parse_args()
 
-x_vals = y_vals = z_vals = []
+x_vals, y_vals, z_vals = [], [], []
 tmp_file = TemporaryFile()
 first_line = True
 
@@ -46,3 +46,9 @@ with open(args.filename, 'w') as file_out:
         file_out.write(line)
         
 tmp_file.close()
+
+print "=======INFO======="
+print " direction|  length  |    min    |   max"
+print "    X     |  %6i  |   %6.1f  |  %6.1f"%(len(x_vals), min(x_vals), max(x_vals))
+print "    Y     |  %6i  |   %6.1f  |  %6.1f"%(len(y_vals), min(y_vals), max(y_vals))
+print "    Z     |  %6i  |   %6.1f  |  %6.1f"%(len(z_vals), min(z_vals), max(z_vals))

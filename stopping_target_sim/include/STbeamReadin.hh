@@ -38,7 +38,16 @@ private:
     static STbeamReadin* mInstancePtr;
     vector<inputParticle> mParticleVec;
     G4int mCurrentParticle;
-    G4float* transformToLocal (G4float* in);
+    G4float xOffset, yOffset, zOffset; // all other co-ordinates should map 1:1
+    G4float maxX, maxY, maxZ;
+    G4float minX, minY, minZ;
+    
+    inline G4bool checkbounds(G4float position[3])
+    {
+        return (minX < position[0] && position[0] < maxX) &&
+               (minY < position[1] && position[1] < maxY) &&
+               (minZ < position[2] && position[2] < maxZ);
+    }
     
 };
 

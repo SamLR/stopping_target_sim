@@ -38,7 +38,7 @@
 
 #include "G4UImanager.hh"
 
-STPrimaryGeneratorAction::STPrimaryGeneratorAction(): mFileMode(true)
+STPrimaryGeneratorAction::STPrimaryGeneratorAction(): mFileMode(false)
 // TODO look at getting data for detector from that class
 // add messenger to toggle file input & mono-energetic muon 
 {
@@ -51,10 +51,10 @@ STPrimaryGeneratorAction::STPrimaryGeneratorAction(): mFileMode(true)
     } else {
         mParticleTable = G4ParticleTable::GetParticleTable();
         mParticleGun = new G4ParticleGun(1);
-        G4ParticleDefinition* particle = mParticleTable->FindParticle("e-"); 
+        G4ParticleDefinition* particle = mParticleTable->FindParticle("opticalphoton"); 
         mParticleGun->SetParticleDefinition(particle);
-        mParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
-        mParticleGun->SetParticleEnergy(5*MeV);
+        mParticleGun->SetParticleMomentumDirection(G4ThreeVector(1., 0., 0.));
+        mParticleGun->SetParticleEnergy(2*keV);
     }
 }
 
@@ -86,7 +86,7 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
         // position will need to be adjusted WRT to new geometry
         mParticleGun->SetParticleMomentum(current.momentum);
     } else {
-        mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 0.));
+        mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 9.25*mm));
     }
     mParticleGun->GeneratePrimaryVertex(anEvent);
 

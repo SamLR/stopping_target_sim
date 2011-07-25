@@ -47,10 +47,10 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     ~STDetectorConstruction();
 
     G4VPhysicalVolume* Construct();
-    void ConstructMaterials();
 
   private:
-    
+    void defineMaterials();
+    void surfaceProperties();
     // TODO: add hitcollection
     
     // Logical volumes
@@ -59,16 +59,33 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     G4LogicalVolume* expHall_log;
     G4LogicalVolume* counterA_log;
     G4LogicalVolume* counterB_log;
+    G4LogicalVolume* wrapA_log;
+    G4LogicalVolume* wrapB_log;
+//    G4LogicalVolume* mppc_log;
+    G4LogicalVolume* mppcA1_log;
+    G4LogicalVolume* mppcA2_log;
+    G4LogicalVolume* mppcB1_log;
+    G4LogicalVolume* mppcB2_log;
     
     // Physical volumes
     G4VPhysicalVolume* cuStoppingTarget_phys;
     G4VPhysicalVolume* expHall_phys;
     G4VPhysicalVolume* counterA_phys;
     G4VPhysicalVolume* counterB_phys;
+    G4VPhysicalVolume* wrapA_phys;
+    G4VPhysicalVolume* wrapB_phys;
+    G4VPhysicalVolume* mppcA1_phys;
+    G4VPhysicalVolume* mppcA2_phys;
+    G4VPhysicalVolume* mppcB1_phys;
+    G4VPhysicalVolume* mppcB2_phys;
+
     
     // Sensitive Detectors
-    G4VSensitiveDetector* counterA_sd;
-    G4VSensitiveDetector* counterB_sd;
+//    G4VSensitiveDetector* mppc_sd;
+    G4VSensitiveDetector* mppcA1_sd;
+    G4VSensitiveDetector* mppcA2_sd;
+    G4VSensitiveDetector* mppcB1_sd;
+    G4VSensitiveDetector* mppcB2_sd;
     
 };
 

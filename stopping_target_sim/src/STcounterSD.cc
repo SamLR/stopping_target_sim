@@ -38,22 +38,19 @@ G4bool STcounterSD::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     // we want to record the first hit each event
     // first check that the partice is entering the detector
     // then count it
+    G4cout << "HERE I AM" << G4endl << G4endl << G4endl << G4endl;
     G4StepPoint* point = aStep->GetPreStepPoint();
     const G4ParticleDefinition* particle = 
                             aStep->GetTrack()->GetParticleDefinition();
     G4String particle_name = particle->GetParticleName();
-    
-    G4bool ionising = (particle_name == "mu-" || 
-                       particle_name == "mu+" ||
-                       particle_name == "e-"  ||
-                       particle_name == "e+"    ); 
-    
-    
-    if (ionising && (point->GetStepStatus() == fGeomBoundary))
-    {
-        ++hitCount;
-        ++totalCount;
-        return true;
-    } 
+    G4cout << particle_name << G4endl;
+//    G4bool optical_photon = (particle_name == "opticalphoton");
+//    
+//    if (optical_photon && (point->GetStepStatus() == fGeomBoundary))
+//    {
+//        ++hitCount;
+//        ++totalCount;
+//        return true;
+//    } 
     return false;
 }

@@ -43,26 +43,45 @@
 #define STPhysicsList_h 1
 
 #include "G4VUserPhysicsList.hh"
-
 #include "globals.hh"
+
+class G4Cerenkov;
+class G4Scintillation;
+class G4OpAbsorption;
+class G4OpRayleigh;
+class G4OpMieHG;
+class G4OpBoundaryProcess;      
 
 class STPhysicsList: public G4VUserPhysicsList
 {
-  public:
+public:
     STPhysicsList();
     ~STPhysicsList();
-
-  protected:
+    
+protected:
     // Construct particle and physics process
     void ConstructParticle();
     void ConstructProcess();
     void SetCuts();
+    
+    void ConstructBosons();
     void ConstructLeptons();
     void ConstructBaryons();
     void ConstructMesons();
+    
     void ConstructEM();
+    void ConstructOp(); 
     void ConstructDecay();
-
+    
+private:
+//    // pointers to specific processes
+    G4Cerenkov*          theCerenkovProcess;
+    G4Scintillation*     theScintillationProcess;
+    G4OpAbsorption*      theAbsorptionProcess;
+    G4OpRayleigh*        theRayleighScatteringProcess;
+    G4OpMieHG*           theMieHGScatteringProcess;
+    G4OpBoundaryProcess* theBoundaryProcess;  
+    
 };
 
 #endif

@@ -17,7 +17,8 @@ STbeamReadin* STbeamReadin::mInstancePtr = NULL;
 
 STbeamReadin::STbeamReadin(): 
     mCurrentParticle(0),
-    xOffset(0),     yOffset(0),     zOffset(-2750*mm), 
+    // zOffset = (g4beamline - counter:beamend separation)
+    xOffset(0),     yOffset(0),     zOffset(-(3901.18-50)*mm), 
     maxX( 1000*mm), maxY( 1000*mm), maxZ( 1000*mm),
     minX(-1000*mm), minY(-1000*mm), minZ(-1000*mm)
 {;}

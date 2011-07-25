@@ -34,6 +34,10 @@
 #include "G4ParticleTypes.hh"
 #include "G4ProcessManager.hh"
 
+// get special managers for muons
+#include "G4MuonPlus.hh"
+#include "G4MuonMinus.hh"
+
 // EM processes
 #include "G4ComptonScattering.hh"
 #include "G4GammaConversion.hh"
@@ -50,6 +54,7 @@
 #include "G4MuIonisation.hh"
 #include "G4MuBremsstrahlung.hh"
 #include "G4MuPairProduction.hh"
+#include "G4MuonMinusCaptureAtRest.hh"
 
 // EM for hadrons
 #include "G4hMultipleScattering.hh"
@@ -59,6 +64,18 @@
 
 #include "G4Decay.hh"
 
+// optical Photon processes     
+#include "G4OpticalPhoton.hh"
+#include "G4Cerenkov.hh" 
+
+#include "G4Scintillation.hh"
+#include "G4OpAbsorption.hh"
+#include "G4OpRayleigh.hh"
+#include "G4OpMieHG.hh"
+#include "G4OpBoundaryProcess.hh"
+
+#include "G4LossTableManager.hh"
+#include "G4EmSaturation.hh"     
 
 STPhysicsList::STPhysicsList(): G4VUserPhysicsList()
 {;}
@@ -67,7 +84,8 @@ STPhysicsList::~STPhysicsList()
 {;}
 
 void STPhysicsList::ConstructParticle()
-{    
+{
+    ConstructBosons();
     ConstructLeptons();
     ConstructBaryons();
     ConstructMesons();
@@ -78,6 +96,7 @@ void STPhysicsList::ConstructProcess()
 {
     ConstructEM();
     ConstructDecay();
+    ConstructOp();
     AddTransportation();
 }
 
@@ -92,6 +111,19 @@ void STPhysicsList::SetCuts()
     
     // Retrieve verbose level
     SetVerboseLevel(temp);  
+}
+
+void STPhysicsList::ConstructBosons()
+{
+    // pseudo-particles
+    G4Geantino::GeantinoDefinition();
+    G4ChargedGeantino::ChargedGeantinoDefinition();
+    
+    // gamma
+    G4Gamma::GammaDefinition();
+    
+    // optical photon
+    G4OpticalPhoton::OpticalPhotonDefinition(); 
 }
 
 void STPhysicsList::ConstructLeptons()
@@ -115,6 +147,7 @@ void STPhysicsList::ConstructMesons()
 {
     G4PionPlus::PionPlusDefinition();
     G4PionMinus::PionMinusDefinition();
+    G4PionZero::PionZeroDefinition();
 }
 
 void STPhysicsList::ConstructBaryons()
@@ -155,14 +188,25 @@ void STPhysicsList::ConstructEM()
             pmanager->AddProcess(new G4eBremsstrahlung,     -1, 3, 3);
             pmanager->AddProcess(new G4eplusAnnihilation,    0,-1, 4);
             
-        } else if( particleName == "mu+" || 
-                   particleName == "mu-" ) 
+        } else if (particleName == "mu+" ) 
         {
+            pmanager = G4MuonPlus::MuonPlus()->GetProcessManager();
             //muon  
             pmanager->AddProcess(new G4MuMultipleScattering, -1, 1, 1);
             pmanager->AddProcess(new G4MuIonisation,         -1, 2, 2);
             pmanager->AddProcess(new G4MuBremsstrahlung,     -1, 3, 3);
-            pmanager->AddProcess(new G4MuPairProduction,     -1, 4, 4);       
+            pmanager->AddProcess(new G4MuPairProduction,     -1, 4, 4);   
+            
+        } else if (particleName == "mu-" ) 
+        {
+            pmanager = G4MuonMinus::MuonMinus()->GetProcessManager();
+            //muon  
+            pmanager->AddProcess(new G4MuMultipleScattering, -1, 1, 1);
+            pmanager->AddProcess(new G4MuIonisation,         -1, 2, 2);
+            pmanager->AddProcess(new G4MuBremsstrahlung,     -1, 3, 3);
+            pmanager->AddProcess(new G4MuPairProduction,     -1, 4, 4);   
+            
+            pmanager->AddRestProcess(new G4MuonMinusCaptureAtRest);
             
         } else if( particleName == "proton" ||
                   particleName == "pi-" ||
@@ -197,5 +241,60 @@ void STPhysicsList::ConstructDecay()
     }
 }
 
+
+void STPhysicsList::ConstructOp()
+{
+    theCerenkovProcess           = new G4Cerenkov("Cerenkov");
+    theScintillationProcess      = new G4Scintillation("Scintillation");
+    theAbsorptionProcess         = new G4OpAbsorption();
+    theRayleighScatteringProcess = new G4OpRayleigh();
+    theMieHGScatteringProcess    = new G4OpMieHG();
+    theBoundaryProcess           = new G4OpBoundaryProcess();
+    
+    theCerenkovProcess->SetMaxNumPhotonsPerStep(20);
+    theCerenkovProcess->SetMaxBetaChangePerStep(10.0);
+    theCerenkovProcess->SetTrackSecondariesFirst(true);
+    
+    theScintillationProcess->SetScintillationYieldFactor(1.);
+    theScintillationProcess->SetTrackSecondariesFirst(true);
+    
+    // Use Birks Correction in the Scintillation process
+//    
+//    G4EmSaturation* emSaturation = G4LossTableManager::Instance()->EmSaturation();
+//    theScintillationProcess->AddSaturation(emSaturation);
+    
+    G4OpticalSurfaceModel themodel = unified;
+    theBoundaryProcess->SetModel(themodel);
+    
+    theParticleIterator->reset();
+    while( (*theParticleIterator)() )
+    {
+        G4ParticleDefinition* particle = theParticleIterator->value();
+        G4ProcessManager* pmanager = particle->GetProcessManager();
+        G4String particleName = particle->GetParticleName();
+        
+        if (theCerenkovProcess->IsApplicable(*particle)) {
+            
+            pmanager->AddProcess(theCerenkovProcess);
+            pmanager->SetProcessOrdering(theCerenkovProcess,idxPostStep);
+        }
+        
+        if (theScintillationProcess->IsApplicable(*particle)) 
+        {
+            pmanager->AddProcess(theScintillationProcess);
+            pmanager->SetProcessOrderingToLast(theScintillationProcess, idxAtRest);
+            pmanager->SetProcessOrderingToLast(theScintillationProcess, idxPostStep);
+        }
+        
+        if (particleName == "opticalphoton") 
+        {
+            G4cout << " AddDiscreteProcess to OpticalPhoton " << G4endl;
+            pmanager->AddDiscreteProcess(theAbsorptionProcess);
+            pmanager->AddDiscreteProcess(theRayleighScatteringProcess);
+            pmanager->AddDiscreteProcess(theMieHGScatteringProcess);
+            pmanager->AddDiscreteProcess(theBoundaryProcess);
+        }
+    }
+}
 
 

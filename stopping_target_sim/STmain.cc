@@ -50,6 +50,7 @@
 #include "STDetectorConstruction.hh"
 #include "STPhysicsList.hh"
 #include "STPrimaryGeneratorAction.hh"
+#include "STRunAction.hh"
 
 int main(int argc, char** argv)
 {
@@ -67,6 +68,9 @@ int main(int argc, char** argv)
     
     // initialise primary action
     runManager->SetUserAction(new STPrimaryGeneratorAction);
+    
+    // set the run action (write the .root file at end of each run)
+    runManager->SetUserAction(new STRunAction);
     
     // Initialize G4 kernel
     //

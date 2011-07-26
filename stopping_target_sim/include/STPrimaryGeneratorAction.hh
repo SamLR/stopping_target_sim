@@ -53,8 +53,7 @@ class STPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   private:
     G4ParticleGun* mParticleGun;
-    G4ParticleTable* mParticleTable;
-    STbeamReadin* mBeam_data;
+    STbeamReadin* mBeamData;
     G4bool mFileMode;
 };
 

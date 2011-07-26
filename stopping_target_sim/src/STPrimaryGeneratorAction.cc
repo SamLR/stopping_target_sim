@@ -38,31 +38,32 @@
 
 #include "G4UImanager.hh"
 
-STPrimaryGeneratorAction::STPrimaryGeneratorAction(): mFileMode(false)
+STPrimaryGeneratorAction::STPrimaryGeneratorAction(): 
+    mFileMode(true), mBeamData(0), mParticleGun(0)
 // TODO look at getting data for detector from that class
 // add messenger to toggle file input & mono-energetic muon 
 {
     if (mFileMode)
     {    
-        G4String file_path = "../../test_particles.txt";
-        mParticleTable = G4ParticleTable::GetParticleTable();
-        mBeam_data =  STbeamReadin::getPointer(file_path);
+//        G4String file_path = "../../test_particles.txt";
+        G4String file_path 
+            = "../../../MuSIC_g4beamline/monitor6_9999990_initial_protons.txt";
+        mBeamData =  STbeamReadin::getPointer(file_path);
         mParticleGun = new G4ParticleGun(1);
-    } else {
-        mParticleTable = G4ParticleTable::GetParticleTable();
+    } else 
+    {
+        G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
         mParticleGun = new G4ParticleGun(1);
-        G4ParticleDefinition* particle = mParticleTable->FindParticle("opticalphoton"); 
+        G4ParticleDefinition* particle = particleTable->FindParticle("opticalphoton"); 
         mParticleGun->SetParticleDefinition(particle);
         mParticleGun->SetParticleMomentumDirection(G4ThreeVector(1., 0., 0.));
-        mParticleGun->SetParticleEnergy(2*keV);
+        mParticleGun->SetParticleEnergy(0.002*keV);
     }
 }
 
 STPrimaryGeneratorAction::~STPrimaryGeneratorAction()
 {
-    delete mParticleTable;
-    delete mParticleGun;
-    delete mBeam_data;
+    if (mParticleGun) delete mParticleGun;
 }
 
 void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
@@ -70,7 +71,7 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     if (mFileMode) 
     {
         inputParticle current;
-        current = mBeam_data->next();
+        current = mBeamData->next();
         if (current.status < 0) 
         {
             // error, stop the current run
@@ -78,14 +79,16 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
             G4UImanager* ui = G4UImanager::GetUIpointer();
             ui->ApplyCommand("/run/abort");
         }
+        G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
         G4ParticleDefinition* particle =
-        mParticleTable->FindParticle(current.PDG_id);
+                    particleTable->FindParticle(current.PDG_id);
         
         mParticleGun->SetParticleDefinition(particle);
         mParticleGun->SetParticlePosition(current.position);
         // position will need to be adjusted WRT to new geometry
         mParticleGun->SetParticleMomentum(current.momentum);
-    } else {
+    } else 
+    {
         mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 9.25*mm));
     }
     mParticleGun->GeneratePrimaryVertex(anEvent);

@@ -14,6 +14,7 @@
 using namespace std; // for files etc
 
 STbeamReadin* STbeamReadin::mInstancePtr = NULL;
+G4int STbeamReadin::mPtrCount = 0;
 
 STbeamReadin::STbeamReadin(): 
     mCurrentParticle(0),
@@ -23,7 +24,20 @@ STbeamReadin::STbeamReadin():
     minX(-1000*mm), minY(-1000*mm), minZ(-1000*mm)
 {;}
 
-STbeamReadin::~STbeamReadin(){;}
+void STbeamReadin::destroy()
+{
+    delete mInstancePtr;
+    mInstancePtr = NULL;
+}
+
+STbeamReadin::~STbeamReadin()//{;}
+{
+    --mPtrCount;
+    if (mPtrCount <= 0)
+    {
+//        destroy();
+    }
+}
 
 inputParticle STbeamReadin::next()
 {
@@ -43,6 +57,7 @@ STbeamReadin* STbeamReadin::getPointer(G4String file)
         mInstancePtr = new STbeamReadin();
         mInstancePtr->initialise(file);
     }
+    ++mPtrCount;
     return mInstancePtr;
 }
 

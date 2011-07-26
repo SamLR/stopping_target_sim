@@ -52,8 +52,7 @@
 #include "G4LogicalBorderSurface.hh"   
 
 
-STDetectorConstruction::STDetectorConstruction()
-{;}
+STDetectorConstruction::STDetectorConstruction(){;}
 
 STDetectorConstruction::~STDetectorConstruction() {;}
 

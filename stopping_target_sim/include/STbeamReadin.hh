@@ -29,6 +29,7 @@ class STbeamReadin
 public:
     inputParticle next();
     static STbeamReadin* getPointer(G4String file);
+    static void destroy();
     ~STbeamReadin();
     G4int inline getMaxParticles() {return mParticleVec.size();}
     
@@ -36,6 +37,8 @@ private:
     STbeamReadin();
     void initialise(G4String file);
     static STbeamReadin* mInstancePtr;
+    
+    static G4int mPtrCount;
     vector<inputParticle> mParticleVec;
     G4int mCurrentParticle;
     G4float xOffset, yOffset, zOffset; // all other co-ordinates should map 1:1

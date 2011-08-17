@@ -19,7 +19,7 @@ G4int STbeamReadin::mPtrCount = 0;
 STbeamReadin::STbeamReadin(): 
     mCurrentParticle(0),
     // zOffset = (g4beamline - counter:beamend separation)
-    xOffset(0),     yOffset(0),     zOffset(-(3901.18-50)*mm), 
+    xOffset(0),     yOffset(0),     zOffset(-(3901.18+100)*mm), 
     maxX( 1000*mm), maxY( 1000*mm), maxZ( 1000*mm),
     minX(-1000*mm), minY(-1000*mm), minZ(-1000*mm)
 {;}
@@ -80,6 +80,12 @@ void STbeamReadin::initialise(G4String file)
             
             // some of the PIDs given are in valid; remove them
             if (pid>1000000000) continue;
+            // check for charged particles pi, mu, e or p. 
+            G4bool charged = (pid == -211 || pid == -13 || pid == -11) || 
+                             (pid ==  211 || pid ==  13 || pid ==  11) ||
+            (pid == 2212);
+
+            if (!charged) continue;
             
             pos[0] += xOffset;// move within world volume
             pos[1] += yOffset;

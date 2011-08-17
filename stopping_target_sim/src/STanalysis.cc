@@ -65,6 +65,8 @@ void STanalysis::initialise(G4String filename)
 
 void STanalysis::addHit(G4float* position, G4float time)
 {
+
+    
     mX = position[0];
     mY = position[1];
     mZ = position[2];

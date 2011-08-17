@@ -33,11 +33,11 @@ void STcounterSD::EndOfEvent(G4HCofThisEvent *pThisHC)
     if (hitCount > 0) 
     {
         // save/write root files etc
-        printf("\n++++++++++++++++++++\n");
-        printf("name: %s\n", this->SensitiveDetectorName.data());
-        printf("this count: %i\n", hitCount);
-        printf("total count: %i\n", totalCount);
-        printf("++++++++++++++++++++\n");
+//        printf("\n++++++++++++++++++++\n");
+//        printf("name: %s\n", this->SensitiveDetectorName.data());
+//        printf("this count: %i\n", hitCount);
+//        printf("total count: %i\n", totalCount);
+//        printf("++++++++++++++++++++\n");
     }
 }
 

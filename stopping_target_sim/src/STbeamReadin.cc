@@ -77,6 +77,7 @@ void STbeamReadin::initialise(G4String file)
             fileIn >> eventNo >> pid 
                    >> pos[0] >> pos[1] >> pos[2] 
                    >> mom[0] >> mom[1] >> mom[2];
+            // test
             
             // some of the PIDs given are in valid; remove them
             if (pid>1000000000) continue;

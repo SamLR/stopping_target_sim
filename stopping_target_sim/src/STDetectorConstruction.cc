@@ -65,7 +65,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     G4Material* Al    = G4Material::GetMaterial("Al");
     G4Material* Cu    = G4Material::GetMaterial("Cu");
     G4Material* Scint = G4Material::GetMaterial("Pethylene");
-//    G4Material* Scint = G4Material::GetMaterial("chicken");    
+    
     //--------------------------------------------------------------------------
     // Definition of directions
     //--------------------------------------------------------------------------
@@ -233,9 +233,10 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     if(!fieldIsInitialized)
     {
         G4FieldManager* pFieldMgr;
+        G4String mag_field_location = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/magfield.table";
         
         G4MagneticField* PurgMagField = 
-                    new STTabulatedField3D("../../magfield.table", z_offset_mag);
+                    new STTabulatedField3D(mag_field_location, z_offset_mag);
         
         G4TransportationManager* tMan = 
                             G4TransportationManager::GetTransportationManager();

@@ -45,9 +45,9 @@ STPrimaryGeneratorAction::STPrimaryGeneratorAction():
 {
     if (mFileMode)
     {    
-//        G4String file_path = "../../test_particles.txt";
+//        G4String file_path = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/test_particles.txt";
         G4String file_path 
-            = "../../../MuSIC_g4beamline/monitor6_9999990_initial_protons.txt";
+            = "/Users/scook/code/MuSIC/MuSIC_simulation/MuSIC_g4beamline/monitor6_9999990_initial_protons.txt";
         mBeamData =  STbeamReadin::getPointer(file_path);
         mParticleGun = new G4ParticleGun(1);
     } else 

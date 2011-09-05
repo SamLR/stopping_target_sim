@@ -14,7 +14,6 @@
 using namespace std; // for files etc
 
 STbeamReadin* STbeamReadin::mInstancePtr = NULL;
-G4int STbeamReadin::mPtrCount = 0;
 
 STbeamReadin::STbeamReadin(): 
     mCurrentParticle(0),
@@ -30,24 +29,26 @@ void STbeamReadin::destroy()
     mInstancePtr = NULL;
 }
 
-STbeamReadin::~STbeamReadin()//{;}
-{
-    --mPtrCount;
-    if (mPtrCount <= 0)
-    {
-//        destroy();
-    }
-}
+STbeamReadin::~STbeamReadin() {;}
 
 inputParticle STbeamReadin::next()
 {
-    if (mCurrentParticle == mParticleVec.size())
+    if (mNParticlesRemaining == 0)
     {
-        inputParticle error;
-        error.status = -1;
-        return error;
+        if (mFileIn->is_open())
+        {
+            loadParticles();
+        } else {
+            G4cout << "out of particles" << G4endl;
+            inputParticle error;
+            error.status = 0;
+            return error;
+        }
     }
-    return mParticleVec[mCurrentParticle++];
+    inputParticle res = (*mCurrentParticle);
+    ++mCurrentParticle;
+    --mNParticlesRemaining;
+    return res;
 }
 
 STbeamReadin* STbeamReadin::getPointer(G4String file)
@@ -57,49 +58,68 @@ STbeamReadin* STbeamReadin::getPointer(G4String file)
         mInstancePtr = new STbeamReadin();
         mInstancePtr->initialise(file);
     }
-    ++mPtrCount;
     return mInstancePtr;
 }
 
 void STbeamReadin::initialise(G4String file)
 {
-    ifstream fileIn (file);
+    mFileIn = new ifstream();
+    mFileIn->open(file);
     
-    if (fileIn.is_open())
+    if (mFileIn->is_open())
     {
-        while (fileIn.good())
-        {
-            G4float eventNo, pid;
-            G4float pos[3];
-            G4float mom[3];
-            inputParticle currentParticle;
-            
-            fileIn >> eventNo >> pid 
+        loadParticles();
+    } else {
+        G4cout << "ERROR: file <" << file << "> not opened" << G4endl;
+        exit(1);
+    }
+}
+
+void STbeamReadin::loadParticles()
+{
+    G4int particle_count = 0;
+    mCurrentParticle = mParticles;
+    
+    while (mFileIn->good() && particle_count < mMaxParticlesInArray)
+    {
+        G4float eventNo, pid, pos[3], mom[3];
+        inputParticle currentParticle;
+        
+        (*mFileIn) >> eventNo >> pid 
                    >> pos[0] >> pos[1] >> pos[2] 
                    >> mom[0] >> mom[1] >> mom[2];
-            // test
-            
-            // some of the PIDs given are in valid; remove them
-            if (pid>1000000000) continue;
-            // check for charged particles pi, mu, e or p. 
-            G4bool charged = (pid == -211 || pid == -13 || pid == -11) || 
-                             (pid ==  211 || pid ==  13 || pid ==  11) ||
-            (pid == 2212);
-
-            if (!charged) continue;
-            
-            pos[0] += xOffset;// move within world volume
-            pos[1] += yOffset;
-            pos[2] += zOffset; 
-            
-            if (not checkbounds(pos)) continue;
-            
-            currentParticle.status = 1; 
-            currentParticle.PDG_id = (int) pid;
-            currentParticle.position = G4ThreeVector(pos[0], pos[1], pos[2]);
-            currentParticle.momentum = G4ThreeVector(mom[0], mom[1], mom[2]);
-            mParticleVec.push_back(currentParticle);
-        }
+        
+        // some of the PIDs given are invalid; remove them
+        // check for charged particles pi (211), mu (13), e(11) or p(2212). 
+        G4bool charged = (pid == -211 || pid == -13 || pid == -11) ||  
+                         (pid ==  211 || pid ==  13 || pid ==  11) ||
+                         (pid == 2212);
+        
+        if (!charged) continue;
+        
+        pos[0] += xOffset;// move within world volume
+        pos[1] += yOffset;
+        pos[2] += zOffset; 
+        
+        if (not checkbounds(pos)) continue; // check in world volume
+        
+        currentParticle.status = 1; 
+        currentParticle.PDG_id = (int) pid;
+        currentParticle.position = G4ThreeVector(pos[0], pos[1], pos[2]);
+        currentParticle.momentum = G4ThreeVector(mom[0], mom[1], mom[2]);
+        
+        (*mCurrentParticle) = currentParticle; // enter into array
+        ++mCurrentParticle;
+        ++particle_count;
     }
-    fileIn.close();
+    
+    mCurrentParticle = mParticles; // reset pointer to first particle
+    mNParticles = particle_count;
+    mNParticlesRemaining = particle_count;
+    if (!mFileIn->good()) // if the file has run out of entries close it
+    {
+        mFileIn->close();
+        mFileIn = NULL;
+    }
+    
 }

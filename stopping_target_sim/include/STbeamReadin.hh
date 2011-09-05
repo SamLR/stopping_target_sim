@@ -11,19 +11,22 @@
 #define STBEAMREADIN_HH
 
 #include "globals.hh"
-#include <vector>
+#include <fstream>
+#include <iostream>
 
 #include "G4ThreeVector.hh"
 
 using namespace std;
 
-struct inputParticle {
+struct inputParticle { // one inputParticle ~ 56B (4 + 4 + 3*8 + 3*8)
     G4int status;
     G4int PDG_id;
     G4ThreeVector position;
     G4ThreeVector momentum;
 };
 
+static const G4int mMaxParticlesInArray = 1000;
+	
 class STbeamReadin  
 {
 public:
@@ -31,16 +34,23 @@ public:
     static STbeamReadin* getPointer(G4String file);
     static void destroy();
     ~STbeamReadin();
-    G4int inline getMaxParticles() {return mParticleVec.size();}
+    G4int inline getNParticlesInArray() {return mMaxParticlesInArray;}
+//    G4int inline getMaxParticles() {return mParticleVec.size();}
     
 private:
     STbeamReadin();
     void initialise(G4String file);
+    void loadParticles();
     static STbeamReadin* mInstancePtr;
+
+    ifstream* mFileIn;
     
-    static G4int mPtrCount;
-    vector<inputParticle> mParticleVec;
-    G4int mCurrentParticle;
+    inputParticle mParticles [mMaxParticlesInArray]; // TODO should probably be defined somewhere
+    inputParticle* mCurrentParticle;
+    
+    G4int mNParticles; // total number of particles in the array
+    G4int mNParticlesRemaining; // number of unused particles in array
+    
     G4float xOffset, yOffset, zOffset; // all other co-ordinates should map 1:1
     G4float maxX, maxY, maxZ;
     G4float minX, minY, minZ;

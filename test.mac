@@ -11,25 +11,25 @@
 # (Edit the next line(s) to choose another graphics system)
 #
 #/vis/open OGLIX 600x600-0+0
-/vis/open HepRepFile
-/vis/heprep/setFileName heprep1
+#/vis/open HepRepFile
+#/vis/heprep/setFileName heprep1
 ###############
 #
 # draw scene
 #
 ###############
-/vis/drawVolume
+#/vis/drawVolume
 #
 #/vis/viewer/set/hiddenEdge 0
 #/vis/viewer/set/viewpointThetaPhi 90 0 deg
 #/vis/viewer/zoom 4
 #
 # for drawing the tracks
-/vis/scene/add/trajectories smooth
+#/vis/scene/add/trajectories smooth
 # (if too many tracks cause core dump => /tracking/storeTrajectory 0)
 # for drawing the hits, uncomment next line
 # /vis/scene/add/hits
 # (if you prefer refreshing each event, comment out next line)
-/vis/scene/endOfEventAction accumulate
+#/vis/scene/endOfEventAction accumulate
 #
-/run/beamOn 100
+/run/beamOn 1000000

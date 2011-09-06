@@ -75,7 +75,10 @@
 #include "G4OpBoundaryProcess.hh"
 
 #include "G4LossTableManager.hh"
-#include "G4EmSaturation.hh"     
+#include "G4EmSaturation.hh" 
+
+// for any ions that crop up
+#include "G4ionIonisation.hh"
 
 STPhysicsList::STPhysicsList(): G4VUserPhysicsList()
 {;}
@@ -152,8 +155,12 @@ void STPhysicsList::ConstructMesons()
 
 void STPhysicsList::ConstructBaryons()
 {
+    
     G4Proton::ProtonDefinition();
+    G4AntiProton::AntiProtonDefinition();
+    
     G4Neutron::NeutronDefinition();
+    G4AntiNeutron::AntiNeutronDefinition();
 }
 
 void STPhysicsList::ConstructEM()
@@ -209,14 +216,35 @@ void STPhysicsList::ConstructEM()
             pmanager->AddRestProcess(new G4MuonMinusCaptureAtRest);
             
         } else if( particleName == "proton" ||
-                  particleName == "pi-" ||
-                  particleName == "pi+"    ) {
+                  particleName == "pi-"     ||
+                  particleName == "pi+"     ) 
+        {
             //proton  
             pmanager->AddProcess(new G4hMultipleScattering, -1, 1, 1);
             pmanager->AddProcess(new G4hIonisation,         -1, 2, 2);
             pmanager->AddProcess(new G4hBremsstrahlung,     -1, 3, 3);
             pmanager->AddProcess(new G4hPairProduction,     -1, 4, 4);       
             
+        } else if( particleName == "alpha" ||
+                  particleName == "He3" )     
+        {
+            //alpha 
+            pmanager->AddProcess(new G4hMultipleScattering, -1, 1, 1);
+            pmanager->AddProcess(new G4ionIonisation,       -1, 2, 2);
+            
+        } else if( particleName == "GenericIon" ) 
+        { 
+            //Ions 
+            pmanager->AddProcess(new G4hMultipleScattering, -1, 1, 1);
+            pmanager->AddProcess(new G4ionIonisation,       -1, 2, 2);
+            
+        } else if ((!particle->IsShortLived())                       &&
+                   (particle->GetPDGCharge()    != 0.0)              && 
+                   (particle->GetParticleName() != "chargedgeantino")) 
+        {
+            //all others charged particles except geantino
+            pmanager->AddProcess(new G4hMultipleScattering, -1, 1, 1);
+            pmanager->AddProcess(new G4hIonisation,         -1, 2, 2);
         }
     }
 }

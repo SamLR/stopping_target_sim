@@ -6,6 +6,8 @@
 #
 /control/verbose 0
 /run/verbose 0
+/event/verbose 0
+
 #
 # Create a scene handler for a specific graphics system
 # (Edit the next line(s) to choose another graphics system)

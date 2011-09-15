@@ -54,16 +54,19 @@ void STanalysis::initialise(G4String filename)
 
 void STanalysis::addHit(G4float* position, G4float time)
 {
-
-    
+    ++callCount;
     mX = position[0];
     mY = position[1];
     mZ = position[2];
     mT = time;
     mTree->Fill();
+//    mFile->Write();
 }
 
 void STanalysis::update()
 {
+    G4cout << "writing data to file" <<G4endl; 
+    G4cout << "call count "<< callCount << G4endl <<G4endl;
+    
     mFile->Write();
 }

@@ -68,6 +68,7 @@ protected:
     void ConstructLeptons();
     void ConstructBaryons();
     void ConstructMesons();
+    void ConstructIons();
     
     void ConstructEM();
     void ConstructOp(); 

@@ -21,7 +21,6 @@
 class STanalysis 
 {
 public:    
-    static void destroy();
     static STanalysis* getPointer(G4String filename);
     inline static STanalysis* getPointer() {return mInstancePtr;}
     
@@ -40,6 +39,8 @@ private:
     TFile* mFile;
     TTree* mTree;
     Double_t mX, mY, mZ, mT; // variables that will write to the tree
+    
+    int callCount;
 
 };
 

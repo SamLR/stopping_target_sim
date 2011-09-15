@@ -23,28 +23,17 @@ STanalysis* STanalysis::getPointer(G4String filename)
     return mInstancePtr;
 }
 
-STanalysis::STanalysis(): mX(0), mY(0), mZ(0), mT(0) {;}
+STanalysis::STanalysis(): mX(0), mY(0), mZ(0), mT(0), callCount(0) {;}
 
-void STanalysis::destroy()
-{
-    delete mInstancePtr;
-    mInstancePtr = NULL;
-    mPtrCount = 0;
-}
 
 STanalysis::~STanalysis()// {;}
 {
-    --mPtrCount;
-    if (mPtrCount <= 0)
-    {
-        if (mFile) update();
-        mFile->Close();
-        delete mFile;
-        delete mTree;
-        mFile = 0;
-        mTree = 0;
-//        destroy();
-    };
+    if (mFile) update();
+    mFile->Close();
+    delete mFile;
+    delete mTree;
+    mFile = 0;
+    mTree = 0;
 }
 
 void STanalysis::initialise(G4String filename)

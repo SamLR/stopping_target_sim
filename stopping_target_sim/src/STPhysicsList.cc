@@ -62,6 +62,12 @@
 #include "G4hBremsstrahlung.hh"
 #include "G4hPairProduction.hh"
 
+// Nuclei
+#include "G4Deuteron.hh"
+#include "G4Triton.hh"
+#include "G4Alpha.hh"
+#include "G4GenericIon.hh"
+
 #include "G4Decay.hh"
 
 // optical Photon processes     
@@ -92,6 +98,7 @@ void STPhysicsList::ConstructParticle()
     ConstructLeptons();
     ConstructBaryons();
     ConstructMesons();
+    ConstructIons();
     G4Gamma::GammaDefinition();
 }
 
@@ -155,12 +162,19 @@ void STPhysicsList::ConstructMesons()
 
 void STPhysicsList::ConstructBaryons()
 {
-    
     G4Proton::ProtonDefinition();
     G4AntiProton::AntiProtonDefinition();
     
     G4Neutron::NeutronDefinition();
     G4AntiNeutron::AntiNeutronDefinition();
+}
+
+void STPhysicsList::ConstructIons()
+{    
+    G4Deuteron::DeuteronDefinition();
+    G4Triton::TritonDefinition();
+    G4Alpha::AlphaDefinition();
+    G4GenericIon::GenericIonDefinition();
 }
 
 void STPhysicsList::ConstructEM()

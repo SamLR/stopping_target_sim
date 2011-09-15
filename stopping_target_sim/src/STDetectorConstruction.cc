@@ -156,22 +156,15 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     
     // MPPCs
     G4Box* mppc = new G4Box("MPPC", mppc_d/2, mppc_d/2, mppc_d/2);
-//    G4Box* mppc = new G4Box("MPPC", 5*mm, 50*mm, 3.5*mm);
+    
     mppcA1_log           = new G4LogicalVolume(mppc, Scint, "mppcA1_log");
     mppcA2_log           = new G4LogicalVolume(mppc, Scint, "mppcA2_log");
     mppcB1_log           = new G4LogicalVolume(mppc, Scint, "mppcB1_log");
     mppcB2_log           = new G4LogicalVolume(mppc, Scint, "mppcB2_log");
-//    mppcA1_log           = new G4LogicalVolume(mppc, Air, "mppcA1_log");
-//    mppcA2_log           = new G4LogicalVolume(mppc, Air, "mppcA2_log");
-//    mppcB1_log           = new G4LogicalVolume(mppc, Air, "mppcB1_log");
-//    mppcB2_log           = new G4LogicalVolume(mppc, Air, "mppcB2_log");
+    
 
     G4ThreeVector mppc1 = G4ThreeVector( (c_x - mppc_d)/2, 0, 0);
     G4ThreeVector mppc2 = G4ThreeVector(-(c_x - mppc_d)/2, 0, 0);
-//    G4ThreeVector mppc1 = G4ThreeVector( (c_x + mppc_d)/2, 0, 0);
-//    G4ThreeVector mppc2 = G4ThreeVector(-(c_x + mppc_d)/2, 0, 0);
-//    G4ThreeVector mppc1 = G4ThreeVector( (c_x-5)/2, 0, 0);
-//    G4ThreeVector mppc2 = G4ThreeVector(-(c_x-5)/2, 0, 0);
     // try having the MPPCs inside the scint
     mppcA1_phys          = new G4PVPlacement(0, mppc1, mppcA1_log, 
                                              "mppcA1_phys", counterA_log, 
@@ -185,21 +178,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
                                              false, 0);
     mppcB2_phys          = new G4PVPlacement(0, mppc2, mppcB2_log, 
                                              "mppcB2_phys", counterB_log, 
-                                             false, 0);    
-//    mppcA1_phys          = new G4PVPlacement(0, mppc1, mppcA1_log, 
-//                                             "mppcA1_phys", wrapA_log, 
-//                                             false, 0);
-//    mppcA2_phys          = new G4PVPlacement(0, mppc2, mppcA2_log, 
-//                                             "mppcA2_phys", wrapA_log, 
-//                                             false, 0);
-//    
-//    mppcB1_phys          = new G4PVPlacement(0, mppc1, mppcB1_log, 
-//                                             "mppcB1_phys", wrapB_log, 
-//                                             false, 0);
-//    mppcB2_phys          = new G4PVPlacement(0, mppc2, mppcB2_log, 
-//                                             "mppcB2_phys", wrapB_log, 
-//                                             false, 0);
-//    
+                                             false, 0); 
     //--------------------------------------------------------------------------
     // Create senstive detector manager for the MPPCs
     //--------------------------------------------------------------------------

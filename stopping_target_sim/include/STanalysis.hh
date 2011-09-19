@@ -24,7 +24,7 @@ class STanalysis
 {
 public:    
     
-    void addHit(G4float* position, G4float time);
+    void addHit(G4int eventNo, G4float* position, G4float time);
     void addHit(G4ThreeVector position, G4float time);
     void update();
     void close(G4bool override = FALSE);
@@ -45,6 +45,7 @@ private:
     
     TFile* mFile;
     TTree* mTree;
+    Int_t mEvent;
     Float_t mX, mY, mZ, mT; // variables that will write to the tree
 };
 

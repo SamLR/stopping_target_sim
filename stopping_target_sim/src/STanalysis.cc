@@ -70,6 +70,8 @@ void STanalysis::initialise(G4String filename)
     }
     
     mTree = new TTree("MPPC_Data","hits on MPPCS");
+    mTree->Branch("eventNo", &mEvent, "eventNo/I");
+    
     mTree->Branch("posX", &mX, "posX/F");
     mTree->Branch("posY", &mY, "posY/F");
     mTree->Branch("posZ", &mZ, "posZ/F");
@@ -77,8 +79,9 @@ void STanalysis::initialise(G4String filename)
 }
 
 
-void STanalysis::addHit(G4float* position, G4float time)
+void STanalysis::addHit(G4int eventNo, G4float* position, G4float time)
 {
+    mEvent = eventNo;
     mX = position[0];
     mY = position[1];
     mZ = position[2];
@@ -86,10 +89,10 @@ void STanalysis::addHit(G4float* position, G4float time)
     mTree->Fill();
 }
 
-void STanalysis::addHit(G4ThreeVector position, G4float time)
+void STanalysis::addHit(G4int eventNo, G4ThreeVector position, G4float time)
 {
     G4float positionT[3] = {position.x(), position.y(), position.z()};
-    addHit(positionT, time);
+    addHit(eventNo, positionT, time);
 }
 
 void STanalysis::update()

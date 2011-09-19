@@ -60,12 +60,15 @@ public:
     
     inline void SetPos (G4ThreeVector xyz) { pos = xyz; };
     inline void SetTime (G4float t) {time = t; };
+    inline void SetEvent (G4int e) {eventNo = e; };
     G4ThreeVector GetPos() { return pos; };
     G4float GetTime() {return time; };
+    G4int GetEvent() {return eventNo; };
     
 private:
     G4ThreeVector pos;
     G4float time;
+    G4int eventNo;
     
 };
 

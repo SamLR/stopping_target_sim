@@ -11,7 +11,8 @@
 #include "STanalysis.hh"
 #include "G4SDManager.hh"
 
-STcounterSD::STcounterSD(G4String name) : G4VSensitiveDetector(name) 
+STcounterSD::STcounterSD(G4String name): 
+    G4VSensitiveDetector(name), mEventNumber(0) 
 {
     G4String HCname = name + "CounterCollection";
     collectionName.insert(HCname);
@@ -21,6 +22,7 @@ STcounterSD::~STcounterSD(){;}
 
 void STcounterSD::Initialize(G4HCofThisEvent *pThisHC)
 {
+    ++mEventNumber;
     counterCollection = new STcounterHitsCollection(SensitiveDetectorName, 
                                                     collectionName[0]);
     static G4int HCID = -1; // test if this gets assigned on subsequent calls
@@ -40,7 +42,7 @@ void STcounterSD::EndOfEvent(G4HCofThisEvent *pThisHC)
     {
         G4ThreeVector position = (*counterCollection)[i]->GetPos();
         G4float time = (*counterCollection)[i]->GetTime();
-        analysis->addHit(position, time);
+        analysis->addHit(mEventNumber, position, time);
     }
     analysis->close();
 }
@@ -53,6 +55,7 @@ G4bool STcounterSD::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     if (not stepStatus == fGeomBoundary) return false;
     
     STcounterHit *newHit = new STcounterHit();
+    newHit->SetEvent(mEventNumber);    
     newHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
     newHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
     counterCollection->insert(newHit);

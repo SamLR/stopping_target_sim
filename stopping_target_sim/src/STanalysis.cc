@@ -10,35 +10,61 @@
 #include "STanalysis.hh"
 
 STanalysis* STanalysis::mInstancePtr = NULL;
-G4int STanalysis::mPtrCount = 0;
+int STanalysis::mPtrCount = 0;
+
+STanalysis::STanalysis(): mFile(NULL), mTree(NULL) {;}
+
+STanalysis::STanalysis(G4String filename): mFile(NULL), mTree(NULL)
+{
+    initialise(filename);
+}
+
+STanalysis::~STanalysis() {;}
+
+void STanalysis::close(G4bool override)
+{
+    --mPtrCount;
+    if (mPtrCount <= 0 || override)
+    {
+        mFile->Write();
+        mFile->Close();
+        delete mFile;
+        destroy();
+    }
+}
+
+void STanalysis::destroy()
+{
+    mInstancePtr = NULL;
+    mPtrCount = 0;
+}
 
 STanalysis* STanalysis::getPointer(G4String filename)
 {
-    if (mInstancePtr == NULL)
+    if (!mInstancePtr)
     {
-        mInstancePtr = new STanalysis();
-        mInstancePtr->initialise(filename);
+        mInstancePtr = new STanalysis(filename);
     }
     ++mPtrCount;
     return mInstancePtr;
 }
 
-STanalysis::STanalysis(): mX(0), mY(0), mZ(0), mT(0), callCount(0) {;}
-
-
-STanalysis::~STanalysis()// {;}
+STanalysis* STanalysis::getInitdPointer()
 {
-    if (mFile) update();
-    mFile->Close();
-    delete mFile;
-    delete mTree;
-    mFile = 0;
-    mTree = 0;
+    if (!mInstancePtr) 
+    {
+        G4cout << "no instance initialised exiting"<<G4endl;
+        exit(1);
+    } else {
+        ++mPtrCount;
+        return mInstancePtr;
+    }
 }
 
 void STanalysis::initialise(G4String filename)
 {
     mFile = new TFile(filename.c_str(), "RECREATE");
+    
     if (!mFile) {
         G4cout << "Error: opening " << filename << " for writing" << G4endl;
         exit(1);
@@ -54,19 +80,20 @@ void STanalysis::initialise(G4String filename)
 
 void STanalysis::addHit(G4float* position, G4float time)
 {
-    ++callCount;
     mX = position[0];
     mY = position[1];
     mZ = position[2];
     mT = time;
     mTree->Fill();
-//    mFile->Write();
+}
+
+void STanalysis::addHit(G4ThreeVector position, G4float time)
+{
+    G4float positionT[3] = {position.x(), position.y(), position.z()};
+    addHit(positionT, time);
 }
 
 void STanalysis::update()
 {
-    G4cout << "writing data to file" <<G4endl; 
-    G4cout << "call count "<< callCount << G4endl <<G4endl;
-    
     mFile->Write();
 }

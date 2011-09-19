@@ -32,13 +32,14 @@ class STbeamReadin
 public:
     inputParticle next();
     static STbeamReadin* getPointer(G4String file);
-    static void destroy();
-    ~STbeamReadin();
+    static void close();
     G4int inline getNParticlesInArray() {return mMaxParticlesInArray;}
 //    G4int inline getMaxParticles() {return mParticleVec.size();}
     
 private:
     STbeamReadin();
+    STbeamReadin(G4String file);
+    ~STbeamReadin();
     void initialise(G4String file);
     void loadParticles();
     static STbeamReadin* mInstancePtr;

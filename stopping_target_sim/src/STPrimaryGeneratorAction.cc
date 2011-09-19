@@ -38,6 +38,8 @@
 
 #include "G4UImanager.hh"
 
+#include "STanalysis.hh"
+
 STPrimaryGeneratorAction::STPrimaryGeneratorAction(): 
     mFileMode(true), mBeamData(0), mParticleGun(0)
 // TODO look at getting data for detector from that class
@@ -63,6 +65,7 @@ STPrimaryGeneratorAction::STPrimaryGeneratorAction():
 
 STPrimaryGeneratorAction::~STPrimaryGeneratorAction()
 {
+    if (mBeamData) mBeamData->close();
     if (mParticleGun) delete mParticleGun;
 }
 
@@ -75,6 +78,8 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
         if (current.status < 0) 
         {
             // error, stop the current run
+            STanalysis* analysis = STanalysis::getInitdPointer();
+            analysis->close(TRUE);
             G4cout <<"Error: out of primaries, aborting run" << G4endl;
             G4UImanager* ui = G4UImanager::GetUIpointer();
             ui->ApplyCommand("/run/abort");

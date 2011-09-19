@@ -14,24 +14,23 @@
 #include "G4VSensitiveDetector.hh"
 #include "G4Step.hh"
 #include "STanalysis.hh"
+#include "STcounterHit.hh"
 
 class STcounterSD : public G4VSensitiveDetector 
 {
 public:
-    STcounterSD(G4String name);
+    STcounterSD(G4String);
     ~STcounterSD();
     
-    // needed to set up Root
-    void Initialize(G4HCofThisEvent*);
-    void EndOfEvent(G4HCofThisEvent*);
-    
-private:
-    // required method
+    // required methods
+    void Initialize(G4HCofThisEvent *pThisHC);
+    void EndOfEvent(G4HCofThisEvent *pThisHC);
     G4bool ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist);
     
-    STanalysis* mAnalysis;
-    G4int hitCount;
-    static G4int totalCount;
+private:
+    
+//    STanalysis* mAnalysis; // should this be here? 
+    STcounterHitsCollection *counterCollection;
 };
 
 # endif

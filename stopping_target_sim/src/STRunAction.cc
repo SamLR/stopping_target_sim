@@ -13,13 +13,18 @@
 #include "G4Run.hh"
 
 STRunAction::STRunAction(){;}
-STRunAction::~STRunAction(){;}
+STRunAction::~STRunAction()
+{
+    mAnalysis->close();
+}
 
-void STRunAction::BeginOfRunAction(const G4Run* aRun){;}
+void STRunAction::BeginOfRunAction(const G4Run* aRun)
+{
+    mAnalysis =  STanalysis::getPointer("out.root");
+}
 
 void STRunAction::EndOfRunAction(const G4Run* aRun)
 {
-    G4cout << "updating analysis file" << G4endl;
-    STanalysis* analysis = STanalysis::getPointer();
-    analysis->update();
+//    G4cout << "updating analysis file" << G4endl;
+    mAnalysis->update();
 }

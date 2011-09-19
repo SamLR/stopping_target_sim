@@ -15,9 +15,9 @@ void process1()
     data->SetBranchAddress("posZ", &z);
     data->SetBranchAddress("time", &time);
     
-    TH1F* hist_x = new TH1F("x", "x", 100, -50.0, 50.0);
-    TH1F* hist_y = new TH1F("y", "y", 100, -50.0, 50.0);
-    TH1F* hist_z = new TH1F("z", "z", 100, -50.0, 50.0);
+    TH1F* hist_x = new TH1F("x", "x", 100, -300.0, 300.0);
+    TH1F* hist_y = new TH1F("y", "y", 100, -300.0, 300.0);
+    TH1F* hist_z = new TH1F("z", "z", 100, -300.0, 300.0);
     TH1F* hist_time = new TH1F("time", "time", 100, -50.0, 50.0);
     
     for(int i = 0; i < (int)data->GetEntries(); ++i) 

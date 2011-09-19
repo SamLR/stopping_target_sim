@@ -40,48 +40,41 @@
 
 G4Allocator<STcounterHit> STcounterHitAllocator;
 
-STcounterHit::STcounterHit() {}
+STcounterHit::STcounterHit() {;}
 
-STcounterHit::~STcounterHit() {}
+STcounterHit::~STcounterHit() {;}
 
-STcounterHit::STcounterHit(const STcounterHit& right)
-  : G4VHit()
+STcounterHit::STcounterHit(const STcounterHit& right) : G4VHit()
 {
-  trackID   = right.trackID;
-  edep      = right.edep;
-  pos       = right.pos;
+    pos = right.pos;
+    time = right.time;
 }
 
 const STcounterHit& STcounterHit::operator=(const STcounterHit& right)
 {
-  trackID   = right.trackID;
-  edep      = right.edep;
-  pos       = right.pos;
-  return *this;
+    pos = right.pos;
+    time = right.time;
+    return *this;
 }
 
 G4int STcounterHit::operator==(const STcounterHit& right) const
 {
-  return (this==&right) ? 1 : 0;
+    return (this==&right) ? 1 : 0;
 }
 
 void STcounterHit::Draw()
 {
-  G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
-  if(pVVisManager)
-  {
-    G4Circle circle(pos);
-    circle.SetScreenSize(2.);
-    circle.SetFillStyle(G4Circle::filled);
-    G4Colour colour(1.,0.,0.);
-    G4VisAttributes attribs(colour);
-    circle.SetVisAttributes(attribs);
-    pVVisManager->Draw(circle);
-  }
+    G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
+    if(pVVisManager)
+    {
+        G4Circle circle(pos);
+        circle.SetScreenSize(2.);
+        circle.SetFillStyle(G4Circle::filled);
+        G4Colour colour(1.,0.,0.);
+        G4VisAttributes attribs(colour);
+        circle.SetVisAttributes(attribs);
+        pVVisManager->Draw(circle);
+    }
 }
 
-void STcounterHit::Print()
-{
-  G4cout << "  trackID: " << trackID 
-        << "  position: " << G4BestUnit(pos,"Length") << G4endl;
-}
+void STcounterHit::Print() {;}

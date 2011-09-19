@@ -43,34 +43,30 @@
 
 class STcounterHit : public G4VHit
 {
-  public:
-
-      STcounterHit();
-     ~STcounterHit();
-      STcounterHit(const STcounterHit&);
+public:
     
-      const STcounterHit& operator=(const STcounterHit&);
-      G4int operator==(const STcounterHit&) const;
-
-      inline void* operator new(size_t);
-      inline void  operator delete(void*);
-
-      void Draw();
-      void Print();
-  
-      inline void SetTrackID  (G4int track)      { trackID = track; }; 
-      inline void SetEdep     (G4double de)      { edep = de; };
-      inline void SetPos      (G4ThreeVector xyz){ pos = xyz; };
-      
-      G4int GetTrackID()    { return trackID; };
-      G4double GetEdep()    { return edep; };      
-      G4ThreeVector GetPos(){ return pos; };
-      
-  private:
-  
-      G4int         trackID;
-      G4double      edep;
-      G4ThreeVector pos;
+    STcounterHit();
+    ~STcounterHit();
+    STcounterHit(const STcounterHit&);
+    
+    const STcounterHit& operator=(const STcounterHit&);
+    G4int operator==(const STcounterHit&) const;
+    
+    inline void* operator new(size_t);
+    inline void  operator delete(void*);
+    
+    void Draw();
+    void Print();
+    
+    inline void SetPos (G4ThreeVector xyz) { pos = xyz; };
+    inline void SetTime (G4float t) {time = t; };
+    G4ThreeVector GetPos() { return pos; };
+    G4float GetTime() {return time; };
+    
+private:
+    G4ThreeVector pos;
+    G4float time;
+    
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -84,16 +80,16 @@ extern G4Allocator<STcounterHit> STcounterHitAllocator;
 
 inline void* STcounterHit::operator new(size_t)
 {
-  void *aHit;
-  aHit = (void *) STcounterHitAllocator.MallocSingle();
-  return aHit;
+    void *aHit;
+    aHit = (void *) STcounterHitAllocator.MallocSingle();
+    return aHit;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 inline void STcounterHit::operator delete(void *aHit)
 {
-  STcounterHitAllocator.FreeSingle((STcounterHit*) aHit);
+    STcounterHitAllocator.FreeSingle((STcounterHit*) aHit);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

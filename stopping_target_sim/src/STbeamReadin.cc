@@ -15,17 +15,19 @@ using namespace std; // for files etc
 
 STbeamReadin* STbeamReadin::mInstancePtr = NULL;
 
-STbeamReadin::STbeamReadin(): 
+STbeamReadin::STbeamReadin() {;}
+STbeamReadin::STbeamReadin(G4String file): 
     mCurrentParticle(0),
     // zOffset = (g4beamline - counter:beamend separation)
     xOffset(0),     yOffset(0),     zOffset(-(3901.18+100)*mm), 
     maxX( 1000*mm), maxY( 1000*mm), maxZ( 1000*mm),
     minX(-1000*mm), minY(-1000*mm), minZ(-1000*mm)
-{;}
-
-void STbeamReadin::destroy()
 {
-    delete mInstancePtr;
+    initialise(file);
+}
+
+void STbeamReadin::close()
+{
     mInstancePtr = NULL;
 }
 
@@ -55,8 +57,7 @@ STbeamReadin* STbeamReadin::getPointer(G4String file)
 {
     if (mInstancePtr==NULL) 
     {
-        mInstancePtr = new STbeamReadin();
-        mInstancePtr->initialise(file);
+        mInstancePtr = new STbeamReadin(file);
     }
     return mInstancePtr;
 }

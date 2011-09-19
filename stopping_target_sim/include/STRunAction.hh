@@ -16,6 +16,7 @@
 #include "globals.hh"
 
 class G4Run;
+class STanalysis;
 
 class STRunAction : public G4UserRunAction
 {
@@ -25,6 +26,10 @@ public:
     
     void BeginOfRunAction(const G4Run*);
     void EndOfRunAction(const G4Run*);
+    
+private:
+    STanalysis *mAnalysis;
+    
 };
 
 

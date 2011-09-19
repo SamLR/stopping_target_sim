@@ -34,4 +34,7 @@
 # (if you prefer refreshing each event, comment out next line)
 #/vis/scene/endOfEventAction accumulate
 #
-/run/beamOn 60
+# max number of particles recorded is 418,573 (from 9,999,990 initial)
+/run/beamOn 418570 
+# for a quick/testing run (includes @ least 1 on target particle)
+# /run/beamOn 60 

@@ -26,7 +26,6 @@ void STanalysis::close(G4bool override)
     --mPtrCount;
     if (mPtrCount <= 0 || override)
     {
-        mFile->Write();
         mFile->Close();
         delete mFile;
         destroy();

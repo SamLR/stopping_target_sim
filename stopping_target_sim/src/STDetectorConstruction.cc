@@ -97,7 +97,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     //--------------------------------------------------------------------------
     
     // +++++++++
-    // Experimental hall, beam is assumed to be along the x axis
+    // Experimental hall, beam is assumed to be along the z axis
     
     G4Box* expHall_box = new G4Box("expHall_box",
                                             expHall_x,expHall_y,expHall_z);
@@ -118,7 +118,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
                                               "target_phys", expHall_log, 
                                               false, 0);
     // +++++++++
-    // Counters (A&B currently virtual detectors)
+    // Counters 
     // positional offset: width of Al frame + half widths of Cu & scint
     G4double z_offset = (st_z + c_z + wrap)/2 + al_thickness; 
     

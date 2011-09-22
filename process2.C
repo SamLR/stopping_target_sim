@@ -95,4 +95,24 @@ void digitisation()
 {
     // this will convert an event into a realistic looking MPPC responce 
     
+    // 'True' analogue simulation
+    //
+    // first group by event
+    // then group by MPPC
+    // time order
+    // apply efficiency?
+    // proximity check? <read up on cross talk>
+    // any sharing a region delta t/delta V merge
+    // should now have a list of signals
+    // create output signal
+    //  model each hit as a landau and convolute
+    //  Apply cut on peak size
+    
+    // 'cheat' version
+    // group by event
+    // group by time
+    // apply 'efficiency'
+    // apply cut on N
+    
+    
 }

@@ -305,9 +305,9 @@ void STDetectorConstruction::surfaceProperties()
 {    
     const G4int num = 3;
     G4double Ephoton[num] = {2.52*eV , 2.92*eV, 3.22*eV};
-    
+    G4double refl = 0.88; // according to reading this seems a reasonable value
     //**Scintillator housing properties
-    G4double Reflectivity[num] = {1., 1., 1.}; //{refl, refl, refl};
+    G4double Reflectivity[num] = {refl, refl, refl};
     G4double Efficiency[num] = {0.0, 0.0, 0.0}; 
     
     G4MaterialPropertiesTable* scintHsngPT = new G4MaterialPropertiesTable(); 
@@ -315,7 +315,7 @@ void STDetectorConstruction::surfaceProperties()
     scintHsngPT->AddProperty("EFFICIENCY", Ephoton, Efficiency, num);
     
     G4OpticalSurface* OpScintHousingSurface =
-        new G4OpticalSurface("wrapSurface",unified,polished,dielectric_metal);
+        new G4OpticalSurface("wrapSurface",unified,groundbackpainted,dielectric_metal);
     
     OpScintHousingSurface->SetMaterialPropertiesTable(scintHsngPT);
     

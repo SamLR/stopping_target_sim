@@ -37,4 +37,4 @@
 # max number of particles recorded is 418,573 (from 9,999,990 initial)
 #/run/beamOn 418570 
 # for a quick/testing run (includes @ least 1 on target particle)
- /run/beamOn 60 
+/run/beamOn 1 

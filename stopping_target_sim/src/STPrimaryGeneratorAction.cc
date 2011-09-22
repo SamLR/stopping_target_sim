@@ -41,8 +41,8 @@
 #include "STanalysis.hh"
 
 STPrimaryGeneratorAction::STPrimaryGeneratorAction(): 
-    mFileMode(true), mBeamData(0), mParticleGun(0)
-// TODO look at getting data for detector from that class
+    mFileMode(false), mBeamData(0), mParticleGun(0)
+//    mFileMode(true), mBeamData(0), mParticleGun(0)
 // add messenger to toggle file input & mono-energetic muon 
 {
     if (mFileMode)
@@ -56,10 +56,13 @@ STPrimaryGeneratorAction::STPrimaryGeneratorAction():
     {
         G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
         mParticleGun = new G4ParticleGun(1);
-        G4ParticleDefinition* particle = particleTable->FindParticle("opticalphoton"); 
+//        G4ParticleDefinition* particle = particleTable->FindParticle("OpticalPhoton"); 
+        G4ParticleDefinition* particle = particleTable->FindParticle("mu-"); 
         mParticleGun->SetParticleDefinition(particle);
-        mParticleGun->SetParticleMomentumDirection(G4ThreeVector(1., 0., 0.));
-        mParticleGun->SetParticleEnergy(0.002*keV);
+//        mParticleGun->SetParticleMomentumDirection(G4ThreeVector(1., 0., 0.));
+        mParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
+//        mParticleGun->SetParticleEnergy(0.002*keV);
+        mParticleGun->SetParticleEnergy(5*MeV);
     }
 }
 
@@ -94,7 +97,8 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
         mParticleGun->SetParticleMomentum(current.momentum);
     } else 
     {
-        mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 9.25*mm));
+//        mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 9.25*mm));
+        mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 0.));
     }
     mParticleGun->GeneratePrimaryVertex(anEvent);
 

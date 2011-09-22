@@ -29,7 +29,7 @@ public:
     
 private:
     
-//    STanalysis* mAnalysis; // should this be here? 
+    G4int mEventNumber;
     STcounterHitsCollection *counterCollection;
 };
 

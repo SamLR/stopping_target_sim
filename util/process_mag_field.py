@@ -24,6 +24,10 @@ x_vals, y_vals, z_vals = [], [], []
 tmp_file = TemporaryFile()
 first_line = True
 
+# first 'with' copies the contents of the file and removes the first line
+# second 'with' writes the output file with the newly adjusted first line 
+# the first line contains the number of entries for each dimension
+
 with open(args.filename, 'r') as file_in:
     for line in file_in:
         if (not first_line): tmp_file.write(line) #want to write everything but the first line

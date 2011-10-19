@@ -4,6 +4,7 @@
 
 import argparse
 from tempfile import TemporaryFile
+from sams_utilities import rotate2dDegrees
 
 description = """Checks & adjusts the X Y & Z header values in a .table file to match the file"""
 
@@ -16,7 +17,7 @@ parser.add_argument('-c', dest='col', type=int,
                     default=0, help='the first column of position values')
 
 parser.add_argument('-l', dest='ignore_lines', type=int, 
-                    default=9, help='how many lines of header there are')
+                    default=10, help='how many lines of header there are')
     
 args = parser.parse_args()
 
@@ -28,12 +29,15 @@ first_line = True
 # second 'with' writes the output file with the newly adjusted first line 
 # the first line contains the number of entries for each dimension
 
+# TODO Put into a single function
+
 with open(args.filename, 'r') as file_in:
+    line_count = 0
     for line in file_in:
+        line_count += 1
         if (not first_line): tmp_file.write(line) #want to write everything but the first line
         first_line= False
-        if (args.ignore_lines > 0):
-            args.ignore_lines -= 1
+        if (line_count <= args.ignore_lines):
             continue;
             # extract the x, y and z values and convert them to floats
         x, y, z = map(float, line.split()[args.col: args.col+3]) 
@@ -43,11 +47,26 @@ with open(args.filename, 'r') as file_in:
         
 tmp_file.seek(0)
 
+mod = (-880, 0, -3565)
+
+line_count = 0
+
 with open(args.filename, 'w') as file_out:
     file_out.write("%i %i %i\n"%(len(x_vals), len(y_vals), len(z_vals)))
-
+    # 
+    # for line in tmp_file:
+    #     file_out.write(line)
     for line in tmp_file:
+        line_count += 1
+        if (line_count >= args.ignore_lines): # 1st line now removed from tmp
+            line = line.split() 
+            # convert the co-ordinates to the local values
+            line [:3]=[float(line[i]) + mod[i] for i in range(len(mod))]
+            line[0], line[2] = rotate2dDegrees(line[0],line[2], 36)
+            line = "%f %f %f %s %s %s %s \n" % tuple(line) 
         file_out.write(line)
+
+
         
 tmp_file.close()
 

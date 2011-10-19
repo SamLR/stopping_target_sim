@@ -1,0 +1,9 @@
+right most = 1060 ± 5
+left most = 700 ± 5
+top most = 3690 ± 5
+bottom most = 3440 ± 5
+
+BR = (1060, 3440)
+TL = (700, 3690)
+
+=> middle = (880, 3565)

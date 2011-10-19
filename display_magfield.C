@@ -20,7 +20,7 @@ void display_magfield(){
                                                300, -1000, 5000);
     
     float y, by, junk;
-    char dat_format [] = "%f %f %f %f %f %f %f";
+    char dat_format [] = "%f %f %f %e %e %e %e";
     char line [150];
     int linecount = 0;
     while (fgets(line, 150, pFile) != NULL)

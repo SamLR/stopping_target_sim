@@ -212,7 +212,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     if(!fieldIsInitialized)
     {
         G4FieldManager* pFieldMgr;
-        G4String mag_field_location = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/magfield.table";
+        G4String mag_field_location = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/field/magfield.table";
         
         G4MagneticField* PurgMagField = 
                     new STTabulatedField3D(mag_field_location, z_offset_mag);

@@ -23,7 +23,7 @@ parser.add_argument('-lp', dest='print_ignore_lines', default=True, type=bool,
                     help='whether to print ignored lines')
 
 parser.add_argument('--file', dest='file_name', type=file, 
-                    default='../music_particle_dist.txt',
+                    default='../../music_particle_dist.txt',
                     help='the source file for particles')
                     
 parser.add_argument('--max', dest='max', nargs=3, default=[1000., 1000., 2800.], 
@@ -35,6 +35,8 @@ parser.add_argument('--min', dest='min', nargs=3, default=[-1000., -1000., 2700]
                     help='minimum values (x, y z)')
 
 args = parser.parse_args()
+
+pids = {}
 
 for min, max in zip(args.min, args.max):
     if (min >= max):
@@ -53,8 +55,15 @@ for line in args.file_name:
        not (args.min[1] < y < args.max[1]) or \
        not (args.min[2] < z < args.max[2]): continue
     
+    if (not split[1] in pids):
+        pids[split[1]] = 1
+    else:
+        pids[split[1]] += 1
+    
     print line,
     if (args.n_lines):
-        args.n_lines -= 1
-        if (args.n_lines <= 0): break
-        
+            args.n_lines -= 1
+            if (args.n_lines <= 0): break
+
+for k,v in pids.items():
+    print "%12.0f %6.0f"%(float(k),float(v))

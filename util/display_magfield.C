@@ -9,7 +9,7 @@ struct bfield2d{
 void display_magfield(){
     // FILE *pFile = fopen("magfield.table", "r");
     FILE *pFile = fopen(
-        "../MUSIC-3D-filed-map/MUSIC-FILL-map1-X=+-2000-Y=0-1000-Z=-1000-5000.table", "r");
+        "../../MUSIC-3D-filed-map/MUSIC-FILL-map1-X=+-2000-Y=0-1000-Z=-1000-5000.table", "r");
     
     TFile *outFile = new TFile("magfield.root", "RECREATE");
     TTree *outTree = new TTree("bfield", "bfield");

@@ -25,7 +25,7 @@ class STanalysis
 public:    
     
     void addHit(G4int eventNo, G4float* position, G4float time);
-    void addHit(G4ThreeVector position, G4float time);
+    void addHit(G4int eventNo, G4ThreeVector position, G4float time);
     void update();
     void close(G4bool override = FALSE);
     static STanalysis* getPointer(G4String filename="out.root");

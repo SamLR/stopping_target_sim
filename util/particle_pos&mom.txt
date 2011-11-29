@@ -1,0 +1,10 @@
+==== POSITIONS ====
+average position is: ( +185.15, -4.35, +2757.60, )
+Min position is: ( -1999.53, -1998.70, +2361.51, )
+Max position is: ( +2054.55, +1999.49, +3181.76, )
+
+
+==== MOMENTUM ====
+average momentum is: ( -2.50, +0.02, +14.33, )
+Min momentum is: ( -359.34, -295.58, -284.51, )
+Max momentum is: ( +267.06, +339.11, +586.62, )

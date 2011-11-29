@@ -60,7 +60,8 @@ STTabulatedField3D::STTabulatedField3D( const char* filename,
     
     // Set up storage space for table
     xField.resize( nx );
-    yField.resize( 2*nx ); // assume field vertically symmetric so double 
+    yField.resize( nx ); // swap is applied in 'getFieldValue'?
+//        yField.resize( 2*nx ); // assume field vertically symmetric hence double 
     zField.resize( nx );
     int ix, iy, iz;
     for (ix=0; ix<nx; ix++) {

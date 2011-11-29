@@ -31,11 +31,14 @@ class STTabulatedField3D: public G4MagneticField
     // The physical extent of the defined region
     bool invertX, invertY, invertZ;
     double dx, dy, dz;
-    double fZoffset;
+    double fXoffset, fYoffset, fZoffset;
     
 public:
-    STTabulatedField3D(const char* filename, double zOffset );
+    STTabulatedField3D(const char* filename, 
+                       double xOffset, double yOffset, double zOffset);
     void GetFieldValue(const double Point[4], double *Bfield) const;
+    void GetField(FILE* file);
+    void GetField(const char* filename);
 };
 
 #endif

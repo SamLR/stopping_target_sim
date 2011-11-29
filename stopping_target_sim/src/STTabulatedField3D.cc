@@ -20,17 +20,28 @@
 
 //#include "string_conv.hh" 
 
-STTabulatedField3D::STTabulatedField3D( const char* filename, double zOffset ) 
-:fZoffset(zOffset)
-{    
-    
+double getMod(const double in_vector [3])
+{
+    // calculates the modulous of in_vector
+    double sqs [3];
+    for (int i = 0 ; i < 3; ++i) 
+    {
+        sqs [i] = in_vector[i] * in_vector[i];
+    }
+    return std::sqrt(sqs[0] + sqs[1] + sqs[2]);
+}
+
+STTabulatedField3D::STTabulatedField3D( const char* filename, 
+                                       double xOffset, double yOffset, double zOffset) 
+    :fXoffset(xOffset), fYoffset(yOffset), fZoffset(zOffset)
+{
     double lenUnit= mm;
     double fieldUnit= tesla; 
     G4cout << "\n-----------------------------------------------------------"
-    << "\n      Magnetic field"
-    << "\n-----------------------------------------------------------";
+           << "\n      Magnetic field"
+           << "\n-----------------------------------------------------------";
     
-    G4cout << "\n ---> " "Reading the field grid from " 
+    G4cout << "\n ---> " "Reading the field map from " 
            << filename << " ... " << endl; 
     ifstream file( filename ); // Open the file for reading.
     
@@ -100,11 +111,14 @@ STTabulatedField3D::STTabulatedField3D( const char* filename, double zOffset )
     
     // G4cout << " Read values of field from file " << filename << endl; 
     G4cout << " ---> assumed the order:  x, y, z, Bx, By, Bz "
-    << "\n ---> Min values x,y,z: " 
-    << minx/cm << " " << miny/cm << " " << minz/cm << " cm "
-    << "\n ---> Max values x,y,z: " 
-    << maxx/cm << " " << maxy/cm << " " << maxz/cm << " cm "
-    << "\n ---> The field will be offset by " << zOffset/cm << " cm " << endl;
+        << "\n ---> Min position x,y,z: " 
+        << minx/cm << " " << miny/cm << " " << minz/cm << " cm "
+        << "\n ---> Max position x,y,z: " 
+        << maxx/cm << " " << maxy/cm << " " << maxz/cm << " cm "
+        << "\n ---> The field will be offset by " 
+        << "\n x: "<< xOffset/cm << " cm "
+        << "\n y: "<< yOffset/cm << " cm "
+        << "\n z: "<< zOffset/cm << " cm "<< endl;
     
     // Should really check that the limits are not the wrong way around.
     if (maxx < minx) {swap(maxx,minx); invertX = true;} 
@@ -127,10 +141,10 @@ STTabulatedField3D::STTabulatedField3D( const char* filename, double zOffset )
 void STTabulatedField3D::GetFieldValue(const double point[4],
                                             double *Bfield ) const
 {
-    
     double x = point[0];
     double y = point[1];
     double z = point[2];
+    // assume point[3] is for time varying fields
     
     if (y < 0) y = -y; // y is only defined for y > 0
     
@@ -155,6 +169,8 @@ void STTabulatedField3D::GetFieldValue(const double point[4],
         
         // Position of the point within the cuboid defined by the
         // nearest surrounding tabulated points
+        // frac_part = modf(x, int_part) eg x = 3.1415....
+        // frac_part = .1415 & int_part = 3
         double xlocal = ( std::modf(xfraction*(nx-1), &xdindex));
         double ylocal = ( std::modf(yfraction*(ny-1), &ydindex));
         double zlocal = ( std::modf(zfraction*(nz-1), &zdindex));
@@ -201,3 +217,29 @@ void STTabulatedField3D::GetFieldValue(const double point[4],
     }
 }
 
+void STTabulatedField3D::GetField(FILE* file = stdout)
+{
+    // prints to screen the field map in the format
+    // x y z Bx By Bz Bmod
+    for (double ix = minx; ix < maxx; ix += dx) 
+    {
+        for (double iy = miny; iy < maxy; iy += dy) 
+        {
+            for (double iz = minz; iz < maxz; iz += dz) 
+            {
+                double here [] = {ix, iy, iz, 0.0};
+                double bfield [3];  
+                GetFieldValue(here, bfield);
+                double bMod = getMod(bfield);
+                char fmt [] =  "%f %f %f %f %f %f %f";
+                fprintf(file, fmt, here[0], here[1], here[2],
+                        bfield[0], bfield[1], bfield[2], bMod);
+            }
+        }
+    }
+}
+
+void STTabulatedField3D::GetField(const char* filename)
+{
+    // as getField() but output is to a file instead
+}

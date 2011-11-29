@@ -25,8 +25,8 @@ def main():
                 first_line = False # first line is one we want to re-write
                 continue
             elif line_count < args.ignore_lines:
-                continue
                 tmp_file.write(line)
+                continue
             else:  
                 position = line.split()[:3]
                 position = [float(i) for i in position]

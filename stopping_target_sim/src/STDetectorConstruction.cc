@@ -216,19 +216,19 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
         G4FieldManager* pFieldMgr;
         G4String mag_field_location = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/field/magfield.table";
         
-        G4MagneticField* PurgMagField =
-            new STTabulatedField3D(mag_field_location,
-                                   x_offset_mag, y_offset_mag, z_offset_mag);
+        G4MagneticField* MagField = new STTabulatedField3D();
+//            new STTabulatedField3D(mag_field_location,
+//                                   x_offset_mag, y_offset_mag, z_offset_mag);
         
         G4TransportationManager* tMan = 
                             G4TransportationManager::GetTransportationManager();
         
         pFieldMgr = tMan->GetFieldManager();
                 
-        G4ChordFinder *pChordFinder = new G4ChordFinder(PurgMagField);
+        G4ChordFinder *pChordFinder = new G4ChordFinder(MagField);
         pFieldMgr->SetChordFinder( pChordFinder );
         
-        pFieldMgr->SetDetectorField(PurgMagField);
+        pFieldMgr->SetDetectorField(MagField);
         
         fieldIsInitialized = true;
     }  

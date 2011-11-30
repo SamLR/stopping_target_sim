@@ -28,8 +28,9 @@
 // GEANT4 tag $Name: geant4-09-03-patch-01 $
 //
 
-#include "STDetectorConstruction.hh"
+
 #include "STcounterSD.hh"
+#include "STDetectorConstruction.hh"
 #include "STTabulatedField3D.hh"
 
 // managers

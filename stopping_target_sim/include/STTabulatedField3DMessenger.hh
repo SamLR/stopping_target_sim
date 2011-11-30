@@ -17,6 +17,7 @@ class STTabulatedField3D;
 
 class G4UIcmdWithABool;
 class G4UIcmdWithAString;
+class G4UIcmdWithAnInteger;
 class G4UIcmdWithADoubleAndUnit;
 
 class STTabulatedField3DMessenger: public G4UImessenger
@@ -33,6 +34,7 @@ private:
     G4UIcmdWithABool*   printMapCmd_m; // prints field
     G4UIcmdWithAString* saveMapToFileCmd_m; // saves the field
     G4UIcmdWithAString* setMapFileCmd_m; // sets which map to use
+    G4UIcmdWithAnInteger* verbosityCmd_m;
     G4UIcmdWithADoubleAndUnit* setXoffsetCmd_m; // set the offsets
     G4UIcmdWithADoubleAndUnit* setYoffsetCmd_m;
     G4UIcmdWithADoubleAndUnit* setZoffsetCmd_m;

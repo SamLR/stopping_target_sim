@@ -1,14 +1,12 @@
 #
-# Macro file for the initialization phase of "exampleN02.cc"
-# when runing in interactive mode
-#
 # Sets some default verbose
 #
 /control/verbose 0
 /run/verbose 0
 /event/verbose 0
+/ST/verbose 3
 
 # max number of particles recorded is 418,573 (from 9,999,990 initial)
-/run/beamOn 418570 
+# /run/beamOn 418570 
 # for a quick/testing run (includes @ least 1 on target particle)
-# /run/beamOn 60 
+/run/beamOn 60 

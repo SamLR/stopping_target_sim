@@ -13,6 +13,7 @@
 
 #include "G4UIcmdWithABool.hh"
 #include "G4UIcmdWithAString.hh"
+#include "G4UIcmdWithAnInteger.hh"
 #include "G4UIcmdWithADoubleAndUnit.hh"
 
 void setOffsetCmds(STTabulatedField3DMessenger *msngr, // the messenger
@@ -52,6 +53,11 @@ STTabulatedField3DMessenger::STTabulatedField3DMessenger(STTabulatedField3D* fie
     setMapFileCmd_m->SetGuidance(setFieldInMsg);
     setMapFileCmd_m->SetDefaultValue("input/bfield_roi.table");
     
+    verbosityCmd_m = new G4UIcmdWithAnInteger("ST/verbose", this);
+    verbosityCmd_m->SetGuidance("How much information to print");
+    verbosityCmd_m->SetParameterName("verbose", true);
+    verbosityCmd_m->SetDefaultValue(1);
+    
     setOffsetCmds(this, setXoffsetCmd_m, 'x');
     setOffsetCmds(this, setXoffsetCmd_m, 'y');
     setOffsetCmds(this, setXoffsetCmd_m, 'z');
@@ -62,6 +68,7 @@ STTabulatedField3DMessenger::~STTabulatedField3DMessenger()
     delete printMapCmd_m;
     delete setMapFileCmd_m;
     delete saveMapToFileCmd_m;
+    delete verbosityCmd_m;
     delete setXoffsetCmd_m;
     delete setYoffsetCmd_m;
     delete setZoffsetCmd_m;
@@ -76,11 +83,14 @@ void STTabulatedField3DMessenger::setNewValue(G4UIcommand* cmd, G4String newVal)
     } 
     else if (cmd == saveMapToFileCmd_m) {
         field_m->GetField(newVal);
+    }
+    else if (cmd == verbosityCmd_m) {
+        field_m->SetVerbosity(verbosityCmd_m->GetNewIntValue(newVal));
     } 
     else if (cmd == setMapFileCmd_m) {
         field_m->SetFieldMap(newVal);
         field_m->SetDefaultsFlag(false);
-    } 
+    }
     else if (cmd == setXoffsetCmd_m) {
         field_m->SetXoffset(setXoffsetCmd_m->GetNewDoubleValue(newVal));
         field_m->SetDefaultsFlag(false);

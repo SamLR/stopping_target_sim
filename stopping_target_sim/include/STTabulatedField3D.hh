@@ -38,7 +38,7 @@ private:
     // sets level on information to output
     int verbose;
     // flag for when defaults are changed
-    bool defaultFlag;
+    bool defaultsUsed;
     // messenger 
     STTabulatedField3DMessenger* messenger_m;
     
@@ -76,7 +76,8 @@ public:
     void SetYoffset(double yOff) {yOffset = yOff;}
     void SetZoffset(double zOff) {zOffset = zOff;}
     // Setter for default flat
-    void SetDefaultsFlag(bool flag) {defaultFlag = flag;}
+    void SetDefaultsFlag(bool flag) {defaultsUsed = flag;}
+    void SetVerbosity(int lvl) {verbose = lvl;}
     
 };
 

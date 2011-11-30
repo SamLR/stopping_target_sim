@@ -24,6 +24,12 @@ double getMod(const double in_vector [3])
     return std::sqrt(sqs[0] + sqs[1] + sqs[2]);
 }
 
+double getMod(double x, double y, double z)
+{
+    double position [] = {x, y, z};
+    return getMod(position);
+}
+
 STTabulatedField3D::STTabulatedField3D(const char* filename, 
                                        double xOff, double yOff, double zOff) 
 :xOffset(xOff), yOffset(yOff), zOffset(zOff), verbose(0), defaultsUsed(true)
@@ -268,25 +274,28 @@ void STTabulatedField3D::GetField(FILE* file)
 {
     // prints to screen the field map in the format
     // x y z Bx By Bz Bmod
-    double stepX = dx/nx;
-    double stepY = dy/ny;
-    double stepZ = dz/nz;
-    for (double ix = minx; ix <= maxx; ix += stepX) 
+    for (int ix = 0; ix < xField.size(); ++ix) 
     {
-        for (double iy = miny; iy <= maxy; iy += stepY) 
+        double x = ix * dx + minx;
+        
+        for (int iy = 0; iy < xField[ix].size(); ++iy) 
         {
-            for (double iz = minz; iz <= maxz; iz += stepZ) 
+            double y = iy * dy + miny;
+            
+            for (int iz = 0; iz < xField[ix][iy].size(); ++iz) 
             {
-                double here [] = {ix, iy, iz, 0.0};
-                double bfield [3];  
-                GetFieldValue(here, bfield);
-                double bMod = getMod(bfield);
-                char fmt [] =  "%f %f %f %f %f %f %f";
-                fprintf(file, fmt, here[0], here[1], here[2],
-                        bfield[0], bfield[1], bfield[2], bMod);
+                double z = iz * dz + minz;
+                double bx = xField[ix][iy][iz];
+                double by = yField[ix][iy][iz];
+                double bz = zField[ix][iy][iz];
+                double bmod = getMod(bx, by, bz);
+                char fmt [] = "%f %f %f %f %f %f %f";
+                fprintf(file, fmt, x, y, z, bx, by, bx, bmod);
+                
             }
         }
     }
+
 }
 
 void STTabulatedField3D::GetField(const char* filename)

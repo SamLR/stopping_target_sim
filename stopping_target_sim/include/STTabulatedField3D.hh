@@ -15,11 +15,36 @@
 
 #include <vector>
 
+class STTabulatedField3DMessenger;
+
 using namespace std;
 
 class STTabulatedField3D: public G4MagneticField
 {
-    typedef vector< vector< vector< double > > > vector3d; // vector with 3 subscripts 
+private:
+    // The actual GetField function; others are wrappers
+    void GetField(FILE* file);
+    // Clears the <x,y,z>Field vector3d and sets derived values 
+    // (min, max, d, n and invert) to default values
+    void ClearField();
+    // Initialise the field: read in the file, set derived values etc
+    void Init();
+    
+    // non-derived data
+    // offsets of the bfield from the detector geometry
+    double xOffset, yOffset, zOffset;
+    // file to be read in
+    char filename_m[256];
+    // sets level on information to output
+    int verbose;
+    // flag for when defaults are changed
+    bool defaultFlag;
+    // messenger 
+    STTabulatedField3DMessenger* messenger_m;
+    
+    // derived data
+    // vector with 3 subscripts 
+    typedef vector< vector< vector< double > > > vector3d; 
     // Storage space for the table
     vector3d xField;
     vector3d yField;
@@ -30,15 +55,29 @@ class STTabulatedField3D: public G4MagneticField
     double minx, maxx, miny, maxy, minz, maxz;
     // The physical extent of the defined region
     bool invertX, invertY, invertZ;
+    // region size
     double dx, dy, dz;
-    double fXoffset, fYoffset, fZoffset;
     
 public:
     STTabulatedField3D(const char* filename, 
-                       double xOffset, double yOffset, double zOffset);
+                       double xOff, double yOff, double zOff);
+    STTabulatedField3D();
+    
+    // GetFieldValue is for use by Geant4
     void GetFieldValue(const double Point[4], double *Bfield) const;
-    void GetField(FILE* file);
+    // GetField prints the entire map to screen
+    void GetField();
+    // this version saves the map to a file
     void GetField(const char* filename);
+    // Set a new field map, clears any previous field and runs init()
+    void SetFieldMap(const char* filename);
+    // Setters for the Offsets
+    void SetXoffset(double xOff) {xOffset = xOff;}
+    void SetYoffset(double yOff) {yOffset = yOff;}
+    void SetZoffset(double zOff) {zOffset = zOff;}
+    // Setter for default flat
+    void SetDefaultsFlag(bool flag) {defaultFlag = flag;}
+    
 };
 
 #endif

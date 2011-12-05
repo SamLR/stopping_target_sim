@@ -22,8 +22,11 @@ using namespace std;
 class STTabulatedField3D: public G4MagneticField
 {
 private:
-    // The actual GetField function; others are wrappers
+    // Gets the values saved in the vectors
     void GetField(FILE* file);
+    // Gets the interpolated values from the centre of each voxel saved in the 
+    // vectors (uses the GetFieldValue method)
+    void GetFieldInterpolated(FILE* file);
     // Clears the <x,y,z>Field vector3d and sets derived values 
     // (min, max, d, n and invert) to default values
     void ClearField();
@@ -39,6 +42,7 @@ private:
     int verbose;
     // flag for when defaults are changed
     bool defaultsUsed;
+    bool needUpdate;
     // messenger 
     STTabulatedField3DMessenger* messenger_m;
     
@@ -65,19 +69,21 @@ public:
     
     // GetFieldValue is for use by Geant4
     void GetFieldValue(const double Point[4], double *Bfield) const;
-    // GetField prints the entire map to screen
-    void GetField();
+    // GetField prints the entire map to screen (either interpolated or not)
+    void GetField(bool interpolated);
     // this version saves the map to a file
-    void GetField(const char* filename);
+    void GetField(const char* filename, bool interpolated);
     // Set a new field map, clears any previous field and runs init()
     void SetFieldMap(const char* filename);
     // Setters for the Offsets
-    void SetXoffset(double xOff) {xOffset = xOff;}
-    void SetYoffset(double yOff) {yOffset = yOff;}
-    void SetZoffset(double zOff) {zOffset = zOff;}
+    void SetXoffset(double xOff) {xOffset = xOff; needUpdate = true;}
+    void SetYoffset(double yOff) {yOffset = yOff; needUpdate = true;}
+    void SetZoffset(double zOff) {zOffset = zOff; needUpdate = true;}
     // Setter for default flat
     void SetDefaultsFlag(bool flag) {defaultsUsed = flag;}
     void SetVerbosity(int lvl) {verbose = lvl;}
+    // forces 
+    void update();
     
 };
 

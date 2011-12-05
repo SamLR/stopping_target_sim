@@ -14,9 +14,7 @@ def main():
     x_vals, y_vals, z_vals = [], [], []
     tmp_file = TemporaryFile()
     first_line = True
-    roi = {'x':(args.xmin, args.xmax), 
-           'y':(args.ymin, args.ymax), 
-           'z':(args.zmin, args.zmax)}
+    roi = {'x':args.x, 'y':args.y, 'z':args.z} # args.<xyz> is a (min, max) tuple
     line_count = 0
     with open(args.infilename, 'r') as in_file:
         for line in in_file:
@@ -48,9 +46,9 @@ def main():
         for line in tmp_file:
             out_file.write(line)
         tmp_file.close()            
-    print x_vals
-    print y_vals
-    print z_vals
+    # print x_vals
+    # print y_vals
+    # print z_vals
     print "stats"
     print " |   min   |   max   |   average "
     print "x| %7i | %7i | %5.1f"%minMaxAver(x_vals)
@@ -81,38 +79,38 @@ def getArgs():
     
     parser = argparse.ArgumentParser(description=description)
     
-    parser.add_argument('--xup',   dest='xmax', 
-                        default=None, type=float, help='max x-val')
-    parser.add_argument('--xdown', dest='xmin', 
-                        default=None, type=float, help='min x-val')    
-    parser.add_argument('--yup',   dest='ymax', 
-                        default=None, type=float, help='max y-val')
-    parser.add_argument('--ydown', dest='ymin', 
-                        default=None, type=float, help='min y-val')    
-    parser.add_argument('--zup',   dest='zmax', 
-                        default=None, type=float, help='max z-val')
-    parser.add_argument('--zdown', dest='zmin', 
-                        default=None, type=float, help='min z-val')
+    parser.add_argument('-x',   dest='x', default=1046, type=float, 
+                        help='x mid point')
+    parser.add_argument('-y',   dest='y', default=0, type=float, 
+                        help='y mid point')
+    parser.add_argument('-z',   dest='z', default=3603, type=float, 
+                        help='z mid point')
+                        
+    parser.add_argument('--step',   dest='step', default=20, type=float, 
+                        help='step size used in file')
+                        
+    parser.add_argument('--world-size',   dest='vol', default=1000, type=float,
+                        help='Size of a side of world volume')
     
     parser.add_argument('--ignore', dest='ignore_lines', default=10, 
                         type=int, help='number of lines not to test')
-    
-    
+                        
     parser.add_argument('--infile', dest='infilename', 
                         default='../../MUSIC-3D-filed-map/MuSIC_bfield.table',
                         help='the input file to read')
                         
     parser.add_argument('--outfile', dest='outfilename', 
-                        default='bfield_roi.table',
+                        default='Bfield_roi.table',
                         help='the output file to write')
+    
     args = parser.parse_args()
-    if args.xmax == None and args.xmin == None and \
-            args.ymax == None and args.ymin == None and \
-            args.zmax == None and args.zmin == None:
-       args.xmin, args.xmax = 399,  1401
-       args.ymin, args.ymax = -1,   1001
-       args.zmin, args.zmax = 3099, 4101
-       # default ROI is 1x1x1m centred on (900mm, 0mm, 3600mm)
+    
+    # how far world extends from origin + error margin
+    extent = args.vol/2 + args.step + 1
+    args.x = (args.x - extent), (args.x + extent)
+    args.y = (args.y - extent), (args.y + extent)
+    args.z = (args.z - extent), (args.z + extent)
+        # default ROI is 1x1x1m centred on 
        
     return args
 

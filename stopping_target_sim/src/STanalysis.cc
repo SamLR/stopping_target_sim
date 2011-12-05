@@ -24,7 +24,7 @@ STanalysis::~STanalysis() {;}
 void STanalysis::close(G4bool override)
 {
     --mPtrCount;
-    if (mPtrCount <= 0 || override)
+    if ((mPtrCount <= 0 || override) && mInstancePtr)
     {
         mFile->Close();
         delete mFile;

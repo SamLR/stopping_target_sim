@@ -32,7 +32,7 @@ double getMod(double x, double y, double z)
 
 STTabulatedField3D::STTabulatedField3D(const char* filename, 
                                        double xOff, double yOff, double zOff) 
-:xOffset(xOff), yOffset(yOff), zOffset(zOff), verbose(0), defaultsUsed(true)
+:xOffset(xOff), yOffset(yOff), zOffset(zOff), verbose(3), defaultsUsed(true)
 {
     messenger_m = new STTabulatedField3DMessenger(this);
     sprintf(filename_m, "%s", filename);
@@ -40,26 +40,29 @@ STTabulatedField3D::STTabulatedField3D(const char* filename,
 }
 
 STTabulatedField3D::STTabulatedField3D() 
-: verbose(0), defaultsUsed(true)
+: verbose(3), defaultsUsed(true), xOffset(-1046.23*mm), yOffset(0), zOffset(-3603.51*mm)
 {
-    sprintf(filename_m, "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/bfield_roi.table");// default
-    zOffset = 3603.51*mm;
-    yOffset = 0.0;
-    xOffset = 1046.23*mm; 
-    // all other values are derived
+    sprintf(filename_m, "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/Bfield_roi.table");// default
     
     messenger_m = new STTabulatedField3DMessenger(this);
     if (defaultsUsed and verbose) {
         G4cout << "\n-----------------------------------------------------------"
-               << "\n   WARNING! USING DEFAULT MAGNETIC FIELD SETTINGS"
+               << "\n   USING DEFAULT MAGNETIC FIELD SETTINGS"
                << "\n-----------------------------------------------------------" 
-               << "\n \n To change these use the 'STMap' commands" << G4endl;
+               << G4endl;
     }
     Init();
 }
 
 void STTabulatedField3D::Init()
 {
+    needUpdate = false;
+    if (!defaultsUsed) {
+        G4cout<< "\n-----------------------------------------------------------"
+              << "\n   UPDATING FIELD SETTINGS"
+              << "\n -----------------------------------------------------------" 
+              << G4endl;
+    }
     double lenUnit= mm;
     double fieldUnit= tesla; 
     if (verbose > 1) {    
@@ -76,16 +79,14 @@ void STTabulatedField3D::Init()
                << "\n z: " << zOffset << "mm" <<G4endl;
     }
     ifstream file( filename_m ); // Open the file for reading.
-    
+
     if (!file.good())
     {
         G4cout << "File not properly opened quiting" << endl;
         exit(0);
-    }
-    
+    } 
     // Read table dimensions 
-    file >> nx >> ny >> nz; 
-    
+    file >> nx >> ny >> nz;
     if (verbose > 1) {
         G4cout << "  [ Number of values x,y,z: " 
                << nx << " " << ny << " " << nz << " ] "
@@ -112,23 +113,28 @@ void STTabulatedField3D::Init()
     // Ignore other header information    
     // The first line whose second character is '0' is considered to
     // be the last line of the header.
+    // the above is a stupid rule but whatever, that's how they seem to be made
+    // buffer+getline method used due to non-consistent structure of header
     char buffer[256];
     do {
         file.getline(buffer,256);
     } while ( buffer[1]!='0');
 
     // Read in the data
-    double xval,yval,zval,bx,by,bz;
-    double permeability; // Not used in this example.
+    double xval, yval, zval, bx, by, bz, bmod;
+    
     for (ix=0; ix<nx; ix++) {
         for (iy=0; iy<ny; iy++) {
             for (iz=0; iz<nz; iz++) {
-                file >> xval >> yval >> zval >> bx >> by >> bz >> permeability;
-                zval += zOffset;
-                if ( ix==0 && iy==0 && iz==0 ) {
-                    minx = xval * lenUnit;
-                    miny = yval * lenUnit;
-                    minz = zval * lenUnit;
+                // begin the looping
+                file >> xval >> yval >> zval >> bx >> by >> bz >> bmod;
+
+                // assume sanely ordered table i.e either min or max @ start
+                if ( ix==0 && iy==0 && iz==0 ) { 
+//                    minx = -1 * (xval * lenUnit + xOffset); // x is flipped
+                    minx =       xval * lenUnit + xOffset; // x is flipped
+                    miny =       yval * lenUnit + yOffset;
+                    minz =       zval * lenUnit + zOffset;
                 }
                 xField[ix][iy][iz] = bx * fieldUnit;
                 yField[ix][iy][iz] = by * fieldUnit;
@@ -137,16 +143,15 @@ void STTabulatedField3D::Init()
         }
     }
     file.close();
+    // assume final values are either min or max
+//    maxx = -1*(xval * lenUnit + xOffset);
+    maxx =    (xval * lenUnit + xOffset);
+    maxy =     yval * lenUnit + yOffset;
+    maxz =     zval * lenUnit + zOffset;
     
-    maxx = xval * lenUnit;
-    maxy = yval * lenUnit;
-    maxz = zval * lenUnit;
-    
-    if (verbose > 1) G4cout << "\n ---> ... done reading " << endl;
-    
-    // G4cout << " Read values of field from file " << filename << endl; 
     if (verbose > 1) {
-        G4cout << " ---> assumed the order:  x, y, z, Bx, By, Bz "
+        G4cout << "\n ---> ... done reading " 
+               << "\n ---> assumed the order:  x, y, z, Bx, By, Bz "
                << "\n ---> Min position x,y,z: " 
                << minx/cm << " " << miny/cm << " " << minz/cm << " cm "
                << "\n ---> Max position x,y,z: " 
@@ -170,7 +175,7 @@ void STTabulatedField3D::Init()
         G4cout << "\nAfter reordering if neccesary"  
                << "\n ---> Min values x,y,z: " 
                << minx/cm << " " << miny/cm << " " << minz/cm << " cm "
-               << " \n ---> Max values x,y,z: " 
+               << "\n ---> Max values x,y,z: " 
                << maxx/cm << " " << maxy/cm << " " << maxz/cm << " cm ";
     }
     
@@ -189,6 +194,14 @@ void STTabulatedField3D::Init()
 void STTabulatedField3D::GetFieldValue(const double point[4], 
                                        double *Bfield) const
 {
+    
+    if (verbose > 0 and needUpdate) {
+        G4cout << "\n-----------------------------------------------------------"
+               << "\n WARNING: UNINITIALISED CHANGES"
+               << "\n use '/ST/update' to initialise"
+               << "\n-----------------------------------------------------------"
+               << G4endl;
+    }
     double x = point[0];
     double y = point[1];
     double z = point[2];
@@ -265,45 +278,162 @@ void STTabulatedField3D::GetFieldValue(const double point[4],
     }
 }
 
-void STTabulatedField3D::GetField()
+void STTabulatedField3D::GetFieldInterpolated(FILE* file)
 {
-    GetField(stdout);
+    // prints the centre values of the bfield for each voxel to the specified 
+    // file. It uses the getFieldValue function to get the values
+    
+    // '-1' to account for fence-post problem i.e there are n-1 voxels for any axis
+    const double stepX = dx/(nx - 1); 
+    const double stepY = dy/(ny - 1); 
+    const double stepZ = dz/(nz - 1);
+
+    if (verbose > 1){
+        G4cout << "\n Field map variables:"
+        << "\n StepX: " << stepX
+        << "\n StepY: " << stepY
+        << "\n StepZ: " << stepZ
+        << "\n for ranges: "
+        << "\n " << minx << " < x < " << maxx
+        << "\n " << miny << " < y < " << maxy
+        << "\n " << minz << " < z < " << maxz << G4endl;
+        }
+    
+    if (verbose > 2){
+        double pos [] = {minx, miny,minz,0};
+        double bfield [3];
+        GetFieldValue(pos, bfield);
+        G4cout << "\n~~~ DEBUG INFO:"
+               << "\n~~~ Calibration point (minx, miny, minz) for interpolated"
+               << "\n~~~ minx= "<< minx
+               << "\n~~~ miny= "<< miny
+               << "\n~~~ minz= "<< minz
+               << "\n~~~ Bx = " << bfield[0]
+               << "\n~~~ By = " << bfield[1]
+               << "\n~~~ Bz = " << bfield[2] << G4endl;
+    }
+    
+    for (double x = minx + (stepX/2); x <= maxx; x += stepX) 
+    {
+        for (double y = miny + (stepY/2); y <= maxy; y += stepY) 
+        {
+            for (double z = minz + (stepZ/2); z <= maxz; z += stepZ) 
+            {
+                double pos [] = {x, y, z, 0.0};
+                double bfield [] = {0.0, 0.0, 0.0};
+                GetFieldValue(pos, bfield);
+                double bmod = getMod(bfield);
+                char fmt [] = "%f %f %f %e %e %e %e\n";
+                fprintf(file, fmt, x, y, z, 
+                        bfield[0], bfield[1], bfield[2], bmod);
+            }
+        }
+    }
 }
 
 void STTabulatedField3D::GetField(FILE* file)
 {
     // prints to screen the field map in the format
     // x y z Bx By Bz Bmod
+    const double stepX = dx/(nx - 1); // '-1' term should deal with fence-posting
+    const double stepY = dy/(ny - 1);
+    const double stepZ = dz/(nz - 1);
+    if (verbose > 1){
+        G4cout << "\n Field map variables:"
+               << "\n StepX: " << stepX
+               << "\n StepY: " << stepY
+               << "\n StepZ: " << stepZ
+               << "\n for ranges: "
+               << "\n " << minx << " < x < " << maxx
+               << "\n " << miny << " < y < " << maxy
+               << "\n " << minz << " < z < " << maxz << G4endl;
+    }
+    
+    
+    if (verbose > 2){
+        double pos [] = {minx, miny,minz,0};
+        double bfield [3];
+        GetFieldValue(pos, bfield);
+        G4cout << "\n~~~ DEBUG INFO:"
+        << "\n~~~ Calibration point (minx, miny, minz) for direct access"
+        << "\n~~~ minx= "<< minx
+        << "\n~~~ miny= "<< miny
+        << "\n~~~ minz= "<< minz
+        << "\n~~~ Bx = " << xField[0][0][0]
+        << "\n~~~ By = " << yField[0][0][0]
+        << "\n~~~ Bz = " << zField[0][0][0] << G4endl;
+    }
+    
     for (int ix = 0; ix < xField.size(); ++ix) 
     {
-        double x = ix * dx + minx;
+        double x = ix * stepX + minx;
         
         for (int iy = 0; iy < xField[ix].size(); ++iy) 
         {
-            double y = iy * dy + miny;
+            double y = iy * stepY + miny;
             
             for (int iz = 0; iz < xField[ix][iy].size(); ++iz) 
             {
-                double z = iz * dz + minz;
+                double z = iz * stepZ + minz;
                 double bx = xField[ix][iy][iz];
                 double by = yField[ix][iy][iz];
                 double bz = zField[ix][iy][iz];
                 double bmod = getMod(bx, by, bz);
-                char fmt [] = "%f %f %f %f %f %f %f";
+                char fmt [] = "%f %f %f %e %e %e %e\n";
                 fprintf(file, fmt, x, y, z, bx, by, bx, bmod);
                 
             }
         }
     }
-
 }
 
-void STTabulatedField3D::GetField(const char* filename)
+void STTabulatedField3D::GetField(bool interpolated)
+{
+    if (verbose > 1) {
+        G4cout <<"\nPrinting field map (as stored) to screen"
+        <<"\n--------------------------------------------------"<< G4endl;
+    }
+    
+    if (interpolated) {
+        GetFieldInterpolated(stdout);
+    } else
+    {
+        GetField(stdout);
+    }
+    if (verbose > 1) {
+        G4cout << "\n--------------------------------------------------"
+        << "\nField map printing complete"
+        << "\n--------------------------------------------------"<< G4endl;
+    }
+    
+}
+
+void STTabulatedField3D::GetField(const char* filename,bool interpolated)
 {
     // as getField() but output is to a file instead
     FILE* pFile = fopen(filename, "w");
-    GetField(pFile);
+    if (pFile == NULL) {
+        G4cout << "\n Error opening file, " << filename << " for writing, exiting." << G4endl;
+        exit(1);
+    }
+    if (verbose > 1) {
+        G4cout << "\n--------------------------------------------------"
+               << "\nWriting field map to file, " << filename 
+               << "\n--------------------------------------------------"<< G4endl;
+    }
+    
+    if (interpolated){
+        GetFieldInterpolated(pFile);
+    } else
+    {
+        GetField(pFile);
+    }
     fclose(pFile);
+    if (verbose > 1) {
+        G4cout << "\n--------------------------------------------------"
+               << "\nField map printing complete"
+               << "\n--------------------------------------------------"<< G4endl;
+    }
 }
 
 void STTabulatedField3D::ClearField()
@@ -327,6 +457,11 @@ void STTabulatedField3D::ClearField()
 void STTabulatedField3D::SetFieldMap(const char *filename)
 {
     sprintf(filename_m, "%s", filename);
+    needUpdate = true;
+}
+
+void STTabulatedField3D::update()
+{
     ClearField();
     Init();
 }

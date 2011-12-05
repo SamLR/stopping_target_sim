@@ -34,6 +34,7 @@
 class G4LogicalVolume;
 class G4VPhysicalVolume;
 class G4VSensitiveDetector;
+class G4MagneticField;
 
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
@@ -52,6 +53,9 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     void defineMaterials();
     void surfaceProperties();
     // TODO: add hitcollection
+    
+    // The magnetic field
+    G4MagneticField* magField;
     
     // Logical volumes
     //

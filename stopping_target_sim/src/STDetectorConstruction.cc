@@ -53,7 +53,10 @@
 #include "G4LogicalBorderSurface.hh"   
 
 
-STDetectorConstruction::STDetectorConstruction(){;}
+STDetectorConstruction::STDetectorConstruction()
+{
+    magField = new STTabulatedField3D();
+}
 
 STDetectorConstruction::~STDetectorConstruction() {;}
 
@@ -103,7 +106,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // Experimental hall, beam is assumed to be along the z axis
     
     G4Box* expHall_box = new G4Box("expHall_box",
-                                            expHall_x,expHall_y,expHall_z);
+                                            expHall_x/2,expHall_y/2,expHall_z/2);
     
     expHall_log = new G4LogicalVolume(expHall_box,
                                                Air,"expHall_log",0,0,0);
@@ -215,9 +218,9 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     if(!fieldIsInitialized)
     {
         G4FieldManager* pFieldMgr;
-        G4String mag_field_location = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/field/magfield.table";
+//        G4String mag_field_location = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/field/magfield.table";
         
-        G4MagneticField* MagField = new STTabulatedField3D();
+//        G4MagneticField* magField = new STTabulatedField3D();
 //            new STTabulatedField3D(mag_field_location,
 //                                   x_offset_mag, y_offset_mag, z_offset_mag);
         
@@ -226,10 +229,10 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
         
         pFieldMgr = tMan->GetFieldManager();
                 
-        G4ChordFinder *pChordFinder = new G4ChordFinder(MagField);
+        G4ChordFinder *pChordFinder = new G4ChordFinder(magField);
         pFieldMgr->SetChordFinder( pChordFinder );
         
-        pFieldMgr->SetDetectorField(MagField);
+        pFieldMgr->SetDetectorField(magField);
         
         fieldIsInitialized = true;
     }  

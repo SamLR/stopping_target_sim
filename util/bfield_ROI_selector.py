@@ -79,11 +79,11 @@ def getArgs():
     
     parser = argparse.ArgumentParser(description=description)
     
-    parser.add_argument('-x',   dest='x', default=1046, type=float, 
+    parser.add_argument('-x',   dest='x', default=1010, type=float, 
                         help='x mid point')
     parser.add_argument('-y',   dest='y', default=0, type=float, 
                         help='y mid point')
-    parser.add_argument('-z',   dest='z', default=3603, type=float, 
+    parser.add_argument('-z',   dest='z', default=3778, type=float, 
                         help='z mid point')
                         
     parser.add_argument('--step',   dest='step', default=20, type=float, 

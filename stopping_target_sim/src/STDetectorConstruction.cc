@@ -220,6 +220,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
         G4FieldManager* pFieldMgr;
 //        G4String mag_field_location = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/field/magfield.table";
         
+
 //        G4MagneticField* magField = new STTabulatedField3D();
 //            new STTabulatedField3D(mag_field_location,
 //                                   x_offset_mag, y_offset_mag, z_offset_mag);

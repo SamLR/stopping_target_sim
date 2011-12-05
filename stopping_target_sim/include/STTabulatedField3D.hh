@@ -84,7 +84,6 @@ public:
     void SetVerbosity(int lvl) {verbose = lvl;}
     // forces 
     void update();
-    
 };
 
 #endif

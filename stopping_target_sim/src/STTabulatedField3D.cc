@@ -161,7 +161,6 @@ void STTabulatedField3D::Init()
                << "\n y: "<< yOffset/mm << " mm "
                << "\n z: "<< zOffset/mm << " mm "<< endl;
     }
-    
     // reset assumed state
     invertX = false;
     invertY = false;
@@ -194,7 +193,6 @@ void STTabulatedField3D::Init()
 void STTabulatedField3D::GetFieldValue(const double point[4], 
                                        double *Bfield) const
 {
-    
     if (verbose > 0 and needUpdate) {
         G4cout << "\n-----------------------------------------------------------"
                << "\n WARNING: UNINITIALISED CHANGES"
@@ -381,7 +379,6 @@ void STTabulatedField3D::GetField(FILE* file)
                 double bmod = getMod(bx, by, bz);
                 char fmt [] = "%f %f %f %e %e %e %e\n";
                 fprintf(file, fmt, x, y, z, bx, by, bx, bmod);
-                
             }
         }
     }
@@ -465,3 +462,9 @@ void STTabulatedField3D::update()
     ClearField();
     Init();
 }
+=======
+void STTabulatedField3D::GetField(const char* filename)
+{
+    // as getField() but output is to a file instead
+}
+>>>>>>> 507da4650ea93777f609c8b9d13c9b1b05d26444

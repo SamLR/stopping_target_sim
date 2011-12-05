@@ -46,7 +46,6 @@ private:
     G4UIcmdWithADoubleAndUnit* setYoffsetCmd_m;
     G4UIcmdWithADoubleAndUnit* setZoffsetCmd_m;
 
-    // later set it up so that can generate the bfieldFile internally
     
 };
 

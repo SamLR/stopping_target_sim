@@ -40,7 +40,7 @@ STTabulatedField3D::STTabulatedField3D(const char* filename,
 }
 
 STTabulatedField3D::STTabulatedField3D() 
-: verbose(3), defaultsUsed(true), xOffset(-1046.23*mm), yOffset(0), zOffset(-3603.51*mm)
+: verbose(3), defaultsUsed(true), xOffset(-1010.99*mm), yOffset(0), zOffset(-3778.43*mm)
 {
     sprintf(filename_m, "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/Bfield_roi.table");// default
     
@@ -153,13 +153,13 @@ void STTabulatedField3D::Init()
         G4cout << "\n ---> ... done reading " 
                << "\n ---> assumed the order:  x, y, z, Bx, By, Bz "
                << "\n ---> Min position x,y,z: " 
-               << minx/cm << " " << miny/cm << " " << minz/cm << " cm "
+               << minx/mm << " " << miny/mm << " " << minz/mm << " mm "
                << "\n ---> Max position x,y,z: " 
-               << maxx/cm << " " << maxy/cm << " " << maxz/cm << " cm "
+               << maxx/mm << " " << maxy/mm << " " << maxz/mm << " mm "
                << "\n ---> The field will be offset by " 
-               << "\n x: "<< xOffset/cm << " cm "
-               << "\n y: "<< yOffset/cm << " cm "
-               << "\n z: "<< zOffset/cm << " cm "<< endl;
+               << "\n x: "<< xOffset/mm << " mm "
+               << "\n y: "<< yOffset/mm << " mm "
+               << "\n z: "<< zOffset/mm << " mm "<< endl;
     }
     
     // reset assumed state
@@ -174,9 +174,9 @@ void STTabulatedField3D::Init()
     if (verbose > 1) {
         G4cout << "\nAfter reordering if neccesary"  
                << "\n ---> Min values x,y,z: " 
-               << minx/cm << " " << miny/cm << " " << minz/cm << " cm "
+               << minx/mm << " " << miny/mm << " " << minz/mm << " mm "
                << "\n ---> Max values x,y,z: " 
-               << maxx/cm << " " << maxy/cm << " " << maxz/cm << " cm ";
+               << maxx/mm << " " << maxy/mm << " " << maxz/mm << " mm ";
     }
     
     dx = maxx - minx;
@@ -185,7 +185,7 @@ void STTabulatedField3D::Init()
     
     if (verbose > 1) {
         G4cout << "\n ---> Dif values x,y,z (range): " 
-               << dx/cm << " " << dy/cm << " " << dz/cm << " cm in z "
+               << dx/mm << " " << dy/mm << " " << dz/mm << " mm in z "
                << "\n-----------------------------------------------------------" 
                << endl;
     }
@@ -290,13 +290,13 @@ void STTabulatedField3D::GetFieldInterpolated(FILE* file)
 
     if (verbose > 1){
         G4cout << "\n Field map variables:"
-        << "\n StepX: " << stepX
-        << "\n StepY: " << stepY
-        << "\n StepZ: " << stepZ
+        << "\n StepX: " << stepX/mm << "mm"
+        << "\n StepY: " << stepY/mm << "mm"
+        << "\n StepZ: " << stepZ/mm << "mm"
         << "\n for ranges: "
-        << "\n " << minx << " < x < " << maxx
-        << "\n " << miny << " < y < " << maxy
-        << "\n " << minz << " < z < " << maxz << G4endl;
+        << "\n " << minx/mm << " < x < " << maxx/mm << "mm"
+        << "\n " << miny/mm << " < y < " << maxy/mm << "mm"
+        << "\n " << minz/mm << " < z < " << maxz/mm << "mm" << G4endl;
         }
     
     if (verbose > 2){
@@ -305,12 +305,12 @@ void STTabulatedField3D::GetFieldInterpolated(FILE* file)
         GetFieldValue(pos, bfield);
         G4cout << "\n~~~ DEBUG INFO:"
                << "\n~~~ Calibration point (minx, miny, minz) for interpolated"
-               << "\n~~~ minx= "<< minx
-               << "\n~~~ miny= "<< miny
-               << "\n~~~ minz= "<< minz
-               << "\n~~~ Bx = " << bfield[0]
-               << "\n~~~ By = " << bfield[1]
-               << "\n~~~ Bz = " << bfield[2] << G4endl;
+               << "\n~~~ minx= "<< minx/mm << "mm"
+               << "\n~~~ miny= "<< miny/mm << "mm"
+               << "\n~~~ minz= "<< minz/mm << "mm"
+               << "\n~~~ Bx = " << bfield[0]/tesla << "T"
+               << "\n~~~ By = " << bfield[1]/tesla << "T"
+               << "\n~~~ Bz = " << bfield[2]/tesla << "T" << G4endl;
     }
     
     for (double x = minx + (stepX/2); x <= maxx; x += stepX) 
@@ -340,13 +340,13 @@ void STTabulatedField3D::GetField(FILE* file)
     const double stepZ = dz/(nz - 1);
     if (verbose > 1){
         G4cout << "\n Field map variables:"
-               << "\n StepX: " << stepX
-               << "\n StepY: " << stepY
-               << "\n StepZ: " << stepZ
+               << "\n StepX: " << stepX/mm << "mm"
+               << "\n StepY: " << stepY/mm << "mm"
+               << "\n StepZ: " << stepZ/mm << "mm"
                << "\n for ranges: "
-               << "\n " << minx << " < x < " << maxx
-               << "\n " << miny << " < y < " << maxy
-               << "\n " << minz << " < z < " << maxz << G4endl;
+               << "\n " << minx/mm << " < x < " << maxx/mm << "mm"
+               << "\n " << miny/mm << " < y < " << maxy/mm << "mm"
+               << "\n " << minz/mm << " < z < " << maxz/mm << "mm" << G4endl;
     }
     
     
@@ -356,12 +356,12 @@ void STTabulatedField3D::GetField(FILE* file)
         GetFieldValue(pos, bfield);
         G4cout << "\n~~~ DEBUG INFO:"
         << "\n~~~ Calibration point (minx, miny, minz) for direct access"
-        << "\n~~~ minx= "<< minx
-        << "\n~~~ miny= "<< miny
-        << "\n~~~ minz= "<< minz
-        << "\n~~~ Bx = " << xField[0][0][0]
-        << "\n~~~ By = " << yField[0][0][0]
-        << "\n~~~ Bz = " << zField[0][0][0] << G4endl;
+        << "\n~~~ minx= "<< minx/mm << "mm"
+        << "\n~~~ miny= "<< miny/mm << "mm"
+        << "\n~~~ minz= "<< minz/mm << "mm"
+        << "\n~~~ Bx = " << xField[0][0][0]/tesla <<"T"
+        << "\n~~~ By = " << yField[0][0][0]/tesla <<"T"
+        << "\n~~~ Bz = " << zField[0][0][0]/tesla <<"T" << G4endl;
     }
     
     for (int ix = 0; ix < xField.size(); ++ix) 

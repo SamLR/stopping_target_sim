@@ -462,9 +462,3 @@ void STTabulatedField3D::update()
     ClearField();
     Init();
 }
-=======
-void STTabulatedField3D::GetField(const char* filename)
-{
-    // as getField() but output is to a file instead
-}
->>>>>>> 507da4650ea93777f609c8b9d13c9b1b05d26444

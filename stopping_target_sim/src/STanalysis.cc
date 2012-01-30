@@ -81,6 +81,7 @@ void STanalysis::initialise(G4String filename)
 
 void STanalysis::addHit(G4int eventNo, G4float* position, G4float time)
 {
+    
     mEvent = eventNo;
     mX = position[0];
     mY = position[1];

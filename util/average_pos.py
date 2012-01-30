@@ -1,10 +1,12 @@
 #! /usr/bin/python
 
+
 def main():
-    file_name = "music_particle_dist.txt"
+    file_name = "../input/music_particle_dist.txt"
     # file_name = "stopping_target_sim/test_particles.txt"                             
     positions = []
     momentums = []
+    pids      = {}
     
     entry_count = 0
 
@@ -14,6 +16,11 @@ def main():
             bits = map(float, bits) # convert it all to floats
             positions.append(bits[2:5] )
             momentums.append(bits[5:])
+            pid = int(bits[1])
+            if pids.has_key(pid):
+                pids[pid] += 1
+            else:
+                pids[pid] = 1
             entry_count += 1
                     
     positions = index_list(positions)
@@ -35,6 +42,16 @@ def main():
     print ")\nMax momentum is: (",
     print_func(momentums, max)
     print ")"
+    
+    print "\n\n==== PID ===="
+    k = pids.keys()
+    k.sort()
+    charged = 0
+    charged_pids = (-211, -13, -11, 211, 13, 11, 2212)
+    for pid in k:
+        charged = charged + pids[pid] if pid in charged_pids else charged
+        print "pid %i has %i entries"%(pid, pids[pid])
+    print "charged particles = %i"%charged
 
 
 def print_func(l, func):

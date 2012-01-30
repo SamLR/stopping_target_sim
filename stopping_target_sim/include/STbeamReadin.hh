@@ -13,8 +13,11 @@
 #include "globals.hh"
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 #include "G4ThreeVector.hh"
+
+// REFACTOR THIS DOESNT NEED TO BE A SINGLETON
 
 using namespace std;
 
@@ -25,7 +28,7 @@ struct inputParticle { // one inputParticle ~ 56B (4 + 4 + 3*8 + 3*8)
     G4ThreeVector momentum;
 };
 
-static const G4int mMaxParticlesInArray = 1000;
+//static const G4int mMaxParticlesInArray = 1000;
 	
 class STbeamReadin  
 {
@@ -33,24 +36,27 @@ public:
     inputParticle next();
     static STbeamReadin* getPointer(G4String file);
     static void close();
-    G4int inline getNParticlesInArray() {return mMaxParticlesInArray;}
-//    G4int inline getMaxParticles() {return mParticleVec.size();}
+//    G4int inline getNParticlesInArray() {return mMaxParticlesInArray;}
+    
+    G4int inline getNParticles() {return mNParticles;}
+    G4int inline getMaxParticles() {return mNParticles;}
     
 private:
     STbeamReadin();
     STbeamReadin(G4String file);
     ~STbeamReadin();
     void initialise(G4String file);
-    void loadParticles();
+    void loadParticles(ifstream*);
+//        void loadParticles();
     static STbeamReadin* mInstancePtr;
 
-    ifstream* mFileIn;
+//    ifstream* mFileIn;
     
-    inputParticle mParticles [mMaxParticlesInArray]; // TODO should probably be defined somewhere
-    inputParticle* mCurrentParticle;
-    
+    vector<inputParticle> mParticleVec;
+//    inputParticle mParticles [mMaxParticlesInArray]; // TODO should probably be defined somewhere
+//    inputParticle* mCurrentParticle;
+    G4int mCurrentParticle;
     G4int mNParticles; // total number of particles in the array
-    G4int mNParticlesRemaining; // number of unused particles in array
     
     G4float xOffset, yOffset, zOffset; // all other co-ordinates should map 1:1
     G4float maxX, maxY, maxZ;

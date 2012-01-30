@@ -106,7 +106,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // Experimental hall, beam is assumed to be along the z axis
     
     G4Box* expHall_box = new G4Box("expHall_box",
-                                            expHall_x/2,expHall_y/2,expHall_z/2);
+                                            expHall_x,expHall_y,expHall_z);
     
     expHall_log = new G4LogicalVolume(expHall_box,
                                                Air,"expHall_log",0,0,0);

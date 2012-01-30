@@ -55,6 +55,7 @@ class STPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     G4ParticleGun* mParticleGun;
     STbeamReadin* mBeamData;
     G4bool mFileMode;
+    G4int  mParticle_count;
 };
 
 #endif

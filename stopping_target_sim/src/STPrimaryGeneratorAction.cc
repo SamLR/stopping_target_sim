@@ -41,13 +41,14 @@
 #include "STanalysis.hh"
 
 STPrimaryGeneratorAction::STPrimaryGeneratorAction(): 
-    mFileMode(false), mBeamData(0), mParticleGun(0)
-//    mFileMode(true), mBeamData(0), mParticleGun(0)
+//    mFileMode(false), mBeamData(0), mParticleGun(0)
+    mFileMode(true), mBeamData(0), mParticleGun(0)
 // add messenger to toggle file input & mono-energetic muon 
 {
     if (mFileMode)
     {    
-        G4String file_path = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/test_particles.txt";
+        G4String file_path = "/Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/music_particle_dist.txt";        
+//        G4String file_path = "/Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/test_particles.txt";
 //        G4String file_path 
 //            = "/Users/scook/code/MuSIC/MuSIC_simulation/MuSIC_g4beamline/monitor6_9999990_initial_protons.txt";
         mBeamData =  STbeamReadin::getPointer(file_path);
@@ -100,6 +101,8 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //        mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 9.25*mm));
         mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 0.));
     }
+    if (mParticle_count%100 == 0) G4cout<< "Particles processed "<< mParticle_count << G4endl;
+    mParticle_count++;
     mParticleGun->GeneratePrimaryVertex(anEvent);
 
 }

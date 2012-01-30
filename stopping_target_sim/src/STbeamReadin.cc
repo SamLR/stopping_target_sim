@@ -17,9 +17,8 @@ STbeamReadin* STbeamReadin::mInstancePtr = NULL;
 
 STbeamReadin::STbeamReadin() {;}
 STbeamReadin::STbeamReadin(G4String file): 
-    mCurrentParticle(0),
-    // zOffset = (g4beamline - counter:beamend separation)
-    xOffset(0),     yOffset(0),     zOffset(-(3901.18+100)*mm), 
+    mCurrentParticle(0), mParticleVec(0),
+    xOffset(0),     yOffset(0),     zOffset(-2757*mm), // average zoffset 
     maxX( 1000*mm), maxY( 1000*mm), maxZ( 1000*mm),
     minX(-1000*mm), minY(-1000*mm), minZ(-1000*mm)
 {
@@ -35,22 +34,14 @@ STbeamReadin::~STbeamReadin() {;}
 
 inputParticle STbeamReadin::next()
 {
-    if (mNParticlesRemaining == 0)
+    if (mCurrentParticle == mNParticles) // out of particles
     {
-        if (mFileIn->is_open())
-        {
-            loadParticles();
-        } else {
-            G4cout << "out of particles" << G4endl;
-            inputParticle error;
-            error.status = 0;
-            return error;
-        }
+        G4cout << "out of particles" << G4endl;
+        inputParticle error;
+        error.status = -1;
+        return error;
     }
-    inputParticle res = (*mCurrentParticle);
-    ++mCurrentParticle;
-    --mNParticlesRemaining;
-    return res;
+    return mParticleVec[mCurrentParticle++];
 }
 
 STbeamReadin* STbeamReadin::getPointer(G4String file)
@@ -64,29 +55,27 @@ STbeamReadin* STbeamReadin::getPointer(G4String file)
 
 void STbeamReadin::initialise(G4String file)
 {
-    mFileIn = new ifstream();
-    mFileIn->open(file);
-    
-    if (mFileIn->is_open())
+    ifstream* fileIn = new ifstream();
+    fileIn->open(file);
+         
+    if (fileIn->is_open())
     {
-        loadParticles();
+//        loadParticles();
+        loadParticles(fileIn);
     } else {
         G4cout << "ERROR: file <" << file << "> not opened" << G4endl;
         exit(1);
     }
 }
 
-void STbeamReadin::loadParticles()
+//void STbeamReadin::loadParticles()
+void STbeamReadin::loadParticles(ifstream* fileIn)
 {
-    G4int particle_count = 0;
-    mCurrentParticle = mParticles;
-    
-    while (mFileIn->good() && particle_count < mMaxParticlesInArray)
+    while (fileIn->good())
     {
         G4float eventNo, pid, pos[3], mom[3];
-        inputParticle currentParticle;
         
-        (*mFileIn) >> eventNo >> pid 
+        (*fileIn) >> eventNo >> pid 
                    >> pos[0] >> pos[1] >> pos[2] 
                    >> mom[0] >> mom[1] >> mom[2];
         
@@ -103,24 +92,18 @@ void STbeamReadin::loadParticles()
         pos[2] += zOffset; 
         
         if (not checkbounds(pos)) continue; // check in world volume
+        inputParticle* currentParticle = new inputParticle();
         
-        currentParticle.status = 1; 
-        currentParticle.PDG_id = (int) pid;
-        currentParticle.position = G4ThreeVector(pos[0], pos[1], pos[2]);
-        currentParticle.momentum = G4ThreeVector(mom[0], mom[1], mom[2]);
+        currentParticle->status = 1; 
+        currentParticle->PDG_id = (int) pid;
+        currentParticle->position = G4ThreeVector(pos[0], pos[1], pos[2]);
+        currentParticle->momentum = G4ThreeVector(mom[0], mom[1], mom[2]);
         
-        (*mCurrentParticle) = currentParticle; // enter into array
-        ++mCurrentParticle;
-        ++particle_count;
+        mParticleVec.push_back(*currentParticle);
     }
     
-    mCurrentParticle = mParticles; // reset pointer to first particle
-    mNParticles = particle_count;
-    mNParticlesRemaining = particle_count;
-    if (!mFileIn->good()) // if the file has run out of entries close it
-    {
-        mFileIn->close();
-        mFileIn = NULL;
-    }
+    mNParticles = mParticleVec.size();
+    fileIn->close();
+    fileIn = NULL;
     
 }

@@ -7,14 +7,14 @@
 /ST/verbose 3
 
 #/ST/getField 
-/ST/setFieldFile /Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/Bfield_roi.table
-/ST/update
-/ST/saveInterpolatedField /Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/output/int_field_out.table
-/ST/saveField /Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/output/vec_field_out.table
+#/ST/setFieldFile /Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/Bfield_roi.table
+#/ST/update
+#/ST/saveInterpolatedField /Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/output/int_field_out.table
+#/ST/saveField /Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/output/vec_field_out.table
 
 
 # max number of particles recorded is 418,573 (from 9,999,990 initial)
-# /run/beamOn 418570 
+/run/beamOn 18000 
 # for a quick/testing run (includes @ least 1 on target particle)
 #/run/beamOn 1
 #/run/beamOn 60 

@@ -12,7 +12,8 @@
 
 #include "globals.hh"
 #include "TROOT.h"
-#include "TFile.h"
+//#include "TFile.h"
+#include "STSmartTFile.hh"
 #include "TTree.h"
 
 #include "G4ThreeVector.hh"
@@ -24,28 +25,31 @@ class STanalysis
 {
 public:    
     
-    void addHit(G4int eventNo, G4float* position, G4float time);
-    void addHit(G4int eventNo, G4ThreeVector position, G4float time);
+    // add hit (evet, pid, position, time)
+    void addHit(G4int, G4int, G4float*, G4float);
+    void addHit(G4int, G4int, G4ThreeVector, G4float);
     void update();
-    void close(G4bool override = FALSE);
-    static STanalysis* getPointer(G4String filename="out.root");
-    static STanalysis* getInitdPointer();
+    
+    STanalysis();
+    STanalysis(G4String, G4String);
+    ~STanalysis();
     
 private:
-    STanalysis();
-    ~STanalysis();
-    STanalysis(G4String filename);
     
-    static void destroy();
+    void close();
     
-    void initialise(G4String filename);
+    void initialise(G4String, G4String);
+    void addTree(G4String);
     
     static STanalysis* mInstancePtr;
     static int mPtrCount;
     
-    TFile* mFile;
+    G4String mFileName;
+//    TFile* mFile;
+    STSmartTFile* mFile;
     TTree* mTree;
     Int_t mEvent;
+    Int_t mPID;
     Float_t mX, mY, mZ, mT; // variables that will write to the tree
 };
 

@@ -65,6 +65,8 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     G4LogicalVolume* counterB_log;
     G4LogicalVolume* wrapA_log;
     G4LogicalVolume* wrapB_log;
+    G4LogicalVolume* monA_log;
+    G4LogicalVolume* monB_log;
 //    G4LogicalVolume* mppc_log;
     G4LogicalVolume* mppcA1_log;
     G4LogicalVolume* mppcA2_log;
@@ -78,6 +80,8 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     G4VPhysicalVolume* counterB_phys;
     G4VPhysicalVolume* wrapA_phys;
     G4VPhysicalVolume* wrapB_phys;
+    G4VPhysicalVolume* monA_phys;
+    G4VPhysicalVolume* monB_phys;
     G4VPhysicalVolume* mppcA1_phys;
     G4VPhysicalVolume* mppcA2_phys;
     G4VPhysicalVolume* mppcB1_phys;
@@ -90,6 +94,9 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     G4VSensitiveDetector* mppcA2_sd;
     G4VSensitiveDetector* mppcB1_sd;
     G4VSensitiveDetector* mppcB2_sd;
+    
+    G4VSensitiveDetector* monA_sd;
+    G4VSensitiveDetector* monB_sd;
     
 };
 

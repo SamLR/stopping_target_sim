@@ -30,6 +30,8 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+
+
 #include "STcounterHit.hh"
 
 #include "G4UnitsTable.hh"
@@ -46,12 +48,14 @@ STcounterHit::~STcounterHit() {;}
 
 STcounterHit::STcounterHit(const STcounterHit& right) : G4VHit()
 {
+    eventNo = right.eventNo;
     pos = right.pos;
     time = right.time;
 }
 
 const STcounterHit& STcounterHit::operator=(const STcounterHit& right)
 {
+    eventNo = right.eventNo;
     pos = right.pos;
     time = right.time;
     return *this;

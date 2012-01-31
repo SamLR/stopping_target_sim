@@ -1,26 +1,26 @@
 //
-//  STcounterSD.h
+//  STMonitorSD.hh
 //  stopping_target_sim
 //
-//  Created by Sam Cook on 20/06/2011.
-//  Copyright 2011 UCL. All rights reserved.
+//  Created by Sam Cook on 30/01/2012.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#ifndef STcounterSD_HH
-#define STcounterSD_HH 1
+#ifndef STMonitorSD_hh
+#define STMonitorSD_hh
 
-#include "STcounterSD.hh"
+#include "STMonitorSD.hh"
 #include "globals.hh"
 #include "G4VSensitiveDetector.hh"
 #include "G4Step.hh"
 #include "STanalysis.hh"
-#include "STcounterHit.hh"
+#include "STMonitorHit.hh"
 
-class STcounterSD : public G4VSensitiveDetector 
+class STMonitorSD : public G4VSensitiveDetector 
 {
 public:
-    STcounterSD(G4String, G4String, G4String);
-    ~STcounterSD();
+    STMonitorSD(G4String, G4String, G4String);
+    ~STMonitorSD();
     
     // required methods
     void Initialize(G4HCofThisEvent *pThisHC);
@@ -30,8 +30,8 @@ public:
 private:
     
     G4int mEventNumber;
-    STcounterHitsCollection *counterCollection;
+    STMonitorHitsCollection *counterCollection;
     STanalysis* mAnalysis;
 };
 
-# endif
+#endif

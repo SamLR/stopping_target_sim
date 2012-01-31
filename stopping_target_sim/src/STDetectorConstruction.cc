@@ -30,6 +30,7 @@
 
 
 #include "STcounterSD.hh"
+#include "STMonitorSD.hh"
 #include "STDetectorConstruction.hh"
 #include "STTabulatedField3D.hh"
 
@@ -132,6 +133,20 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     G4Box* counter_wrap = new G4Box("wrapper",
                                     (c_x + wrap)/2, (c_y + wrap)/2, (c_z + wrap)/2);
     
+    // Monitor A
+    G4double mon_z = 3*mm; // x & y dimensions are the same as counter
+    G4Box* mon_box = new G4Box("monitor", c_x/2, c_y/2, mon_z/2);
+    
+    G4double mon_offset = (st_z + mon_z)/2 + c_z + wrap + al_thickness;
+    G4ThreeVector monA_pos = G4ThreeVector(0, 0, mon_offset);
+    
+    monA_log = new G4LogicalVolume(mon_box, Air, "monitorA");
+    monA_phys = new G4PVPlacement(0, monA_pos, monA_log, "monA_Phys", expHall_log, false, 0);
+    
+    G4ThreeVector monB_pos = G4ThreeVector(0, 0, -mon_offset);    
+    monB_log = new G4LogicalVolume(mon_box, Air, "monitorB");
+    monB_phys = new G4PVPlacement(0, monB_pos, monB_log, "monB_Phys", expHall_log, false, 0);
+    
     // location of counter & wrap A
     G4ThreeVector a_pos = G4ThreeVector(0, 0, z_offset);
     
@@ -194,22 +209,33 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
 //    mppc_sd = new STcounterSD("mppc");
 //    sdMan->AddNewDetector(mppc_sd); 
 //    mppc_log->SetSensitiveDetector(mppc_sd);    
-    mppcA1_sd = new STcounterSD("mppcA1");
+    G4String fileroot="/Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/output";
+    G4String mppcFile = fileroot+"/mppc_out.root";
+    G4String truthFile = fileroot+"/truth_out.root";
+    
+    mppcA1_sd = new STcounterSD("mppcA1", mppcFile, "mppcA1");
     sdMan->AddNewDetector(mppcA1_sd); 
     mppcA1_log->SetSensitiveDetector(mppcA1_sd);    
     
-    mppcA2_sd = new STcounterSD("mppcA2");
+    mppcA2_sd = new STcounterSD("mppcA2", mppcFile, "mppcA2");
     sdMan->AddNewDetector(mppcA2_sd); 
     mppcA2_log->SetSensitiveDetector(mppcA2_sd);    
     
-    mppcB1_sd = new STcounterSD("mppcB1");
+    mppcB1_sd = new STcounterSD("mppcB1", mppcFile, "mppcB1");
     sdMan->AddNewDetector(mppcB1_sd); 
     mppcB1_log->SetSensitiveDetector(mppcB1_sd);    
     
-    mppcB2_sd = new STcounterSD("mppcB2");
+    mppcB2_sd = new STcounterSD("mppcB2", mppcFile, "mppcA2");
     sdMan->AddNewDetector(mppcB2_sd); 
-    mppcB2_log->SetSensitiveDetector(mppcB2_sd);    
+    mppcB2_log->SetSensitiveDetector(mppcB2_sd);   
     
+    monA_sd= new STMonitorSD("monA", truthFile, "monA");
+    sdMan->AddNewDetector(monA_sd); 
+    monA_log->SetSensitiveDetector(monA_sd);   
+    
+    monB_sd= new STMonitorSD("monB", truthFile, "monB");
+    sdMan->AddNewDetector(monB_sd); 
+    monB_log->SetSensitiveDetector(monB_sd);  
     //--------------------------------------------------------------------------   
     //  Magnetic Field 
     //--------------------------------------------------------------------------

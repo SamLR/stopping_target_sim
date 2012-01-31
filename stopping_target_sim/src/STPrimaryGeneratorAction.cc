@@ -82,8 +82,8 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
         if (current.status < 0) 
         {
             // error, stop the current run
-            STanalysis* analysis = STanalysis::getInitdPointer();
-            analysis->close(TRUE);
+//            STanalysis* analysis = STanalysis::getInitdPointer();
+//            analysis->close(TRUE);
             G4cout <<"Error: out of primaries, aborting run" << G4endl;
             G4UImanager* ui = G4UImanager::GetUIpointer();
             ui->ApplyCommand("/run/abort");

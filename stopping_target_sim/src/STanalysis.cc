@@ -9,80 +9,59 @@
 
 #include "STanalysis.hh"
 
-STanalysis* STanalysis::mInstancePtr = NULL;
-int STanalysis::mPtrCount = 0;
 
 STanalysis::STanalysis(): mFile(NULL), mTree(NULL) {;}
 
-STanalysis::STanalysis(G4String filename): mFile(NULL), mTree(NULL)
+STanalysis::STanalysis(G4String filename, G4String treename)
 {
-    initialise(filename);
+    initialise(filename, treename); // open the file and make a tree
 }
 
-STanalysis::~STanalysis() {;}
-
-void STanalysis::close(G4bool override)
+STanalysis::~STanalysis() 
 {
-    --mPtrCount;
-    if ((mPtrCount <= 0 || override) && mInstancePtr)
-    {
-        mFile->Close();
-        delete mFile;
-        destroy();
-    }
+    close();
 }
 
-void STanalysis::destroy()
+void STanalysis::close()
 {
-    mInstancePtr = NULL;
-    mPtrCount = 0;
+    mFile->close();
+//    if (mFile->IsOpen())
+//    {
+//        update();
+//        G4cout << "closing " << mFile->GetName()<< G4endl;
+//        mFile->Close();
+//        delete mFile;
+//    }
 }
 
-STanalysis* STanalysis::getPointer(G4String filename)
+void STanalysis::initialise(G4String  filename, G4String treename)
 {
-    if (!mInstancePtr)
-    {
-        mInstancePtr = new STanalysis(filename);
-    }
-    ++mPtrCount;
-    return mInstancePtr;
-}
-
-STanalysis* STanalysis::getInitdPointer()
-{
-    if (!mInstancePtr) 
-    {
-        G4cout << "no instance initialised exiting"<<G4endl;
-        exit(1);
-    } else {
-        ++mPtrCount;
-        return mInstancePtr;
-    }
-}
-
-void STanalysis::initialise(G4String filename)
-{
-    mFile = new TFile(filename.c_str(), "RECREATE");
+//    mFile = new TFile(filename.c_str(), "UPDATE");
+    mFile = STSmartTFile::getTFile(filename.c_str(), "UPDATE");
     
     if (!mFile) {
         G4cout << "Error: opening " << filename << " for writing" << G4endl;
         exit(1);
     }
     
-    mTree = new TTree("MPPC_Data","hits on MPPCS");
+    addTree(treename);
+}
+
+void STanalysis::addTree(G4String treename)
+{
+    mTree = new TTree(treename,treename);
     mTree->Branch("eventNo", &mEvent, "eventNo/I");
-    
+    mTree->Branch("pid" , &mPID, "PID/I");
     mTree->Branch("posX", &mX, "posX/F");
     mTree->Branch("posY", &mY, "posY/F");
     mTree->Branch("posZ", &mZ, "posZ/F");
     mTree->Branch("time", &mT, "time/F");
 }
 
-
-void STanalysis::addHit(G4int eventNo, G4float* position, G4float time)
+void STanalysis::addHit(G4int eventNo, G4int pid,  G4float* position, G4float time)
 {
-    
     mEvent = eventNo;
+    mPID = pid;
     mX = position[0];
     mY = position[1];
     mZ = position[2];
@@ -90,13 +69,13 @@ void STanalysis::addHit(G4int eventNo, G4float* position, G4float time)
     mTree->Fill();
 }
 
-void STanalysis::addHit(G4int eventNo, G4ThreeVector position, G4float time)
+void STanalysis::addHit(G4int eventNo,G4int pid,  G4ThreeVector position, G4float time)
 {
     G4float positionT[3] = {position.x(), position.y(), position.z()};
-    addHit(eventNo, positionT, time);
+    addHit(eventNo, pid, positionT, time);
 }
 
 void STanalysis::update()
 {
-    mFile->Write();
+//    mFile->Write();
 }

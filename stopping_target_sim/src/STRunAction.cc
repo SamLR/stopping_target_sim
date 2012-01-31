@@ -15,16 +15,16 @@
 STRunAction::STRunAction(){;}
 STRunAction::~STRunAction()
 {
-    mAnalysis->close();
+//    mAnalysis->close();
 }
 
 void STRunAction::BeginOfRunAction(const G4Run* aRun)
 {
-    mAnalysis =  STanalysis::getPointer("out.root");
+//    mAnalysis = new STanalysis("out.root");
 }
 
 void STRunAction::EndOfRunAction(const G4Run* aRun)
 {
 //    G4cout << "updating analysis file" << G4endl;
-    mAnalysis->update();
+//    mAnalysis->update();
 }

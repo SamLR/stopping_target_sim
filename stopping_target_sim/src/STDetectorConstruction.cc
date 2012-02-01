@@ -47,6 +47,7 @@
 #include "G4Material.hh"
 #include "G4ThreeVector.hh"
 #include "G4PVPlacement.hh"
+#include "G4RotationMatrix.hh"
 
 // optical properties
 #include "G4OpticalSurface.hh"   
@@ -79,12 +80,9 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // z = beam direction (positive = direction of particles)
     //--------------------------------------------------------------------------
     G4double al_thickness = 3*mm;
+
     G4double wrap = 3*mm; // excess width due to Al foil (gives 1.5mm width)
-    
-    G4double x_offset_mag = 0.0;
-    G4double y_offset_mag = 0.0;
-    G4double z_offset_mag = -4000*mm;
-    
+        
     G4double expHall_x = 1.0*m;
     G4double expHall_y = 1.0*m;
     G4double expHall_z = 1.0*m;
@@ -99,6 +97,16 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     
     G4double mppc_d = 1*mm; // model MPPC as a 1x1x1mm cube of Air
     
+    G4double theta = -36*deg; // angle by which the ST is rotated about Y
+
+    G4double contX = 42*cm;
+    G4double contY = 10*cm;
+    G4double contZ = 4*cm;
+    
+    G4double mon_z = 3*mm; // x & y dimensions are the same as counter
+    
+    G4double beampipe_offset = 5*cm; // distance from end of beampipe to target
+        
     //--------------------------------------------------------------------------
     // Define Volumes
     //--------------------------------------------------------------------------
@@ -107,56 +115,74 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // Experimental hall, beam is assumed to be along the z axis
     
     G4Box* expHall_box = new G4Box("expHall_box",
-                                            expHall_x,expHall_y,expHall_z);
+                                   expHall_x,expHall_y,expHall_z);
     
     expHall_log = new G4LogicalVolume(expHall_box,
-                                               Air,"expHall_log",0,0,0);
-
-    expHall_phys = new G4PVPlacement(0,G4ThreeVector(),
-                                              expHall_log,"expHall_phys",
-                                              0,false,0);
-//    // +++++++++
-//    // Stopping target (copper)//
-    G4ThreeVector stPos = G4ThreeVector(0,0,0);
+                                      Air,"expHall_log",0,0,0);
     
-    G4Box* target_phys = new G4Box("target", st_x/2, st_y/2, st_z/2);
-    cuStoppingTarget_log = new G4LogicalVolume(target_phys, Cu, "target_log");
-    cuStoppingTarget_phys = new G4PVPlacement(0, stPos, cuStoppingTarget_log, 
-                                              "target_phys", expHall_log, 
+    expHall_phys = new G4PVPlacement(0,G4ThreeVector(),
+                                     expHall_log,"expHall_phys",
+                                     0,false,0);
+    
+    // +++++++++
+    // container region (air)    
+    
+    // these check which is larger the 'c' or 'st' value then add a border (10%)
+    // the '/2' is due to G4 working from a centre outwards by the distance
+    // assume the wrap etc can be ignored
+
+    G4ThreeVector container_offset = G4ThreeVector(0,0,beampipe_offset);
+    G4RotationMatrix* rotation = new G4RotationMatrix();
+    rotation->rotateY(theta);
+
+    
+    G4Box* container_box = new G4Box("container", contX, contY, contZ);
+    container_log  = new G4LogicalVolume(container_box, Air, "containter_log");
+    container_phys = new G4PVPlacement(rotation, container_offset, container_log, 
+                                       "container_phys", expHall_log, false, 0);
+    
+    // +++++++++
+    // Stopping target (copper)//
+    G4ThreeVector origin = G4ThreeVector(0, 0, 0);
+    G4Box* target_box = new G4Box("target", st_x/2, st_y/2, st_z/2);
+    cuStoppingTarget_log = new G4LogicalVolume(target_box, Cu, "target_log");
+    cuStoppingTarget_phys = new G4PVPlacement(0, origin, cuStoppingTarget_log, 
+                                              "target_phys", container_log, 
                                               false, 0);
     // +++++++++
     // Counters 
     // positional offset: width of Al frame + half widths of Cu & scint
     G4double z_offset = (st_z + c_z + wrap)/2 + al_thickness; 
     
-    G4Box* counter = new G4Box("counter", c_x/2, c_y/2, c_z/2);
+    G4Box* counter_box = new G4Box("counter", c_x/2, c_y/2, c_z/2);
     G4Box* counter_wrap = new G4Box("wrapper",
                                     (c_x + wrap)/2, (c_y + wrap)/2, (c_z + wrap)/2);
     
     // Monitor A
-    G4double mon_z = 3*mm; // x & y dimensions are the same as counter
     G4Box* mon_box = new G4Box("monitor", c_x/2, c_y/2, mon_z/2);
     
-    G4double mon_offset = (st_z + mon_z)/2 + c_z + wrap + al_thickness;
+
+    G4double mon_offset = (st_z + mon_z)/2 + al_thickness + c_z;
     G4ThreeVector monA_pos = G4ThreeVector(0, 0, mon_offset);
     
     monA_log = new G4LogicalVolume(mon_box, Air, "monitorA");
-    monA_phys = new G4PVPlacement(0, monA_pos, monA_log, "monA_Phys", expHall_log, false, 0);
+    monA_phys = new G4PVPlacement(0, monA_pos, monA_log, "monA_Phys", container_log, false, 0);
     
     G4ThreeVector monB_pos = G4ThreeVector(0, 0, -mon_offset);    
     monB_log = new G4LogicalVolume(mon_box, Air, "monitorB");
-    monB_phys = new G4PVPlacement(0, monB_pos, monB_log, "monB_Phys", expHall_log, false, 0);
+    monB_phys = new G4PVPlacement(0, monB_pos, monB_log, "monB_Phys", container_log, false, 0);
     
     // location of counter & wrap A
     G4ThreeVector a_pos = G4ThreeVector(0, 0, z_offset);
     
-    // Al wrapper for counter A
+    // Al wrapper for counter A;
     wrapA_log    = new G4LogicalVolume(counter_wrap, Al, "wrapA_log");
     wrapA_phys   = new G4PVPlacement(0, a_pos, wrapA_log, 
-                                     "wrapA_phys", expHall_log, 
+//                                     "wrapA_phys", expHall_log,
+                                     "wrapA_phys", container_log, 
                                      false, 0);
     // Counter A
-    counterA_log  = new G4LogicalVolume(counter, Scint, "counterA_log");
+    counterA_log  = new G4LogicalVolume(counter_box, Scint, "counterA_log");
     counterA_phys = new G4PVPlacement(0, G4ThreeVector(), counterA_log, 
                                       "counterA_phys", wrapA_log, 
                                       false, 0);
@@ -165,12 +191,12 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     G4ThreeVector b_pos = G4ThreeVector(0, 0, -z_offset);
     
     // Al wrapper for counter A
-    wrapB_log    = new G4LogicalVolume(counter_wrap, Al, "wrapB_log");
+    wrapB_log    = new G4LogicalVolume(counter_wrap, Al, "wrapB_log"); 
     wrapB_phys   = new G4PVPlacement(0, b_pos, wrapB_log, 
-                                     "wrapb_phys", expHall_log, 
+                                     "wrapb_phys", container_log, 
                                      false, 0);    
     // Counter B
-    counterB_log  = new G4LogicalVolume(counter, Scint, "counterB_log");
+    counterB_log  = new G4LogicalVolume(counter_box, Scint, "counterB_log");
     counterB_phys = new G4PVPlacement(0, G4ThreeVector(), counterB_log, 
                                       "counterB_phys", wrapB_log, 
                                       false, 0);
@@ -183,7 +209,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     mppcB1_log           = new G4LogicalVolume(mppc, Scint, "mppcB1_log");
     mppcB2_log           = new G4LogicalVolume(mppc, Scint, "mppcB2_log");
     
-
+    
     G4ThreeVector mppc1 = G4ThreeVector( (c_x - mppc_d)/2, 0, 0);
     G4ThreeVector mppc2 = G4ThreeVector(-(c_x - mppc_d)/2, 0, 0);
     // try having the MPPCs inside the scint
@@ -206,9 +232,6 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // create the detector manager
     G4SDManager* sdMan = G4SDManager::GetSDMpointer(); 
     
-//    mppc_sd = new STcounterSD("mppc");
-//    sdMan->AddNewDetector(mppc_sd); 
-//    mppc_log->SetSensitiveDetector(mppc_sd);    
     G4String fileroot="/Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/output";
     G4String mppcFile = fileroot+"/mppc_out.root";
     G4String truthFile = fileroot+"/truth_out.root";
@@ -225,7 +248,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     sdMan->AddNewDetector(mppcB1_sd); 
     mppcB1_log->SetSensitiveDetector(mppcB1_sd);    
     
-    mppcB2_sd = new STcounterSD("mppcB2", mppcFile, "mppcA2");
+    mppcB2_sd = new STcounterSD("mppcB2", mppcFile, "mppcB2");
     sdMan->AddNewDetector(mppcB2_sd); 
     mppcB2_log->SetSensitiveDetector(mppcB2_sd);   
     
@@ -244,15 +267,11 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     if(!fieldIsInitialized)
     {
         G4FieldManager* pFieldMgr;
-//        G4String mag_field_location = "/Users/scook/code/MuSIC/MuSIC_simulation/stopping_target_sim/field/magfield.table";
         
-
-//        G4MagneticField* magField = new STTabulatedField3D();
-//            new STTabulatedField3D(mag_field_location,
-//                                   x_offset_mag, y_offset_mag, z_offset_mag);
+        G4MagneticField* magField = new STTabulatedField3D();
         
         G4TransportationManager* tMan = 
-                            G4TransportationManager::GetTransportationManager();
+        G4TransportationManager::GetTransportationManager();
         
         pFieldMgr = tMan->GetFieldManager();
                 
@@ -275,28 +294,28 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
 
 void STDetectorConstruction::defineMaterials()
 {
-
-
+    
+    
     //-------------------------------------------------------------------------- 
     // Define Materials
     //--------------------------------------------------------------------------    
-
+    
     G4double a;  // atomic mass
     G4double z;  // atomic number
     G4double density;
     G4int    nel; // number of elements (for mixtures)
-
+    
     // bulk materials
     G4Material* Cu =
-        new G4Material("Cu", z=29, a=63.54*g/mole, density=8.94*g/cm3);
+    new G4Material("Cu", z=29, a=63.54*g/mole, density=8.94*g/cm3);
     
     G4Material* Al = 
-        new G4Material("Al", z=13., a=26.98*g/mole, density=2.7*g/cm3);  
-
+    new G4Material("Al", z=13., a=26.98*g/mole, density=2.7*g/cm3);  
+    
     //Air (copied from ExN02DectectorConstruction)
     G4Element* N = new G4Element("Nitrogen", "N", z=7., a= 14.01*g/mole);
     G4Element* O = new G4Element("Oxygen"  , "O", z=8., a= 16.00*g/mole);
-
+    
     G4Material* Air = new G4Material("Air", density= 1.29*mg/cm3, nel=2);
     Air->AddElement(N, 70*perCent);
     Air->AddElement(O, 30*perCent); 
@@ -332,7 +351,7 @@ void STDetectorConstruction::defineMaterials()
     Pethylene_mt->AddConstProperty("SLOWTIMECONSTANT",14.2*ns);
     Pethylene_mt->AddConstProperty("YIELDRATIO",1.0);
     Pethylene->SetMaterialPropertiesTable(Pethylene_mt);   
-
+    
 }
 
 void STDetectorConstruction::surfaceProperties()
@@ -358,7 +377,7 @@ void STDetectorConstruction::surfaceProperties()
                              OpScintHousingSurface);
     new G4LogicalSkinSurface("wrapA_surf",wrapB_log,
                              OpScintHousingSurface);
-
+    
 } 
 
 

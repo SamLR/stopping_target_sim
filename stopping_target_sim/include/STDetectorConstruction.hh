@@ -59,8 +59,10 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     
     // Logical volumes
     //
-    G4LogicalVolume* cuStoppingTarget_log;
+
     G4LogicalVolume* expHall_log;
+    G4LogicalVolume* container_log;
+    G4LogicalVolume* cuStoppingTarget_log;
     G4LogicalVolume* counterA_log;
     G4LogicalVolume* counterB_log;
     G4LogicalVolume* wrapA_log;
@@ -74,8 +76,9 @@ class STDetectorConstruction : public G4VUserDetectorConstruction
     G4LogicalVolume* mppcB2_log;
     
     // Physical volumes
-    G4VPhysicalVolume* cuStoppingTarget_phys;
     G4VPhysicalVolume* expHall_phys;
+    G4VPhysicalVolume* container_phys;
+    G4VPhysicalVolume* cuStoppingTarget_phys;
     G4VPhysicalVolume* counterA_phys;
     G4VPhysicalVolume* counterB_phys;
     G4VPhysicalVolume* wrapA_phys;

@@ -56,6 +56,7 @@ class STPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     STbeamReadin* mBeamData;
     G4bool mFileMode;
     G4int  mParticle_count;
+    G4double mYTheta; // z angular offset
 };
 
 #endif

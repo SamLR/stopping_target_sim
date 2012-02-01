@@ -37,7 +37,7 @@ void STanalysis::close()
 void STanalysis::initialise(G4String  filename, G4String treename)
 {
 //    mFile = new TFile(filename.c_str(), "UPDATE");
-    mFile = STSmartTFile::getTFile(filename.c_str(), "UPDATE");
+    mFile = STSmartTFile::getTFile(filename.c_str(), "RECREATE");
     
     if (!mFile) {
         G4cout << "Error: opening " << filename << " for writing" << G4endl;

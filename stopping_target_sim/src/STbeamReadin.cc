@@ -18,7 +18,8 @@ STbeamReadin* STbeamReadin::mInstancePtr = NULL;
 STbeamReadin::STbeamReadin() {;}
 STbeamReadin::STbeamReadin(G4String file): 
     mCurrentParticle(0), mParticleVec(0),
-    xOffset(0),     yOffset(0),     zOffset(-2757*mm), // average zoffset 
+    // xOffset(0),     yOffset(0),     zOffset(-2757*mm), // average zoffset 
+    xOffset(0),     yOffset(0),     zOffset(-3901*mm), // average zoffset 
     maxX( 1000*mm), maxY( 1000*mm), maxZ( 1000*mm),
     minX(-1000*mm), minY(-1000*mm), minZ(-1000*mm)
 {

@@ -2,14 +2,14 @@
 
 void process1()
 {
-    TFile* file = new TFile("build/out.root", "READ");
+    TFile* file = new TFile("../output/old_root/mppc_out.root", "READ");
     
     float time;
     float x;
     float y;
     float z;
     
-    TTree* data = (TTree*) file->Get("MPPC_Data");
+    TTree* data = (TTree*) file->Get("mppcA1");
     data->SetBranchAddress("posX", &x);
     data->SetBranchAddress("posY", &y);
     data->SetBranchAddress("posZ", &z);

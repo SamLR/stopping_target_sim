@@ -47,7 +47,8 @@ STPrimaryGeneratorAction::STPrimaryGeneratorAction():
     if (mFileMode)
     {    
         G4cout << "Reading in particles" << G4endl;
-        G4String file_path = "/Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/music_particle_dist.txt";        
+        //        G4String file_path = "/Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/music_particle_dist.txt";        
+        G4String file_path = "../input/music_particle_dist.txt";        
         mBeamData =  STbeamReadin::getPointer(file_path);
         mParticleGun = new G4ParticleGun(1);
     } else 

@@ -2,6 +2,7 @@
 
 
 def main():
+    # file_name = "../input/particle_dist_100M_charged.txt"
     file_name = "../input/music_particle_dist.txt"
     # file_name = "stopping_target_sim/test_particles.txt"                             
     positions = []

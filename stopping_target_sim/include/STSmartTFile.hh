@@ -21,6 +21,7 @@ public:
     static STSmartTFile* getTFile(G4String, G4String); // returns the smart file of given name with options
     
     void close();
+    static void forceClose();
     
 //    void addTree(G4String);
 private:

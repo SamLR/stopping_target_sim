@@ -39,6 +39,7 @@
 #include "G4UImanager.hh"
 
 #include "STanalysis.hh"
+#include "STSmartTFile.hh"
 
 STPrimaryGeneratorAction::STPrimaryGeneratorAction(): 
     mFileMode(true), mBeamData(0), mParticleGun(0), mYTheta(36*deg)
@@ -78,6 +79,7 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
         if (current.status < 0) 
         {
             G4cout <<"Error: out of primaries, aborting run" << G4endl;
+            STSmartTFile::forceClose(); // make sure everything so far is saved
             G4UImanager* ui = G4UImanager::GetUIpointer();
             ui->ApplyCommand("/run/abort");
         }

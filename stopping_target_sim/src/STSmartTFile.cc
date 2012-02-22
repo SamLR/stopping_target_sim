@@ -28,6 +28,18 @@ void STSmartTFile::close()
     }
 }
 
+void STSmartTFile::forceClose()
+{
+    // automatically closes all open files ignoring number of active pointers
+    cout <<endl << endl << "WARNING: force closing all open root files"<< endl;
+    map<G4String, STSmartTFile*>::iterator iter;
+    for (iter = mFileMap.begin(); iter != mFileMap.end(); ++iter) 
+    {
+        iter->second->Write();
+        iter->second->Close();
+    }
+}
+
 STSmartTFile* STSmartTFile::getTFile(G4String filename, G4String options)
 {
     map<G4String, STSmartTFile*>::iterator iter;

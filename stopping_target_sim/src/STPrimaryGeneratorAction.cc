@@ -88,11 +88,12 @@ void STPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
                     particleTable->FindParticle(current.PDG_id);
         
         mParticleGun->SetParticleDefinition(particle);
+        mParticleGun->SetParticleTime(current.time_offset);
+//        mParticleGun->SetParticleTime(99999999999.0);
+        
+        // adjust the gun positions WRT b-field angular offset
         mParticleGun->SetParticlePosition(current.position.rotateY(mYTheta));
-//        mParticleGun->SetParticlePosition(current.position);
-        // position will need to be adjusted WRT to new geometry
         mParticleGun->SetParticleMomentum(current.momentum.rotateY(mYTheta));
-//        mParticleGun->SetParticleMomentum(current.momentum);
     } else 
     {
 //        mParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 9.25*mm));

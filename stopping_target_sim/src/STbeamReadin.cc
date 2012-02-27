@@ -74,11 +74,12 @@ void STbeamReadin::loadParticles(ifstream* fileIn)
 {
     while (fileIn->good())
     {
-        G4float eventNo, pid, pos[3], mom[3];
+        G4float eventNo, pid, pos[3], mom[3], time;
         
         (*fileIn) >> eventNo >> pid 
-                   >> pos[0] >> pos[1] >> pos[2] 
-                   >> mom[0] >> mom[1] >> mom[2];
+                  >> pos[0] >> pos[1] >> pos[2] 
+                  >> mom[0] >> mom[1] >> mom[2]
+                  >> time;
         
         // some of the PIDs given are invalid; remove them
         // check for charged particles pi (211), mu (13), e(11) or p(2212). 
@@ -99,6 +100,7 @@ void STbeamReadin::loadParticles(ifstream* fileIn)
         currentParticle->PDG_id = (int) pid;
         currentParticle->position = G4ThreeVector(pos[0], pos[1], pos[2]);
         currentParticle->momentum = G4ThreeVector(mom[0], mom[1], mom[2]);
+        currentParticle->time_offset = time;
         
         mParticleVec.push_back(*currentParticle);
     }

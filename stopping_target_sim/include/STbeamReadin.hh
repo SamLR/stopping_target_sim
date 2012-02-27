@@ -26,6 +26,7 @@ struct inputParticle { // one inputParticle ~ 56B (4 + 4 + 3*8 + 3*8)
     G4int PDG_id;
     G4ThreeVector position;
     G4ThreeVector momentum;
+    G4float time_offset; // offset from when the proton was produced (in G4BL)
 };
 
 //static const G4int mMaxParticlesInArray = 1000;

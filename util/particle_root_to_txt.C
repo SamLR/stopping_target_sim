@@ -44,7 +44,7 @@ int main()
         if (charged_pid) 
         {
             ++count;
-            out_file <<" "<< event <<" "<< PID <<" "<< x <<" "<< y <<" "<< z <<" "<< Px <<" "<< Py <<" "<< Pz << endl;
+            out_file <<" "<< event <<" "<< PID <<" "<< x <<" "<< y <<" "<< z <<" "<< Px <<" "<< Py <<" "<< Pz <<" "<< t << endl;
         }
         
     }

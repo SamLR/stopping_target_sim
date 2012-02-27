@@ -43,7 +43,7 @@ STTabulatedField3D::STTabulatedField3D()
 : verbose(3), defaultsUsed(true), xOffset(-1010.99*mm), yOffset(0), zOffset(-3778.43*mm)
 {    
     //    sprintf(filename_m, "/Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/input/Bfield_roi.table");// default    
-    sprintf(filename_m, "../input/Bfield_roi.table");// default
+    sprintf(filename_m, "../../../input/Bfield_roi.table");// default
     
     messenger_m = new STTabulatedField3DMessenger(this);
     if (defaultsUsed and verbose) {

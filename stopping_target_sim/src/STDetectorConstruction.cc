@@ -233,7 +233,7 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     G4SDManager* sdMan = G4SDManager::GetSDMpointer(); 
     
 //    G4String fileroot="/Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/output";
-    G4String fileroot="../output";
+    G4String fileroot="../../../output";
     G4String mppcFile = fileroot+"/mppc_out.root";
     G4String truthFile = fileroot+"/truth_out.root";
     

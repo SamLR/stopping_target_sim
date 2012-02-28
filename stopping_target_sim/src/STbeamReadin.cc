@@ -21,7 +21,8 @@ STbeamReadin::STbeamReadin(G4String file):
     // xOffset(0),     yOffset(0),     zOffset(-2757*mm), // average zoffset 
     xOffset(0),     yOffset(0),     zOffset(-3901*mm), // average zoffset 
     maxX( 1000*mm), maxY( 1000*mm), maxZ( 1000*mm),
-    minX(-1000*mm), minY(-1000*mm), minZ(-1000*mm)
+    minX(-1000*mm), minY(-1000*mm), minZ(-1000*mm),
+    proton_rate(26.7*ns)
 {
     initialise(file);
 }
@@ -100,7 +101,7 @@ void STbeamReadin::loadParticles(ifstream* fileIn)
         currentParticle->PDG_id = (int) pid;
         currentParticle->position = G4ThreeVector(pos[0], pos[1], pos[2]);
         currentParticle->momentum = G4ThreeVector(mom[0], mom[1], mom[2]);
-        currentParticle->time_offset = time;
+        currentParticle->time_offset = time*ns + eventNo*proton_rate;
         
         mParticleVec.push_back(*currentParticle);
     }

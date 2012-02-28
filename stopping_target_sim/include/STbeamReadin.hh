@@ -62,6 +62,7 @@ private:
     G4float xOffset, yOffset, zOffset; // all other co-ordinates should map 1:1
     G4float maxX, maxY, maxZ;
     G4float minX, minY, minZ;
+    G4float proton_rate; // multiplier for eventIDs to convert to 'real' times
     
     inline G4bool checkbounds(G4float position[3])
     {

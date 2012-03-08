@@ -35,20 +35,28 @@ public:
     void Draw();
     void Print();
     
+    // Setters
     inline void SetPos (G4ThreeVector xyz) { pos = xyz; };
+    inline void SetMom (G4ThreeVector Pxyz) { mom = Pxyz; };
     inline void SetPid (G4int p) { pid = p; };
     inline void SetTime (G4float t) {time = t; };
     inline void SetEvent (G4int e) {eventNo = e; };
-    G4ThreeVector GetPos() { return pos; };
-    G4float GetTime() {return time; };
-    G4int GetEvent() {return eventNo; };
-    G4int GetPID() {return pid; };
+    inline void SetParentID (G4int p) {parentID = p; };
+    inline void SetTrackID (G4int t) {trackID = t; };
+    // Getters
+    inline G4ThreeVector GetPos() { return pos; };
+    inline G4ThreeVector GetMom() { return mom; };
+    inline G4float GetTime() {return time; };
+    inline G4int GetEvent() {return eventNo; };
+    inline G4int GetPID() {return pid; };
+    inline G4int GetParentID() {return parentID; };
+    inline G4int GetTrackID() {return trackID; };
     
 private:
-    G4ThreeVector pos;
+    G4ThreeVector pos, mom;
     G4float time;
-    G4int eventNo;
-    G4int pid;
+    G4int eventNo, pid, parentID, trackID;
+    
     
 };
 

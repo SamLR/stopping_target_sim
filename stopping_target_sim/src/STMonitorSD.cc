@@ -44,9 +44,12 @@ void STMonitorSD::EndOfEvent(G4HCofThisEvent *pThisHC)
     for (int i = 0; i<nHits; ++i) 
     {
         G4int pid = (*counterCollection)[i]->GetPID();
+        G4int parent = (*counterCollection)[i]->GetParentID();
+        G4int track = (*counterCollection)[i]->GetTrackID();
         G4ThreeVector position = (*counterCollection)[i]->GetPos();
+        G4ThreeVector momentum = (*counterCollection)[i]->GetMom();
         G4float time = (*counterCollection)[i]->GetTime();
-        mAnalysis->addHit(mEventNumber, pid, position, time); // MPPC don't care about PID
+        mAnalysis->addHit(mEventNumber, pid, parent, track, position, momentum, time);
     }
 //    mAnalysis->update(); 
 }
@@ -63,6 +66,9 @@ G4bool STMonitorSD::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     newHit->SetPid(aStep->GetTrack()->GetDefinition()->GetPDGEncoding());
     newHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
     newHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
+    newHit->SetMom( aStep->GetPostStepPoint()->GetMomentum()); // momentum
+    newHit->SetTrackID(aStep->GetTrack()->GetTrackID()); // ID for this track/particle
+    newHit->SetParentID(aStep->GetTrack()->GetParentID());
     counterCollection->insert(newHit);
     return true;
 }

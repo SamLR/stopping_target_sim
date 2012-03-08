@@ -46,7 +46,7 @@ void STcounterSD::EndOfEvent(G4HCofThisEvent *pThisHC)
     {
         G4ThreeVector position = (*counterCollection)[i]->GetPos();
         G4float time = (*counterCollection)[i]->GetTime();
-        mAnalysis->addHit(mEventNumber, 0, position, time); // MPPC don't care about PID
+        mAnalysis->addHit(mEventNumber, 0, 0, 0, position, G4ThreeVector(), time); // MPPC don't care about PID
     }
 //    mAnalysis->update(); 
 }

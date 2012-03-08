@@ -21,18 +21,20 @@ STMonitorHit::STMonitorHit() {;}
 
 STMonitorHit::~STMonitorHit() {;}
 
-STMonitorHit::STMonitorHit(const STMonitorHit& right) : G4VHit()
-{
-    pos = right.pos;
-    time = right.time;
-}
+STMonitorHit::STMonitorHit(const STMonitorHit& right) 
+: G4VHit(), pos(right.pos), mom(right.mom), time(right.time), eventNo(right.eventNo), 
+pid(right.pid), parentID(right.parentID), trackID(right.trackID)
+{;}
 
 const STMonitorHit& STMonitorHit::operator=(const STMonitorHit& right)
 {
+    pos = right.pos;
+    mom = right.mom;
+    time = right.time; 
     eventNo = right.eventNo;
     pid = right.pid;
-    pos = right.pos;
-    time = right.time;
+    parentID = right.parentID;
+    trackID = right.trackID;
     return *this;
 }
 

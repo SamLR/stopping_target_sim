@@ -25,9 +25,9 @@ class STanalysis
 {
 public:    
     
-    // add hit (evet, pid, position, time)
-    void addHit(G4int, G4int, G4float*, G4float);
-    void addHit(G4int, G4int, G4ThreeVector, G4float);
+    // add hit (event, pid, parentId, trackID, position, momentum, time)
+    void addHit(G4int, G4int, G4int, G4int, G4float*, G4float*, G4float);
+    void addHit(G4int, G4int, G4int, G4int, G4ThreeVector, G4ThreeVector, G4float);
     void update();
     
     STanalysis();
@@ -48,9 +48,8 @@ private:
 //    TFile* mFile;
     STSmartTFile* mFile;
     TTree* mTree;
-    Int_t mEvent;
-    Int_t mPID;
-    Float_t mX, mY, mZ, mT; // variables that will write to the tree
+    Int_t mEvent, mPID, mParentID, mTrackID;
+    Float_t mX, mY, mZ, mT, mPx, mPy, mPz; // variables that will write to the tree
 };
 
 #endif

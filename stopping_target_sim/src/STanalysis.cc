@@ -51,28 +51,41 @@ void STanalysis::addTree(G4String treename)
 {
     mTree = new TTree(treename,treename);
     mTree->Branch("eventNo", &mEvent, "eventNo/I");
+    mTree->Branch("trackID" , &mTrackID, "trackID/I");
+    mTree->Branch("ParentID" , &mParentID, "ParentID/I");
     mTree->Branch("pid" , &mPID, "PID/I");
     mTree->Branch("posX", &mX, "posX/F");
     mTree->Branch("posY", &mY, "posY/F");
     mTree->Branch("posZ", &mZ, "posZ/F");
+    mTree->Branch("momX", &mX, "momX/F");
+    mTree->Branch("momY", &mY, "momY/F");
+    mTree->Branch("momZ", &mZ, "momZ/F");
     mTree->Branch("time", &mT, "time/F");
 }
 
-void STanalysis::addHit(G4int eventNo, G4int pid,  G4float* position, G4float time)
+void STanalysis::addHit(G4int eventNo, G4int pid, G4int parentID, G4int trackID,
+                        G4float* position, G4float* momentum, G4float time)
 {
     mEvent = eventNo;
     mPID = pid;
+    mParentID = parentID;
+    mTrackID = trackID;
     mX = position[0];
     mY = position[1];
     mZ = position[2];
+    mPx = momentum[0];
+    mPy = momentum[1];
+    mPz = momentum[2];
     mT = time;
     mTree->Fill();
 }
 
-void STanalysis::addHit(G4int eventNo,G4int pid,  G4ThreeVector position, G4float time)
+void STanalysis::addHit(G4int eventNo,G4int pid, G4int parentID, G4int trackID,
+                        G4ThreeVector position, G4ThreeVector momentum, G4float time)
 {
     G4float positionT[3] = {position.x(), position.y(), position.z()};
-    addHit(eventNo, pid, positionT, time);
+    G4float momentumT[3] = {momentum.x(), momentum.y(), momentum.z()};
+    addHit(eventNo, pid, parentID, trackID, positionT, momentumT, time);
 }
 
 void STanalysis::update()

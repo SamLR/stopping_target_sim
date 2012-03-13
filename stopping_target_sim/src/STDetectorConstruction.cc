@@ -109,15 +109,16 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     
     G4double c_x = 40.0*cm; // counter dimensions
     G4double c_y =  5.0*cm;
-    G4double c_z =  0.35*mm; 
+    G4double c_z =  0.35*cm; 
     
-    G4double al_thickness = 3.0*mm; // Aluminium supports (not modelled)
+    G4double al_thickness = 0.3*cm; // Aluminium supports (not modelled)
     
-    G4double wrap = 3.0*mm; // excess width due to Al foil (gives 1.5mm width)
+    G4double wrap = 0.3*cm; // excess width due to Al foil (gives 1.5mm width)
 
-    G4double mppc_d = 1.0*mm; // model MPPC as a 1x1x1mm cube of Air
+    G4double mppc_d = 0.1*cm; // model MPPC as a 1x1x1mm cube of Air
     
-    G4double theta = -36.0*deg; // angle by which the ST is rotated about Y
+//    G4double theta = -36.0*deg; // angle by which the ST is rotated about Y
+    G4double theta = 0*deg; // angle by which the ST is rotated about Y
     
     G4double beampipe_offset = 5.0*cm; // distance from end of beampipe to target
         
@@ -143,10 +144,11 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // This allows all the other regions to be manipulated as a single object
     
     // Derived values
-    G4double contX = c_x + 2*c_z; // width of counter and 2 monitors    
+    G4double contX = c_x + wrap + 2*c_z; // width of counter and 2 monitors    
     G4double contY = st_y + 2*c_z; // height of the target and 2 monitors
     // 2 Al supports, 4 monitors, 2 counters , 2 Al wrappers (monitors_z == c_z)
-    G4double contZ = 2*al_thickness + 6*c_z + 2*wrap + st_z; 
+    G4double contZ = 2*al_thickness + 4*c_z + 2*wrap + st_z; 
+//        G4double contZ = 2*al_thickness + 6*c_z + 2*wrap + st_z; 
 
     G4ThreeVector container_offset = G4ThreeVector(0,0,beampipe_offset);
     G4RotationMatrix* rotation = new G4RotationMatrix();
@@ -234,31 +236,33 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // Monitors
     // Scint Monitors
     // Solid for the scintillator monitors (could just use the scintillators? 
-    G4Box* counter_mon_box = new G4Box("monitor", c_x/2, c_y/2, c_z/2);
-    
-    G4double mon_offset = (st_z + c_z)/2 + al_thickness + c_z;
-    G4ThreeVector monA_pos = G4ThreeVector(0, 0, mon_offset);
-    
-    monA_log = new G4LogicalVolume(counter_mon_box, Air, "monitorA");
-    monA_phys = new G4PVPlacement(0, monA_pos, monA_log, "monA_Phys", container_log, false, 0);
-    
-    G4ThreeVector monB_pos = G4ThreeVector(0, 0, -mon_offset);    
-    monB_log = new G4LogicalVolume(counter_mon_box, Air, "monitorB");
-    monB_phys = new G4PVPlacement(0, monB_pos, monB_log, "monB_Phys", container_log, false, 0);
+//    G4Box* counter_mon_box = new G4Box("monitor", c_x/2, c_y/2, c_z/2);
+//    
+//    G4double mon_offset = (st_z + c_z)/2 + al_thickness + c_z;
+//    G4ThreeVector monA_pos = G4ThreeVector(0, 0, mon_offset);
+//    
+//    monA_log = new G4LogicalVolume(counter_mon_box, Air, "monitorA");
+//    monA_phys = new G4PVPlacement(0, monA_pos, monA_log, "monA_Phys", container_log, false, 0);
+//    
+//    G4ThreeVector monB_pos = G4ThreeVector(0, 0, -mon_offset);    
+//    monB_log = new G4LogicalVolume(counter_mon_box, Air, "monitorB");
+//    monB_phys = new G4PVPlacement(0, monB_pos, monB_log, "monB_Phys", container_log, false, 0);
     
     // ==========
     // Box monitors (enclose the entire detector)
     // <x,y,z>_max give the maximum dimensions of the monitor box
-    G4double z_max = st_z + 6*c_z + 2*wrap; // includes the 2 z-face monitors
+//    G4double z_max = st_z + 6*c_z + 2*wrap; // includes the 2 z-face monitors
+    G4double z_max = st_z + 4*c_z + 2*wrap + 2*al_thickness; // includes the 2 z-face monitors
     G4double y_max = st_y + 2*c_z;
     G4double x_max = 2*c_z + c_x + wrap; 
+//    G4double x_max = 2*c_z + c_x + wrap; 
     
     // x-face is middle, hence abutted by z-face and abutts y-face
-    G4Box* x_face_mon = new G4Box("x_face", z_max/2, st_y/2, c_z/2);
+    G4Box* x_face_mon = new G4Box("x_face", c_z/2, st_y/2, z_max/2);
     // y-face is outer most hence abutted by x and z-face monitors (in z_thickness & param)
     G4Box* y_face_mon = new G4Box("y_face", x_max/2, c_z/2, z_max/2);
     // z-face is inner most, abutts both x and y faces
-    G4Box* z_face_mon = new G4Box("z_face", (x_max - 2*c_x)/2, st_y/2, c_z/2);
+    G4Box* z_face_mon = new G4Box("z_face", (x_max - 2*c_z)/2, st_y/2, c_z/2);
     
     // positional offsets, these move the centre of the solid hence removal of 
     // a monitor's width from each maximum
@@ -335,11 +339,13 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     
     monA_sd= new STMonitorSD("monA", truthFile, "monA");
     sdMan->AddNewDetector(monA_sd); 
-    monA_log->SetSensitiveDetector(monA_sd);   
+    counterA_log->SetSensitiveDetector(monA_sd);   
+//    monA_log->SetSensitiveDetector(monA_sd);   
     
     monB_sd= new STMonitorSD("monB", truthFile, "monB");
     sdMan->AddNewDetector(monB_sd); 
-    monB_log->SetSensitiveDetector(monB_sd);  
+    counterB_log->SetSensitiveDetector(monB_sd);  
+//    monB_log->SetSensitiveDetector(monB_sd);  
     
     
     for (int i(0); i < 6; ++i) {

@@ -43,4 +43,4 @@
 #/run/beamOn 10 
 # for a quick/testing run (includes @ least 1 on target particle)
 
-/run/beamOn 1 
+/run/beamOn 50

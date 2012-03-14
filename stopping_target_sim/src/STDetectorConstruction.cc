@@ -117,8 +117,8 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
 
     G4double mppc_d = 0.1*cm; // model MPPC as a 1x1x1mm cube of Air
     
-//    G4double theta = -36.0*deg; // angle by which the ST is rotated about Y
-    G4double theta = 0*deg; // angle by which the ST is rotated about Y
+    G4double theta = -36.0*deg; // angle by which the ST is rotated about Y
+
     
     G4double beampipe_offset = 5.0*cm; // distance from end of beampipe to target
         
@@ -340,16 +340,13 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     monA_sd= new STMonitorSD("monA", truthFile, "monA");
     sdMan->AddNewDetector(monA_sd); 
     counterA_log->SetSensitiveDetector(monA_sd);   
-//    monA_log->SetSensitiveDetector(monA_sd);   
     
     monB_sd= new STMonitorSD("monB", truthFile, "monB");
     sdMan->AddNewDetector(monB_sd); 
-    counterB_log->SetSensitiveDetector(monB_sd);  
-//    monB_log->SetSensitiveDetector(monB_sd);  
-    
+    counterB_log->SetSensitiveDetector(monB_sd);      
     
     for (int i(0); i < 6; ++i) {
-        box_sd[i] = new STMonitorSD(face_names[i], truthFile, face_names[i]);
+        box_sd[i] = new STMonitorSD(face_names[i], boxFile, face_names[i]);
         sdMan->AddNewDetector(box_sd[i]);
         mon_box_log[i]->SetSensitiveDetector(box_sd[i]);
 

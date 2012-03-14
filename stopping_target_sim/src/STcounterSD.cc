@@ -58,6 +58,10 @@ G4bool STcounterSD::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     
     if (not stepStatus == fGeomBoundary) return false;
     
+    G4int pid = aStep->GetTrack()->GetDefinition()->GetPDGEncoding();
+    
+    if (pid != 0) return false; // only pay attention to optical photons
+    
     STcounterHit *newHit = new STcounterHit();
     newHit->SetEvent(mEventNumber);    
     newHit->SetPos(aStep->GetPostStepPoint()->GetPosition());

@@ -148,7 +148,6 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     G4double contY = st_y + 2*c_z; // height of the target and 2 monitors
     // 2 Al supports, 4 monitors, 2 counters , 2 Al wrappers (monitors_z == c_z)
     G4double contZ = 2*al_thickness + 4*c_z + 2*wrap + st_z; 
-//        G4double contZ = 2*al_thickness + 6*c_z + 2*wrap + st_z; 
 
     G4ThreeVector container_offset = G4ThreeVector(0,0,beampipe_offset);
     G4RotationMatrix* rotation = new G4RotationMatrix();
@@ -233,29 +232,12 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     mppcB2_phys          = new G4PVPlacement(0, mppc2, mppcB2_log, 
                                              "mppcB2_phys", counterB_log, 
                                              false, 0);  
-    // Monitors
-    // Scint Monitors
-    // Solid for the scintillator monitors (could just use the scintillators? 
-//    G4Box* counter_mon_box = new G4Box("monitor", c_x/2, c_y/2, c_z/2);
-//    
-//    G4double mon_offset = (st_z + c_z)/2 + al_thickness + c_z;
-//    G4ThreeVector monA_pos = G4ThreeVector(0, 0, mon_offset);
-//    
-//    monA_log = new G4LogicalVolume(counter_mon_box, Air, "monitorA");
-//    monA_phys = new G4PVPlacement(0, monA_pos, monA_log, "monA_Phys", container_log, false, 0);
-//    
-//    G4ThreeVector monB_pos = G4ThreeVector(0, 0, -mon_offset);    
-//    monB_log = new G4LogicalVolume(counter_mon_box, Air, "monitorB");
-//    monB_phys = new G4PVPlacement(0, monB_pos, monB_log, "monB_Phys", container_log, false, 0);
-    
     // ==========
     // Box monitors (enclose the entire detector)
     // <x,y,z>_max give the maximum dimensions of the monitor box
-//    G4double z_max = st_z + 6*c_z + 2*wrap; // includes the 2 z-face monitors
     G4double z_max = st_z + 4*c_z + 2*wrap + 2*al_thickness; // includes the 2 z-face monitors
     G4double y_max = st_y + 2*c_z;
     G4double x_max = 2*c_z + c_x + wrap; 
-//    G4double x_max = 2*c_z + c_x + wrap; 
     
     // x-face is middle, hence abutted by z-face and abutts y-face
     G4Box* x_face_mon = new G4Box("x_face", c_z/2, st_y/2, z_max/2);
@@ -286,29 +268,6 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
         mon_box_phys[i] = new G4PVPlacement(0, face_pos[i], mon_box_log[i], 
                                             face_names[i], container_log, false, 0); 
     }
-//    mon_box_log[0]  = new G4LogicalVolume(x_face_mon, Air, "x-_face");
-//    mon_box_phys[0] = new G4PVPlacement(0, -1.0*x_box_off, mon_box_log[0], 
-//                                        "x-_phys", container_log, false, 0); 
-//    
-//    mon_box_log[1]  = new G4LogicalVolume(x_face_mon, Air, "x+_face");
-//    mon_box_phys[1] = new G4PVPlacement(0, x_box_off, mon_box_log[1], 
-//                                        "x+_phys", container_log, false, 0); 
-//    mon_box_log[2]  = new G4LogicalVolume(y_face_mon, Air, "y-_face");
-//    
-//    mon_box_phys[2] = new G4PVPlacement(0, -1.0*y_box_off, mon_box_log[2], 
-//                                        "y-_phys", container_log, false, 0); 
-//    
-//    mon_box_log[3]  = new G4LogicalVolume(y_face_mon, Air, "y+_face");
-//    mon_box_phys[3] = new G4PVPlacement(0, y_box_off, mon_box_log[3], 
-//                                        "y+_phys", container_log, false, 0);
-//    
-//    mon_box_log[4]  = new G4LogicalVolume(z_face_mon, Air, "z-_face");
-//    mon_box_phys[4] = new G4PVPlacement(0, -1.0*z_box_off, mon_box_log[4], 
-//                                        "z-_phys", container_log, false, 0);
-//    
-//    mon_box_log[5]  = new G4LogicalVolume(z_face_mon, Air, "z+_face");
-//    mon_box_phys[5] = new G4PVPlacement(0, z_box_off, mon_box_log[5], 
-//                                        "z+_phys", container_log, false, 0);
     
     //--------------------------------------------------------------------------
     // Create senstive detector manager for the MPPCs
@@ -316,10 +275,10 @@ G4VPhysicalVolume* STDetectorConstruction::Construct()
     // create the detector manager
     G4SDManager* sdMan = G4SDManager::GetSDMpointer(); 
     
-//    G4String fileroot="/Users/samcook/code/MuSIC/MuSIC_simulation/stopping_target_sim/output";
     G4String fileroot="../../../output";
     G4String mppcFile = fileroot+"/mppc_out.root";
     G4String truthFile = fileroot+"/truth_out.root";
+    G4String boxFile = fileroot+"/box_out.root";
     
     mppcA1_sd = new STcounterSD("mppcA1", mppcFile, "mppcA1");
     sdMan->AddNewDetector(mppcA1_sd); 

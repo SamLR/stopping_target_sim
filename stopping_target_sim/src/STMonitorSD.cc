@@ -58,12 +58,15 @@ G4bool STMonitorSD::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
 {
     // add checks that first hit etc
     G4StepStatus stepStatus = aStep->GetPreStepPoint()->GetStepStatus();
-    
     if (not stepStatus == fGeomBoundary) return false;
+    
+    G4int pid = aStep->GetTrack()->GetDefinition()->GetPDGEncoding();
+    
+    if (pid == 0) return false; // ignore optical photons
     
     STMonitorHit *newHit = new STMonitorHit();
     newHit->SetEvent(mEventNumber);    
-    newHit->SetPid(aStep->GetTrack()->GetDefinition()->GetPDGEncoding());
+    newHit->SetPid(pid);
     newHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
     newHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
     newHit->SetMom( aStep->GetPostStepPoint()->GetMomentum()); // momentum

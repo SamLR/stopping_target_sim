@@ -4,8 +4,9 @@
 # way of running the analysis. Depending on proformance I may re write this in
 # C++/C to be compiled. 
 
-from ROOT import TFile, TTree
+from ROOT import TFile, TTree, TH1F, TCanvas
 from collections import OrderedDict
+from time import sleep
 
 def cut(branch, values):
     return True if branch in values else False
@@ -13,26 +14,37 @@ def cut(branch, values):
 def getDataFlat(tree, data, index):
     if (tree.GetEntry(index) <= 0): return # no data, shouldn't happen
     if not cut(tree.pid, (-13, -11, 11, 13)): return
-    data.append({'event':tree.eventNo,
-                 'PID'  :tree.pid,
-                 'pos'  :(tree.posX, tree.posY, tree.posZ), # 3-vector
-                 'time' :tree.time,
-                 'place':tree.GetName()})
+    data.append({'event' :tree.eventNo,
+                 'PID'   :tree.pid,
+                 'parent':tree.ParentID,
+                 'track' :tree.trackID,
+                 'pos'   :(tree.posX, tree.posY, tree.posZ),
+                 'mom'   :(tree.momX, tree.momY, tree.momZ),
+                 'time'  :tree.time,
+                 'place' :tree.GetName()})
     return
 
 def getDataEvent(tree, data, index):
     if (tree.GetEntry(index) <= 0): return # no data, shouldn't happen
     if not cut(tree.pid, (-13, -11, 11, 13)): return
     key = tree.eventNo
-    value = {'PID'  :tree.pid,
-             'pos'  :(tree.posX, tree.posY, tree.posZ),
-             'time' :tree.time,
-             'place':tree.GetName()}
+    value = {'PID'   :tree.pid,
+             'parent':tree.ParentID,
+             'track' :tree.trackID,
+             'pos'   :(tree.posX, tree.posY, tree.posZ),
+             'mom'   :(tree.momX, tree.momY, tree.momZ),
+             'time'  :tree.time,
+             'place' :tree.GetName()}
     if data.has_key(key): # if the event exists append to it otherwise create it
         data[key].append(value)
     else:
         data[key] = [value,]
     return
+
+
+def calcMom(x,y,z):
+    return (x*x+y*y+z*z)**0.5
+
 
 
 file_in = TFile('../output/truth_out.root', 'READ')
@@ -70,29 +82,60 @@ muon_count = 0
 stopped_muons = 0
 non_stop_muons = 0
 
+nameA = "positive muons at A"
+nameB = "negative muons at A"
+momDistB = TH1F(nameB,nameB,250,0,250)
+momDistA = TH1F(nameA, nameA,250,0,250)
+momDistStopped = TH1F("stopped momentum distribution","stopped momentum distribution",100,0,100)
+
 for eventID in eventOD:
     event = eventOD[eventID] # alias
-    if len(eventOD[eventID]) < 2:
-        # Don't just skip empty events, still cound towards number of muons
-        if (event[0]['PID'] == 13) or  (event[0]['PID'] == -13): 
-            muon_count+=1 
+    if len(event) < 2:
+        # Don't just skip empty events, still could towards number of muons
+        if (abs(event[0]['PID']) == 13): muon_count+=1 
         continue
         
     event = sorted(event, key=lambda s: s['time']) # time sort the event
-    for i in event: print i
-    print '*'*40
-    possible_hit = False
-    stopped = False
+    
+    # for i in event: print i
+    # print '*'*40
+    # possible_hit = False
+    # stopped = False
+    muon_tracks = [] # list of 'used' muons to prevent double counting etc
+    stopped = []
+    parentID = -1;
     for hit in event:
-        if (abs(hit['PID'])==13): muon_count += 1
-        if possible_hit and (abs(hit['PID'])==13) and (hit['place']=='monA'): 
-            # muon didn't stop
-            non_stop_muons += 1
-            stopped = False
-        elif (abs(hit['PID'])==13) and (hit['place']=='monB'): 
-            possible_hit = True
-            stopped = True
-    if possible_hit and stopped: stopped_muons += 1
+        # if not (hit['PID'] == 13): continue # select only muons
+        # if not (hit['PID'] == -13): continue # select only +ve muons
+        # if not (abs(hit['PID']) == 13): continue
+        if not (abs(hit['PID']) == 13) and (hit['place']=='monA'): continue
+        if (hit['place'],hit['track']) in muon_tracks:
+            continue
+        else:
+            muon_tracks.append((hit['place'],hit['track']))
+            mom=calcMom(*hit['mom'])
+            if hit['PID'] == 13:
+                momDistB.Fill(mom)
+            else:
+                momDistA.Fill(mom)
+            
+    print muon_tracks, "\n"+40*"*"        
+        
+momDistA.Draw()
+c2 = TCanvas("C2", "C2")
+momDistB.Draw()
+sleep(60)        
+        # if (abs(hit['PID'])==13): muon_count += 1
+        
+        
+    #     if possible_hit and (abs(hit['PID'])==13) and (hit['place']=='monA'): 
+    #         # muon didn't stop
+    #         non_stop_muons += 1
+    #         stopped = False
+    #     elif (abs(hit['PID'])==13) and (hit['place']=='monB'): 
+    #         possible_hit = True
+    #         stopped = True
+    # if possible_hit and stopped: stopped_muons += 1
     
 print "total events", len(eventOD)
 print "muon count", muon_count

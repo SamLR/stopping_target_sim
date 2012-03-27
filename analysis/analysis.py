@@ -32,8 +32,8 @@ def getDataEvent(tree, data, index):
 def calcMom(x,y,z):
     return (x*x+y*y+z*z)**0.5
 
-def momTH1(name):
-    return TH1F(name, name, 250, 0, 250)
+def quickTH1(name, bins=250, xmin=0, xmax=250):
+    return TH1F(name, name, bins, xmin, xmax)
     
 
 file_in = TFile('../output/truth_out.root', 'READ')
@@ -59,11 +59,12 @@ for index in range(nentriesA if nentriesA>nentriesB else nentriesB):
 # data should now have all the muons and electrons from A&B
 eventOD = OrderedDict(dataEvent)
 muon_count = 0
-# momDistB = momTH1("negative muons at A")
-momDistB = momTH1("muons (-) at B")
-# momDistA = momTH1("positive muons at A")
-momDistA = momTH1("muons (-) at A")
-momDistStopped = momTH1("stopped momentum distribution")
+# momDistB = quickTH1("negative muons at A")
+momDistB = quickTH1("muons (-) at B")
+# momDistA = quickTH1("positive muons at A")
+momDistA = quickTH1("muons (-) at A")
+momDistStopped = quickTH1("stopped momentum distribution")
+stoppedTimes = quickTH1("decay times", xmin=2)
 
 for eventID in eventOD:
     event = eventOD[eventID] # alias
@@ -85,15 +86,17 @@ for eventID in eventOD:
             if hit['track'] not in already_seen_B:
                 stopped.append(hit)
                 already_seen_B.append(hit['track'])
-                print hit['track']
+                # print hit['track']
         elif (hit['PID'] == 11): 
             for muon in stopped:
                 if muon['track'] == hit['parent']:
                     momDistStopped.Fill(calcMom(*muon['mom']))
+                    stoppedTimes.Fill(hit['time']-muon['time'])
+                    print (hit['time']-muon['time'])
                     # print 'muon', stopped
                     # print 'electron', hit
                     # print '*'*40
-    print '*'*40
+    # print '*'*40
         
         # if (abs(hit['PID']) == 13): 
         # if (hit['PID'] == 13): #negative muons
@@ -120,7 +123,8 @@ for eventID in eventOD:
 # momDistA.Draw()
 # c2 = TCanvas("C2", "C2")
 # momDistB.Draw()
-momDistStopped.Draw()
+# momDistStopped.Draw()
+stoppedTimes.Draw()
 sleep(60)        
 
 print "total events", len(eventOD)

@@ -34,6 +34,33 @@ def calcMom(x,y,z):
 
 def quickTH1(name, bins=250, xmin=0, xmax=250):
     return TH1F(name, name, bins, xmin, xmax)
+
+
+def floatSlice(list, lbound=0, ubound=50.0, key=lambda x: x[0]):
+    """
+    Returns a slice from a (key) sorted list who's values have keys 
+    between the l(ower) and u(pper) bounds.
+    Note lower and upper bounds don't have to be present keys
+    Returns an empty list if the lower bound isn't reached
+    """
+    lindex = uindex = None
+    list = sorted(list, key=key)
+    for i in list:
+        if key(i) > lbound and lindex == None: 
+            lindex = list.index(i) 
+        elif key(i) > ubound and uindex == None:
+            uindex = list.index(i)
+            break
+        else:
+            continue
+         
+    if (lindex == None): 
+        return []
+    # if uindex is None then returns to end of list
+    return list[lindex:uindex]
+
+            
+        
     
 
 def main():
@@ -71,50 +98,26 @@ def main():
     dts = quickTH1("time differences", 200, 0, 2000)
     triggers = resets = adds = 0
     last_hits = {'A1':None, 'A2':None, 'B1':None, 'B2':None} # record the time of the last hit for each side
-    for hit in hits:
-        dt = hit[0] - start_time
-        if dt > tdcDt:
-            # look for B && !A
-            b_hits = a_hits = []
-            if hit[1][:5] == 'mppcB': 
-                triggers += 1
-                start_time = hit[0]
-        elif dt < coincidenceDt:
-            # check that we only have hits in B if in A reset start_time
-            if hit[1][:5] == 'mppcA': 
-                resets += 1
-                start_time = 0
-            else: # must be another hit in mppcB
-                b_hits.append(hit[0]) # at least one hit in b since trigger
-        elif (dt < tdcDt):
-            # add the hit to the tdc?
-            # create the string for the mppc on the opposite side of the scintillator 
-            opposite_mppc = hit[1][4] + ('1' if hit[1][5]=='2' else '2')
-            this_dt = hit[0] - last_hits[opposite_mppc]
-            if this_dt > coincidenceDt:
-                # this hit is not coincident with the previous hits on the opposite mppc
-                side_to_side_dt = abs(last_hits[hit[1][4]+'1'] - last_hits[hit[1][4]+'2'])
-                if side_to_side_dt < coincidenceDt:
-                    # the previous pair of hits on this scint were coincidence; record it!
-                    dt = (min(last_hits[hit[1][4]+'1'], last_hits[hit[1][4]+'2'])) - start_time
-                    dts.Fill(dt)
-                    adds +=1
-            last_hits[hit[1][4:]] = hit[0]
-            # adds += 1
-            # dts.Fill(dt)
+    for i in len(hits): # allows to skip indexes
+        
     
     print 'triggers', triggers
     print 'resets', resets
     print 'adds', adds
     dts.Draw()
     sleep(60)
+    return
             
     
-    
+def floatSliceTest():
+    list = ((1, 10), (4, 13), (7, 8), (9, 6))
+    print floatSlice(list, lbound=0, ubound=4)
+    print floatSlice(list, lbound=10, ubound=16, key=lambda x: x[1])
     
 if __name__=='__main__':
     try:
-        main()
+        # main()
+        floatSliceTest()
     except KeyboardInterrupt, k:
         exit(1)
     
